@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('userPages/main');
+    return view('userPages/layouts/dashboardUser');
+});
+Route::get('/allProduk', function () {
+    return view('userPages/layouts/allProduk');
 });

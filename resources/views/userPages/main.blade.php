@@ -76,10 +76,7 @@
     @include('userPages/partials/navbar')
 
     {{-- Body Content --}}
-    @include('userPages/layouts/heroSection')
-    @include('userPages/partials/topCategories')
-    @include('userPages/layouts/aboutSection')
-    @include('userPages/layouts/produkSection')
+    @yield('content')
     {{-- End Body Content --}}
 
     {{-- Footer --}}
@@ -89,7 +86,9 @@
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
 
-    {{-- Script Scrolling Navbar --}}<script>
+    {{-- Script Scrolling Navbar --}}
+    @if ($path = request()->path() !== "allProduk")
+      <script>
         $(document).ready(function(){  
             $(window).scroll(function(){
                 var scroll = $(window).scrollTop();
@@ -109,7 +108,9 @@
                 }
             })
         })
-    </script>
+      </script>   
+    @endif
+    
     <script src="{{ 'style/swiper.js' }}"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {
