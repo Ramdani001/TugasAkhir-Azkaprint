@@ -28,15 +28,37 @@
                     </div>
                  </div>
             </div>
-            <div>
+            <div class="grid grid-col-2">
                 <div class="bg-white w-80 ml-5 rounded-md h-80 shadow-md p-3">
                     <h1 class="text-md font-serif font-semibold ">Pesanan</h1>
-                    <hr class="w-8 ">
-                </div>
-                <div class="bg-white mt-3 w-80 ml-5 rounded-md h-32 shadow-md">
+                    <hr class="w-8 mb-3">
+                    <?php
+                        for($i=0; $i < 3; $i++){
+                    ?>
+                    <div class="flex rounded-md w-full h-16 shadow-md p-2 border mb-2">
+                        <div class="bg-gray-400 rounded-full w-10 h-10">
 
+                        </div>
+                        <div class="ml-3">
+                            <h1 class="text-md font-semibold">Rizkan</h1>
+                            <p class="text-xs text-slate-400">
+                                Pesanan : <span class=" italic">1 Produk</span>
+                            </p>
+                        </div>
+                        <div class="text-xs italic self-start ml-14 text-slate-400">
+                            <h5>07/13/2023</h5>
+                        </div>
+                    </div>
+                    <?php } ?>
+
+                </div>
+                <div class="bg-white mt-3 w-80 ml-5 rounded-md h-32 shadow-md p-3">
+                    <h1 class="text-sm font-semibold">Penjualan Hari Ini</h1>
+                    <hr class="w-10 mb-3">
+                    <h2 class="text-2xl font-semibold">123 Produk</h2>
+                    <span class="text-xs text-slate-400">13/07/2023</span>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+@endsection 

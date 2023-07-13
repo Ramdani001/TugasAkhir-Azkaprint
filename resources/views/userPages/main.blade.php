@@ -142,9 +142,7 @@
             $.get(route, function(data) {
               content.html(data);
             });
-
           });
-
         })
 
         // Smooth Scroll
