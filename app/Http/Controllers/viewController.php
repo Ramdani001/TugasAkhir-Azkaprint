@@ -14,7 +14,7 @@ class viewController extends Controller
         return view('adminPages.layouts.dataUsers');
     }
 
-    public function dataProduk(){
+    public function produk(){
         return view('adminPages.layouts.dataProduk');
     }
 

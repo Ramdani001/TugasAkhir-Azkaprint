@@ -76,5 +76,46 @@
         })
      </script>
 
+     {{-- Modal Tambah User --}}
+     <script>
+        
+        function modal(e){
+            if(e == 'Tambah'){
+                console.log("Value : " + e);
+                
+                // Show Modal
+                $('#bgModal').removeClass('hidden');
+                $('#modalTambahUser').removeClass('hidden');
+
+            }else if(e == 'Edit'){
+                console.log("Value : " + e);
+
+                // Show Modal
+                $('#bgModalEdit').removeClass('hidden');
+                $('#modalEditUser').removeClass('hidden');
+
+            }else if(e == 'Close'){
+                    console.log("Close Modal");
+                    $('#bgModal').addClass('hidden');
+                    $('#modalTambahUser').addClass('hidden');
+            }else if(e == 'CloseEdit'){
+                $('#bgModalEdit').addClass('hidden');
+                $('#modalEditUser').addClass('hidden');
+            }else if(e == "Hapus"){
+                console.log("Value : " + e);
+
+                const id = $('.btnHapus').val();
+
+                // Show Modal
+                $('#idUser1').val(" Id User = "+ id);
+                $('#bgModalHapus').removeClass('hidden');
+                $('#modalHapusUser').removeClass('hidden');
+            }else if(e == 'CloseHapus'){
+                $('#bgModalHapus').addClass('hidden');
+                $('#modalHapusUser').addClass('hidden');
+            }
+        }
+     </script>
+
 </body>
 </html>

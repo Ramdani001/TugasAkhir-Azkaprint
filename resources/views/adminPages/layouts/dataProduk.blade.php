@@ -5,12 +5,10 @@
         </div>
         <div class="ml-3">
             <div class="mb-2 relative w-[100%]">
-                <label for="12" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambah">
+                <button for="12" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambah">
                     Tambah
-                </label>
-                {{-- @include('adminPages.partials.modalDataBarang') --}}
+                </button>
             </div>
-            @include('adminPages.partials.modalTambahBarang')
         </div>
     </div>
     <div class="content mt-5">

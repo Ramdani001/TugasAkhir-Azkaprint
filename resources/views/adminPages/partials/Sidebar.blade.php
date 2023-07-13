@@ -31,10 +31,10 @@
                           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
                         </button>
                         <ul id="dropdown-produk" class="hidden">
-                          <li onclick="" class="spa-admin py-2 px-4 block whitespace-no-wrap cursor-pointer mb-4 w-[150px] hidden  spa-admin produkMenu1 bg-slate-200 text-black py-1 pl-2 rounded-m  " value="dataProduk">
+                          <li onclick="" class="spa-admin py-2 px-4 whitespace-no-wrap hidden cursor-pointer mb-4 w-[150px] hidden  spa-admin produkMenu1 bg-slate-200 text-black pl-2 rounded-m  " value="produk">
                               Data Produk
                           </li>
-                          <li onclick="" class="spa-admin py-2 px-4 block whitespace-no-wrap cursor-pointer mb-4 w-[150px] spa-admin produkMenu hover:bg-slate-200 hover:text-black hover:rounded-md" value="dataProduk">
+                          <li onclick="" class="spa-admin py-2 px-4 block whitespace-no-wrap cursor-pointer mb-4 w-[150px] spa-admin produkMenu hover:bg-slate-200 hover:text-black hover:rounded-md" value="produk">
                               Data Produk
                           </li>
 

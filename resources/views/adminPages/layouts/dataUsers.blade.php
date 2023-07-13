@@ -5,12 +5,12 @@
         </div>
         <div class="ml-3">
             <div class="mb-2 relative w-[100%]">
-                <label for="12" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambah">
+                <button onclick="modal('Tambah')" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambahUser" id="btnTambahUser">
                     Tambah
-                </label>
+                </button>
                 {{-- @include('adminPages.partials.modalDataBarang') --}}
             </div>
-            @include('adminPages.partials.modalTambahBarang')
+            @include('adminPages.partials.modalDialogUser')
         </div>
     </div>
     <div class="content mt-5">
@@ -38,8 +38,10 @@
                         <td class="py-2">img.jpg</td>
                         <td class="py-2">12/07/2020</td>
                         <td class="py-2">
-                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md">Edit</button>
-                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md">Hapus</button>
+                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modal('Edit')">
+                                Edit
+                            </button>
+                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md btnHapus" value="900" onclick="modal('Hapus')">Hapus</button>
                         </td>
                     </tr>
                 </tbody>

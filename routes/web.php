@@ -27,7 +27,7 @@ Route::controller(allProduk::class)->group(function() {
 Route::controller(viewController::class)->group(function() {
     Route::get('/admin', 'index');
     Route::get('/dataUser', 'dataUser');
-    Route::get('/dataProduk', 'dataProduk');
+    Route::get('/produk', 'produk');
     Route::get('/dataBarang', 'dataBarang');
     Route::get('/dataKeuangan', 'dataKeuangan');
 });
