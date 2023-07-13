@@ -1,21 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\allProduk;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\viewController;
+use Illuminate\Support\Facades\Route;  
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+//User 
 
-Route::get('/', function () {
-    return view('userPages/layouts/dashboardUser');
+// Route Dashboard User
+Route::controller(userController::class)->group(function() {
+    Route::get('/', 'index');
 });
-Route::get('/allProduk', function () {
-    return view('userPages/layouts/allProduk');
+
+// Route Filter Produk
+Route::controller(allProduk::class)->group(function() {
+    Route::get('/allProduk', 'index');
+    Route::get('/stempel', 'stempel');
+    Route::get('/lanyard', 'lanyard');
+    Route::get('/undangan', 'undangan');
+    Route::get('/idCard', 'idCard');
+    Route::get('/banner', 'banner');
+    Route::get('/xbanner', 'xbanner');
+});
+
+// Admin
+Route::controller(viewController::class)->group(function() {
+    Route::get('/admin', 'index');
 });

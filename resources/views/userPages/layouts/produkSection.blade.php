@@ -1,4 +1,4 @@
-<div class="p-4 h-screen w-full">
+<div class="p-4 h-screen w-full" id="produk">
     <div class="w-full h-full bg-blue-800 rounded-md shadow-lg shadow-black">
         <div class="p-5 flex justify-around pt-10">
             <div class="bg-white w-60 h-[470px] rounded-md shadow-md p-2">

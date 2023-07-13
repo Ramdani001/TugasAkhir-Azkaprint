@@ -1,4 +1,4 @@
-<div class="p-3">
+<div class="p-3" id="tentangKami">
     <div class=" w-full bg-white rounded-md shadow-lg pt-14 shadow-yellow-400/50">
         <h1 class="text-xl font-semibold font-sans text-center">TENTANG KAMI</h1>
        <div class="h-screen w-full flex justify-center relative pt-10">

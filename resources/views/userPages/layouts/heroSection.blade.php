@@ -1,4 +1,4 @@
-<div class="bg-[url('../../public/img/bgHero.jpeg')] bg-cover bg-center w-full h-screen pt-[11%] pb-[9%] px-[3%] text-white">
+<div id="heroSection" class="bg-[url('../../public/img/bgHero.jpeg')] bg-cover bg-center w-full h-screen pt-[11%] pb-[9%] px-[3%] text-white">
     <div class=" w-[35%] shadow-xl bg-white bg-opacity-10 p-3 py-4 rounded-xl shadow-black">
         <h1 class="text-7xl text-blue-600">
             AZKA

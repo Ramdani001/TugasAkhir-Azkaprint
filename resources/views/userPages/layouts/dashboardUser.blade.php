@@ -6,5 +6,5 @@
     @include('userPages/layouts/aboutSection')
     @include('userPages/layouts/produkSection')
     @include('userPages/layouts/FAQSection')
-    @include('userPages/layouts/tentangKamiSection')
+    @include('userPages/layouts/kontakKamiSection')
 @endsection

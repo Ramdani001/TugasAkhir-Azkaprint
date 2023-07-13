@@ -80,13 +80,13 @@
     {{-- End Body Content --}}
 
     {{-- Footer --}}
-  @include('userPages/partials/footerSection')
+    @include('userPages/partials/footerSection')
 
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
 
-    {{-- Script Scrolling Navbar --}}
+    {{-- Script Change Color Scrolling Navbar --}}
     @if ($path = request()->path() !== "allProduk")
       <script>
         $(document).ready(function(){  
@@ -95,23 +95,28 @@
                 if (scroll > 300) {
                     $(".navbar").addClass('bg-blue-800 ', 'opacity-50').removeClass('bg-Transparent', 'opacity-10');
                     $(".btnLogin").removeClass('bg-blue-800').addClass('bg-yellow-400', 'shadow-md');
-                    // $(".text").addClass('text-white');
-
-                    console.log(scroll);
                 }
                 else if(scroll < 300){
                     $(".navbar").removeClass('bg-blue-800');;
                     $(".navbar").addClass('bg-Transparent');
 
                     $(".btnLogin").removeClass('bg-yellow-400').addClass('bg-blue-800', 'text-white');
-                    // $(".text").removeClass('text-white');
                 }
             })
         })
       </script>   
+      @elseif($path = request()->path() === "allProduk")
+      <script>
+        $(document).ready(function(){  
+            $(".navbar").addClass('bg-blue-800 ', 'opacity-50').removeClass('bg-Transparent', 'opacity-10');
+            $(".btnLogin").removeClass('bg-blue-800').addClass('bg-yellow-400', 'shadow-md');
+        })
+      </script>   
+          
     @endif
     
     <script src="{{ 'style/swiper.js' }}"></script>
+
     <script>
         var swiper = new Swiper(".mySwiper", {
             effect: "cards",
@@ -121,6 +126,40 @@
                 disableOnInteraction: false,
             },
         });
+      </script>
+
+      {{-- SPA AllProduk --}}
+      <script>
+        $(document).ready(function() {
+          const link = $('.spa-route'),
+                content = $('#contentProduk');
+
+          link.on('click', function(e) {
+            e.preventDefault()
+            let route = $(this).attr('value');
+            // console.log(route);
+
+            $.get(route, function(data) {
+              content.html(data);
+            });
+
+          });
+
+        })
+
+        // Smooth Scroll
+        $(function() {
+          $('a[href*=\\#]:not([href=\\#])').on('click', function() {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.substr(1) +']');
+              if (target.length) {
+                  $('html,body').animate({
+                      scrollTop: target.offset().top
+                  }, 1500);
+                  return false;
+              }
+          });
+      });
       </script>
 
 </body>
