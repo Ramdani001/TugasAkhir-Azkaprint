@@ -76,9 +76,9 @@
         })
      </script>
 
-     {{-- Modal Tambah User --}}
+     {{-- Modal Dialog --}}
      <script>
-        
+        // Modal Dialog User
         function modal(e){
             if(e == 'Tambah'){
                 console.log("Value : " + e);
@@ -113,6 +113,86 @@
             }else if(e == 'CloseHapus'){
                 $('#bgModalHapus').addClass('hidden');
                 $('#modalHapusUser').addClass('hidden');
+            }
+        }
+
+        // Modal Dialog Produk
+        function modalProduk(e){
+            if(e == 'Tambah'){
+                console.log("Value : " + e);
+                
+                // Show Modal
+                $('#bgModalProduk').removeClass('hidden');
+                $('#modalTambahProduk').removeClass('hidden');
+
+            }else if(e == 'Edit'){
+                console.log("Value : " + e);
+
+                // Show Modal
+                $('#bgModalEdit').removeClass('hidden');
+                $('#modalEditProduk').removeClass('hidden');
+
+            }else if(e == 'Close'){
+                    console.log("Close Modal");
+                    $('#bgModalProduk').addClass('hidden');
+                    $('#modalTambahProduk').addClass('hidden');
+
+            }else if(e == 'CloseEdit'){
+                $('#bgModalEdit').addClass('hidden');
+                $('#modalEditProduk').addClass('hidden');
+            }else if(e == "Hapus"){
+                console.log("Value : " + e);
+
+                const id = $('.btnHapus').val();
+
+                // Show Modal
+                $('#idProduk1').val(" Id User = "+ id);
+                $('#bgModalHapus').removeClass('hidden');
+                $('#modalHapusProduk').removeClass('hidden');
+                
+            }else if(e == 'CloseHapus'){
+                $('#bgModalHapus').addClass('hidden');
+                $('#modalHapusProduk').addClass('hidden');
+            }
+        }
+
+        // Modal Dialog Barang
+        function modalBarang(e){
+            if(e == 'Tambah'){
+                console.log("Value : " + e);
+                
+                // Show Modal
+                $('#bgModalBarang').removeClass('hidden');
+                $('#modalTambahBarang').removeClass('hidden');
+
+            }else if(e == 'Edit'){
+                console.log("Value : " + e);
+
+                // Show Modal
+                $('#bgModalEdit').removeClass('hidden');
+                $('#modalEditBarang').removeClass('hidden');
+
+            }else if(e == 'Close'){
+                    console.log("Close Modal");
+                    $('#bgModalBarang').addClass('hidden');
+                    $('#modalTambahBarang').addClass('hidden');
+
+            }else if(e == 'CloseEdit'){
+                $('#bgModalEdit').addClass('hidden');
+                $('#modalEditBarang').addClass('hidden');
+            }else if(e == "Hapus"){
+                console.log("Value : " + e);
+
+                const id = $('.btnHapus').val();
+
+                // Show Modal
+                $('#idBarang1').val(" Id User = "+ id);
+                $('#bgModalHapus').removeClass('hidden');
+                $('#modalHapusBarang').removeClass('hidden');
+                
+            }else if(e == 'CloseHapus'){
+                $('#bgModalHapus').addClass('hidden');
+                $('#modalHapusBarang').addClass('hidden');
             }
         }
      </script>

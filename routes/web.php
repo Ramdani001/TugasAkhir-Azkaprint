@@ -26,8 +26,29 @@ Route::controller(allProduk::class)->group(function() {
 // Admin
 Route::controller(viewController::class)->group(function() {
     Route::get('/admin', 'index');
+    // User
     Route::get('/dataUser', 'dataUser');
+
+    // Produk
     Route::get('/produk', 'produk');
+
+    // Barang
     Route::get('/dataBarang', 'dataBarang');
+
+    // Keuangan
     Route::get('/dataKeuangan', 'dataKeuangan');
+
+    // Landing Pages
+    Route::get('/EditHeroSection', 'EditHeroSection');
+
+    Route::get('/EditTopCategories', 'EditTopCategories');
+
+    Route::get('/EditTentangKami', 'EditTentangKami');
+
+    Route::get('/EditProdukSection', 'EditProdukSection');
+
+    Route::get('/EditFAQSection', 'EditFAQSection');
+
+    Route::get('/EditKontakKami', 'EditKontakKami');
+
 });

@@ -26,4 +26,30 @@ class viewController extends Controller
         return view('adminPages.layouts.dataKeuangan');
     }
 
+    // Landing Pages
+    
+    public function EditHeroSection(){
+        return view('adminPages.layouts.landingPages.heroSection');
+    }
+
+    public function EditTopCategories(){
+        return view('adminPages.layouts.landingPages.topCategories');
+    }
+
+    public function EditTentangKami(){
+        return view('adminPages.layouts.landingPages.tentangKami');
+    }
+
+    public function EditProdukSection(){
+        return view('adminPages.layouts.landingPages.produkSection');
+    }
+
+    public function EditFAQSection(){
+        return view('adminPages.layouts.landingPages.FAQSection');
+    }
+
+    public function EditKontakKami(){
+        return view('adminPages.layouts.landingPages.kontakKami');
+    }
+
 }

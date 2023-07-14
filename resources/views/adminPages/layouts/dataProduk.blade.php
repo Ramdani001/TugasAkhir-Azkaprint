@@ -5,7 +5,7 @@
         </div>
         <div class="ml-3">
             <div class="mb-2 relative w-[100%]">
-                <button for="12" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambah">
+                <button onclick="modalProduk('Tambah')" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambah">
                     Tambah
                 </button>
             </div>
@@ -32,8 +32,8 @@
                         <td class="py-2">20</td>
                         <td class="py-2">Rp. 78.000</td>
                         <td class="py-2">
-                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md">Edit</button>
-                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md">Hapus</button>
+                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modalProduk('Edit')">Edit</button>
+                            <button value="180" class="btnHapus px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md" onclick="modalProduk('Hapus')">Hapus</button>
                         </td>
                     </tr>
                 </tbody>
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+@include('adminPages.partials.modalDialogProduk')
