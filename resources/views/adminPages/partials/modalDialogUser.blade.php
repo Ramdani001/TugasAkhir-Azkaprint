@@ -8,10 +8,13 @@
         <div class="bg-slate-100 shadow-lg p-5 w-[500px] rounded-md shadow-black ">
             <h1 class="text-xl font-semibold">Tambah Data User Admin</h1>
             <hr>
-            <div class="mt-3">
-                <form action="" method="post" enctype="multipart/form-data">
+            <div class="mt-3"> 
+                <form >
+                    @csrf
                     <input type="text" id="idUser" name="idUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
+                    <input type="text" id="profile" name="profile" placeholder="Profile" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    
                     <input type="text" id="namaUser" name="namaUser" placeholder="Nama User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <input type="text" id="username" name="username" placeholder="Username" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
@@ -26,7 +29,7 @@
 
                     <div class="flex w-full mt-3">
                         <button type="button" onclick="modal('Close')" class="py-1 w-full bg-gray-800 rounded-md text-white shadow-md mr-2 btnBatalModalUser" id="btnBatalUser">Batal</button>
-                        <button type="submit" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Tambah</button>
+                        <button type="button" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md tmbhUser" value="dataUserSection" >Tambah</button>
                     </div>
                 </form>
             </div>
@@ -46,20 +49,31 @@
             <h1 class="text-xl font-semibold">Edit Data User Admin</h1>
             <hr>
             <div class="mt-3">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <input type="text" id="idUser" name="idUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                <form action="/updateDataUser" method="POST" enctype="multipart/form-data">
+                    
+                    @csrf 
+                    @method('PUT')
 
-                    <input type="text" id="namaUser" name="namaUser" placeholder="Nama User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="text" id="idModalUser" name="idModalUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <input type="text" id="username" name="username" placeholder="Username" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="text" id="profileUserModal" name="profileUserModal" placeholder="Profile User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <input type="text" id="status" name="status" placeholder="Status" value="Admin" class="border-2 my-2 rounded-sm shadow-md bg-slate-300 w-full px-3 py-1" readonly>
+                    <input type="text" id="idUserModal" name="idUserModal" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <input type="text" id="email" name="email" placeholder="Alamat Email" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="text" id="namaUserModal" name="namaUserModal" placeholder="Nama User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    
+                    <input type="text" id="usernameModal" name="usernameModal" placeholder="Username" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+
+                    <input type="text" id="passwordUserModal" name="passwordUserModal" placeholder="passwordUserModal" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+
+
+                    <input type="text" id="statusModal" name="status" placeholder="Status" value="Admin" class="border-2 my-2 rounded-sm shadow-md bg-slate-300 w-full px-3 py-1" readonly>
+
+                    <input type="text" id="emailModal" name="emailModal" placeholder="Alamat Email" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <div class="flex w-full mt-3">
                         <button type="button" onclick="modal('CloseEdit')" class="py-1 w-full bg-gray-800 rounded-md text-white shadow-md mr-2 btnBatalModalUser" id="btnBatalUser">Batal</button>
-                        <button type="submit" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Edit</button>
+                        <button type="submit" class="btnEdituser py-1 w-full bg-blue-800 rounded-md text-white shadow-md" value="dataUserSection">Update</button>
                     </div>
                 </form>
             </div>

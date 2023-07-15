@@ -3,7 +3,7 @@
         <div class="border w-full">
             <h1 class="text-xl font-semibold">Data User</h1>
         </div>
-        <div class="ml-3">
+        <div class="ml-3"> 
             <div class="mb-2 relative w-[100%]">
                 <button onclick="modal('Tambah')" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambahUser" id="btnTambahUser">
                     Tambah
@@ -29,21 +29,41 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($dataUser as $user)
                     <tr class="border text-center">
-                        <td class="py-2">AA0989</td>
-                        <td class="py-2">Rizkan Ramdani</td>
-                        <td class="py-2">Rzkn0928</td>
-                        <td class="py-2">Admin</td>
-                        <td class="py-2">rzkn@gmail.com</td>
-                        <td class="py-2">img.jpg</td>
-                        <td class="py-2">12/07/2020</td>
                         <td class="py-2">
-                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modal('Edit')">
+                            {{ $user->idUser }}
+                        </td>
+                        <td class="py-2">
+                            {{ $user->namaUser }}
+                        </td>
+                        <td class="py-2">
+                            {{ $user->username }}
+                        </td>
+                        <td class="py-2">
+                            {{ $user->status }}
+                        </td>
+                        <td class="py-2">
+                            {{ $user->email }}
+                        </td>
+                        <td class="py-2">
+                            {{ $user->profile }}
+                        </td>
+                        <td class="py-2">
+                            {{ $user->created_at }}
+                        </td>
+                        <td class="py-2">
+                            {{-- <button value="{{ $user->idUser }}" class="editDataUser" id="editDataUser" onclick="modal('Edit', '{{$user->idUser}}')">
+                                Edit 2
+                            </button> --}}
+                            <button class="px-4 py-1 bg-green-400 editDataUser text-white font-semibold rounded-md shadow-md" onclick="modal('Edit', '{{$user->id}}')"
+                            value="{{ $user->id }}" id="editDataUser">
                                 Edit
                             </button>
-                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md btnHapus" value="900" onclick="modal('Hapus')">Hapus</button>
+                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md btnHapus" value="{{ $user->idUser }}" onclick="modal('Hapus')">Hapus</button>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -11,7 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('Users', function (Blueprint $table) {
+            $table->id();
+            $table->char('idUser')->nullable(false)->unique();
+            $table->char('namaUser')->nullable(false);
+            $table->char('username')->nullable(false);
+            $table->char('status')->nullable(false); 
+            $table->char('password')->nullable(false); 
+            $table->char('email')->nullable(false); 
+            $table->char('profile')->nullable(false);
+            $table->timestamps();
+        });
     }
 
     /**

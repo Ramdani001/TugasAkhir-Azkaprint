@@ -16,8 +16,8 @@
                 <hr class="w-4">
                 <div class="mt-2">
                     
-                    <button value="dataUser" class="mb-4 w-[150px] hidden spa-admin side1 bg-slate-200 text-black py-1 pl-2 rounded-md absolute pr-12 -rounded-tr-lg">Data Users</button>
-                    <button value="dataUser" class="mb-4 spa-admin side">Data Users</button>
+                    <button value="dataUserSection" class="mb-4 w-[150px] hidden spa-admin side1 bg-slate-200 text-black py-1 pl-2 rounded-md absolute pr-12 -rounded-tr-lg">Data Users</button>
+                    <button value="dataUserSection" class="mb-4 spa-admin side">Data Users</button>
 
 
                     <div id="dropdown" class="mb-4 dropdown inline-block relative">
@@ -51,7 +51,6 @@
                     <div class="mb-4 spa-admin cursor-pointer" value="EditTentangKami">Tentang Kami </div>
                     <div class="mb-4 spa-admin cursor-pointer" value="EditProdukSection">Produk </div>
                     <div class="mb-4 spa-admin cursor-pointer" value="EditFAQSection">FAQ </div>
-                    <div class="mb-4 spa-admin cursor-pointer" value="EditKontakKami">Kontak Kami </div>
                 </div>
             </div>
         </div>

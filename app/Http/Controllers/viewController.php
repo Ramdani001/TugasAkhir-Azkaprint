@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tblUser;
 use Illuminate\Http\Request;
 
 class viewController extends Controller
 {
     public function index(){
-        return view('adminPages.layouts.dashboardAdmin');
+        return view('adminPages.main');
     }
 
     public function dataUser(){
-        return view('adminPages.layouts.dataUsers');
+
+        $dataUser = tblUser::all();
+
+        return view('adminPages.layouts.dataUsers', \compact('dataUser'));
     }
 
     public function produk(){
@@ -46,10 +50,6 @@ class viewController extends Controller
 
     public function EditFAQSection(){
         return view('adminPages.layouts.landingPages.FAQSection');
-    }
-
-    public function EditKontakKami(){
-        return view('adminPages.layouts.landingPages.kontakKami');
     }
 
 }

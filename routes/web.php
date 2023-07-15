@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\allProduk;
+use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\viewController;
 use Illuminate\Support\Facades\Route;  
@@ -20,14 +21,14 @@ Route::controller(allProduk::class)->group(function() {
     Route::get('/undangan', 'undangan');
     Route::get('/idCard', 'idCard');
     Route::get('/banner', 'banner');
-    Route::get('/xbanner', 'xbanner');
+    Route::get('/xbanner', 'xbanner'); 
 });
 
 // Admin
 Route::controller(viewController::class)->group(function() {
     Route::get('/admin', 'index');
     // User
-    Route::get('/dataUser', 'dataUser');
+    Route::get('/dataUserSection', 'dataUser');
 
     // Produk
     Route::get('/produk', 'produk');
@@ -36,7 +37,7 @@ Route::controller(viewController::class)->group(function() {
     Route::get('/dataBarang', 'dataBarang');
 
     // Keuangan
-    Route::get('/dataKeuangan', 'dataKeuangan');
+    Route::get('/dataKeuangan', 'dataKeuangan'); 
 
     // Landing Pages
     Route::get('/EditHeroSection', 'EditHeroSection');
@@ -49,6 +50,11 @@ Route::controller(viewController::class)->group(function() {
 
     Route::get('/EditFAQSection', 'EditFAQSection');
 
-    Route::get('/EditKontakKami', 'EditKontakKami');
+});
 
+// CRUD Data User Admin
+Route::controller(userAdmin::class)->group(function() {
+    Route::post('/createUser1', 'createUser');
+    Route::get('/editDataUser/{id}', 'editUser');
+    Route::put('/updateDataUser', 'updateUser');
 });

@@ -16,7 +16,6 @@
             </form>
         </div>
 
-
     </div>
     <div class="bg-slate-200 w-full h-screen p-9 flex">
         <div class="bg-white w-80 h-full relative md:-ml-44 rounded-sm p-5 grid grid-rows-5 shadow-md">

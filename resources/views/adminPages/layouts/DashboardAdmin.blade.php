@@ -1,6 +1,7 @@
 @extends('adminPages.main')
 
 @section('contentAdmin')
+
     <div class="ml-[13%] mt-4 mx-3">
         <div class="">
             <h1 class="text-2xl font-semibold font-sans">Welcome To Dashboard</h1>

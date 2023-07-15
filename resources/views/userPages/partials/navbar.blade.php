@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <button class="px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 text-white shadow-lg mr-4 btnLogin">
+            <button class="px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 shadow-lg mr-4 btnLogin">
                 Login
             </button>
         </div>
