@@ -47,7 +47,7 @@
                             {{ $user->email }}
                         </td>
                         <td class="py-2">
-                            {{ $user->profile }}
+                            {{ $user->profile }} 
                         </td>
                         <td class="py-2">
                             {{ $user->created_at }}
@@ -60,7 +60,7 @@
                             value="{{ $user->id }}" id="editDataUser">
                                 Edit
                             </button>
-                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md btnHapus" value="{{ $user->idUser }}" onclick="modal('Hapus')">Hapus</button>
+                            <button class="px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md btnHapus" value="{{ $user->id }}" onclick="modal('Hapus', '{{ $user->id }}')">Hapus</button>
                         </td>
                     </tr>
                     @endforeach

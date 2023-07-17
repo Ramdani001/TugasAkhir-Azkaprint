@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\Produk;
 use App\Models\tblUser;
 use Illuminate\Http\Request;
 
@@ -19,11 +21,18 @@ class viewController extends Controller
     }
 
     public function produk(){
-        return view('adminPages.layouts.dataProduk');
+
+        $dataProduk = Produk::all();
+
+        return view('adminPages.layouts.dataProduk', \compact('dataProduk'));
     }
 
     public function dataBarang(){
-        return view('adminPages.layouts.dataBarang');
+        
+        $dataBarang = Barang::all();
+        
+        return view('adminPages.layouts.dataBarang', \compact('dataBarang'));
+
     }
 
     public function dataKeuangan(){

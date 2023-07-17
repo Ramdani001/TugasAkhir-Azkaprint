@@ -9,11 +9,11 @@
             <h1 class="text-xl font-semibold">Tambah Data User Admin</h1>
             <hr>
             <div class="mt-3"> 
-                <form >
+                <form id="formDataUser" enctype="multipart/form-data">
                     @csrf
                     <input type="text" id="idUser" name="idUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <input type="text" id="profile" name="profile" placeholder="Profile" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="file" id="profile" name="file" placeholder="Profile" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
                     
                     <input type="text" id="namaUser" name="namaUser" placeholder="Nama User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
@@ -93,7 +93,8 @@
         <div class="bg-slate-100 shadow-lg p-5 w-[500px] rounded-md shadow-black ">
             <h1 class="text-xl font-semibold">Hapus Data User Admin</h1>
             <hr>
-            <div class="mt-3">
+            <div class="mt-3"> 
+                <form action="/hapusDataUser">
                 <div>
                     <h1>Apakah Anda Yakin Akan Menghapus Data...??? 
                         <input type="text" name="idUser" id="idUser1">
@@ -101,8 +102,9 @@
                 </div>
                 <div class="flex w-full mt-3">
                     <button type="button" onclick="modal('CloseHapus')" class="py-1 w-full bg-gray-800 rounded-md text-white shadow-md mr-2 btnBatalModalUser" id="btnBatalUser">Tidak</button>
-                    <button type="button" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Ya</button>
+                    <button type="submit" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Ya</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>

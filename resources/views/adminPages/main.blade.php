@@ -128,259 +128,134 @@
                 });
             </script>
     <?php 
+        }elseif ($message = Session()->has('Success Produk')) {
+           // alert()->success(Session::get('Success'));
+           alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Success Produk').'")
+                    console.log('.$message.');
+                </script>'
+    ?>
+         <script>
+                
+            const content = $('#contentAdmin');
+            let route = localStorage.getItem("Value Route");
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>
+    <?php 
+        }elseif ($message = Session()->has('Success Update Produk')) {
+           // alert()->success(Session::get('Success'));
+           alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Success Update Produk').'")
+                    console.log('.$message.');
+                </script>'
+    ?>
+         <script>
+                
+            const content = $('#contentAdmin');
+            let route = localStorage.getItem("Value Route");
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>
+    <?php 
+        }elseif ($message = Session()->has('Success Barang')) {
+           // alert()->success(Session::get('Success'));
+           alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Success Barang').'")
+                    console.log('.$message.');
+                </script>'
+    ?>
+         <script>
+                
+            const content = $('#contentAdmin');
+            let route = localStorage.getItem("Value Route");
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>
+    <?php 
+        }elseif ($message = Session()->has('Success Update Barang')) {
+           // alert()->success(Session::get('Success'));
+           alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Success Update Barang').'")
+                    console.log('.$message.');
+                </script>'
+    ?>
+         <script>
+                
+            const content = $('#contentAdmin');
+            let route = localStorage.getItem("Value Route");
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>
+    <?php 
+        }elseif ($message = Session()->has('Success Update Barang')) {
+           // alert()->success(Session::get('Success'));
+           alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Success Update Barang').'")
+                    console.log('.$message.');
+                </script>'
+    ?>
+         <script>
+                
+            const content = $('#contentAdmin');
+            let route = localStorage.getItem("Value Route");
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>
+    <?php
         }
     ?>
     
+
     <script>
-
-    $(document).on('click', '.btnEdituser', function(){
-        console.log("Berhasil Edit");
-        // console.log(id);
-        var id = $(this).val();
-        console.log(id);
-        const content = $('#contentAdmin');
-            $.ajax({ 
-                type: "POST",
-                url: "/updateDataUser",
-                success: function(response){
-                    localStorage.setItem("Value Route", id);
-                    let route = localStorage.getItem("Value Route");
-
-                    $.get(route, function(data) {
-                        content.html(data);
-                    });
-
-                // let route = localStorage.getItem("Value Route");
-                console.log("Value Route", id);
-                // console.log(response.Message);
-                }
-            })
-    });
-
-
-    $(document).on('click', '.tmbhUser', function() {
-        var id = $(this).val();
-
-        // console.log(id);
-        const content = $('#contentAdmin');
-            $.ajax({ 
-                type: "POST",
-                url: "/createUser1",
-                data: { 
-                    idUsers: $('#idUser').val(), 
-                    namaUsers: $('#namaUser').val(),
-                    username: $('#username').val(),
-                    password: $('#password').val(),
-                    profile: $('#profile').val(),
-                    status: $('#status').val(),
-                    email: $('#email').val(),
-                    _token: $('meta[name="csrf-token"]').attr('content') 
-                },
-                success: function(response){
-                    localStorage.setItem("Value Route", id);
-                    let route = localStorage.getItem("Value Route");
-
-                    $.get(route, function(data) {
-                        content.html(data);
-                    });
-                    
-                // let route = localStorage.getItem("Value Route");
-                console.log("Value Route", id);
-                console.log(response);
-                }
-            })
-            
-        })
-
-        function dropdownProduk(){
-         $dropdown = document.getElementById("dropdown-produk");
-         $dropdown.classList.toggle("hidden");
-         $dropdown.classList.toggle("block");
-        }
-
         // SPA SideBar Admin
         $(document).ready(function() {
-          const link = $('.spa-admin'),
+                const link = $('.spa-admin'),
                 content = $('#contentAdmin');
 
-          link.on('click', function(e) {
-            e.preventDefault()
-            // let route = $(this).attr('value');
-            let route = $(this).attr('value');
-            // var $path = path(route);
+                link.on('click', function(e) {
+                    e.preventDefault()
+                    // let route = $(this).attr('value');
+                    let route = $(this).attr('value');
+                    // var $path = path(route);
 
-            $.get(route, function(data) {
-              content.html(data);
-            
-             if(route === 'dataUser'){
-                $('.side1').removeClass('hidden');
-                $('.side').addClass('hidden');
-                $('.dashboard1').removeClass('hidden');
-                $('.dashboard').addClass('hidden');
-                $('.sideData').addClass('pt-2').removeClass('pt-10');
-                $('.dropdown').addClass('mt-10');
-             }else if(route == 'dataProduk'){
-                 
-             }
-            });
-          });
-        })
-     </script>
-
-     {{-- Modal Dialog --}}
-     <script>
-        // Modal Dialog User
-        function modal(e, b){
-            
-            if(e == 'Tambah'){
-                console.log("Value : " + e);
-                
-                // Show Modal
-                $('#bgModal').removeClass('hidden');
-                $('#modalTambahUser').removeClass('hidden');
-
-            }else if(e == 'Edit'){
-                console.log("Value : " + e + b);
-
-                // Show Modal 
-                $('#bgModalEdit').removeClass('hidden');
-                $('#modalEditUser').removeClass('hidden');
-
-                $.ajax({  
-                    type: "GET",
-                    url: "/editDataUser/"+b,
-                    success: function(response){
-                        console.log("Response")
-                        console.log(response.DataUser);
-
-                        $('#idModalUser').val(response.DataUser.id);
-                        $('#profileUserModal').val(response.DataUser.profile);
-                        $('#idUserModal').val(response.DataUser.idUser);
-                        $('#namaUserModal').val(response.DataUser.namaUser);
-                        $('#passwordUserModal').val(response.DataUser.password);
-                        $('#usernameModal').val(response.DataUser.username);
-                        $('#statusModal').val(response.DataUser.status);
-                        $('#emailModal').val(response.DataUser.email);
-
+                    $.get(route, function(data) {
+                    content.html(data);
+                    
+                    if(route === 'dataUser'){
+                        $('.side1').removeClass('hidden');
+                        $('.side').addClass('hidden');
+                        $('.dashboard1').removeClass('hidden');
+                        $('.dashboard').addClass('hidden');
+                        $('.sideData').addClass('pt-2').removeClass('pt-10');
+                        $('.dropdown').addClass('mt-10');
+                    }else if(route == 'dataProduk'){
+                        
                     }
-                })
-
-            }else if(e == 'Close'){
-                    console.log("Close Modal");
-                    $('#bgModal').addClass('hidden');
-                    $('#modalTambahUser').addClass('hidden');
-            }else if(e == 'CloseEdit'){
-                $('#bgModalEdit').addClass('hidden');
-                $('#modalEditUser').addClass('hidden');
-            }else if(e == "Hapus"){
-                console.log("Value : " + e);
-
-                const id = $('.btnHapus').val();
-
-                // Show Modal
-                $('#idUser1').val(" Id User = "+ id);
-                $('#bgModalHapus').removeClass('hidden');
-                $('#modalHapusUser').removeClass('hidden');
-            }else if(e == 'CloseHapus'){
-                $('#bgModalHapus').addClass('hidden');
-                $('#modalHapusUser').addClass('hidden');
-            }
-        }
-
-        // Modal Dialog Produk
-        function modalProduk(e){
-            if(e == 'Tambah'){
-                console.log("Value : " + e);
-                
-                // Show Modal
-                $('#bgModalProduk').removeClass('hidden');
-                $('#modalTambahProduk').removeClass('hidden');
-
-            }else if(e == 'Edit'){
-                console.log("Value : " + e);
-
-                // Show Modal
-                $('#bgModalEdit').removeClass('hidden');
-                $('#modalEditProduk').removeClass('hidden');
-
-            }else if(e == 'Close'){
-                    console.log("Close Modal");
-                    $('#bgModalProduk').addClass('hidden');
-                    $('#modalTambahProduk').addClass('hidden');
-
-            }else if(e == 'CloseEdit'){
-                $('#bgModalEdit').addClass('hidden');
-                $('#modalEditProduk').addClass('hidden');
-            }else if(e == "Hapus"){
-                console.log("Value : " + e);
-
-                const id = $('.btnHapus').val();
-
-                // Show Modal
-                $('#idProduk1').val(" Id User = "+ id);
-                $('#bgModalHapus').removeClass('hidden');
-                $('#modalHapusProduk').removeClass('hidden');
-                
-            }else if(e == 'CloseHapus'){
-                $('#bgModalHapus').addClass('hidden');
-                $('#modalHapusProduk').addClass('hidden');
-            }
-        }
-
-        // Modal Dialog Barang 
-        function modalBarang(e){
-            if(e == 'Tambah'){
-                console.log("Value : " + e);
-                
-                // Show Modal
-                $('#bgModalBarang').removeClass('hidden');
-                $('#modalTambahBarang').removeClass('hidden');
-
-            }else if(e == 'Edit'){
-                console.log("Value : " + e);
-
-                // Show Modal
-                $('#bgModalEdit').removeClass('hidden');
-                $('#modalEditBarang').removeClass('hidden');
-
-            }else if(e == 'Close'){
-                    console.log("Close Modal");
-                    $('#bgModalBarang').addClass('hidden');
-                    $('#modalTambahBarang').addClass('hidden');
-
-            }else if(e == 'CloseEdit'){
-                $('#bgModalEdit').addClass('hidden');
-                $('#modalEditBarang').addClass('hidden');
-            }else if(e == "Hapus"){
-                console.log("Value : " + e);
-
-                const id = $('.btnHapus').val();
-
-                // Show Modal
-                $('#idBarang1').val(" Id User = "+ id);
-                $('#bgModalHapus').removeClass('hidden');
-                $('#modalHapusBarang').removeClass('hidden');
-                
-            }else if(e == 'CloseHapus'){
-                $('#bgModalHapus').addClass('hidden');
-                $('#modalHapusBarang').addClass('hidden');
-            }
-        }
-     </script>
-
-        {{-- Swiper --}}
-         <script src="{{ 'style/swiper.js' }}"></script>
-
-        <script>
-            var swiper = new Swiper(".mySwiper", {
-                effect: "cards",
-                grabCursor: true,
-                autoplay: {
-                    delay: 2500,
-                    disableOnInteraction: false,
-                },
+                });
             });
-        </script>
+        })
+    </script>
+
+    {{-- Script User --}}
+    <script src="{{ 'style/swiper.js' }}"></script>
+    <script src="{{ 'style/scriptUser.js' }}"></script>
+
+    {{-- Script Produk --}}
+    <script src="{{ 'style/scriptProduk.js' }}"></script>
+
+    {{-- Script Barang --}}
+    <script src="{{ 'style/scriptBarang.js' }}"></script>
 
 </body>
 </html>

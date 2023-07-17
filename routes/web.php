@@ -57,4 +57,17 @@ Route::controller(userAdmin::class)->group(function() {
     Route::post('/createUser1', 'createUser');
     Route::get('/editDataUser/{id}', 'editUser');
     Route::put('/updateDataUser', 'updateUser');
+    Route::get('/hapusDataUser', 'hapusUser');
+
+    // Produk
+    Route::post('/createProduk1', 'createDataProduk');
+    Route::get('/editDataProduk/{id}', 'editProduk');
+    Route::put('/updateDataProduk', 'updateProduk');
+    Route::get('/hapusDataProduk', 'hapusProduk');
+
+    // Barang
+    Route::post('/createDataBarang', 'createDataBarang');
+    Route::get('/editDataBarang/{id}', 'editBarang');
+    Route::put('/updateDataBarang', 'updateBarang');
+    Route::get('/hapusDataBarang', 'hapusBarang');
 });

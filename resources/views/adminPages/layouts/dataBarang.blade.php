@@ -5,7 +5,7 @@
         </div>
         <div class="ml-3">
             <div class="mb-2 relative w-[100%]">
-                <button class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambah" onclick="modalBarang('Tambah')">
+                <button class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambahBrng" onclick="modalBarang('Tambah')" value="dataBarang">
                     Tambah
                 </button>
             </div>
@@ -25,17 +25,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border text-center">
-                        <td class="py-2">UI8789</td>
-                        <td class="py-2">Tinta Biru</td>
-                        <td class="py-2">Bahan</td>
-                        <td class="py-2">15</td>
-                        <td class="py-2">12/09/2023</td>
-                        <td class="py-2">
-                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modalBarang('Edit')">Edit</button>
-                            <button class="btnHapus px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md" onclick="modalBarang('Hapus')" value="970">Hapus</button>
-                        </td>
-                    </tr>
+                    @foreach ($dataBarang as $barang)
+                        <tr class="border text-center">
+                            <td class="py-2">
+                                {{ $barang->idBarang }}
+                            </td>
+                            <td class="py-2">
+                                {{ $barang->namaBarang }}
+                            </td>
+                            <td class="py-2">
+                                {{ $barang->tipeBarang }}
+                            </td>
+                            <td class="py-2">
+                                {{ $barang->jumlahBarang }}
+                            </td>
+                            <td class="py-2">
+                                {{ $barang->created_at }}
+                            </td>
+                            <td class="py-2">
+                                <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modalBarang('Edit', '{{ $barang->id }}')">Edit</button>
+                                <button class="btnHapus px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md" onclick="modalBarang('Hapus', '{{ $barang->id }}')" value="970">Hapus</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

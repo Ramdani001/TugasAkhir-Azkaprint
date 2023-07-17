@@ -24,18 +24,32 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="border text-center">
-                        <td class="py-2">STM-009</td>
-                        <td class="py-2">Stempel</td>
-                        <td class="py-2">Stempel D1</td>
-                        <td class="py-2">20</td>
-                        <td class="py-2">Rp. 78.000</td>
-                        <td class="py-2">
-                            <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modalProduk('Edit')">Edit</button>
-                            <button value="180" class="btnHapus px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md" onclick="modalProduk('Hapus')">Hapus</button>
-                        </td>
-                    </tr>
+                <tbody> 
+                    @foreach ($dataProduk as $produk)
+                        <tr class="border text-center">
+                            <td class="py-2">
+                                {{ $produk->idProduk }}
+                            </td>
+                            <td class="py-2">
+                                {{ $produk->namaProduk }}
+                            </td>
+                            <td class="py-2">
+                                {{ $produk->tipeProduk }}
+                            </td>
+                            <td class="py-2">
+                                {{ $produk->jumlahProduk }}
+                            </td>
+                            <td class="py-2">
+                                <?php $harga = $produk->hargaProduk;
+                                    echo "Rp. ". number_format($harga, 0, ".", ".")."/Item";
+                                ?>
+                            </td>
+                            <td class="py-2">
+                                <button class="px-4 py-1 bg-green-400 text-white font-semibold rounded-md shadow-md" onclick="modalProduk('Edit', '{{ $produk->id }}')">Edit</button>
+                                <button value="180" class="btnHapus px-4 py-1 bg-red-400 text-white font-semibold rounded-md shadow-md" onclick="modalProduk('Hapus', '{{ $produk->id }}')">Hapus</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
