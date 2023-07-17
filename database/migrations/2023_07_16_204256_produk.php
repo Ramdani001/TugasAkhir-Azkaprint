@@ -18,6 +18,7 @@ return new class extends Migration
             $table->char('tipeProduk');
             $table->integer('jumlahProduk')->nullable(false);
             $table->bigInteger('hargaProduk');
+            $table->char('fotoProduk');
             $table->timestamps();
         });
     }

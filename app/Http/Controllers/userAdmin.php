@@ -61,17 +61,41 @@ class userAdmin extends Controller
         // dd($request->idmembers);
   
         // dd($dataUser);
-
+ 
         $dataUser-> idUser = $request->idUserModal;
         $dataUser-> namaUser = $request->namaUserModal;
         $dataUser-> username = $request->usernameModal;
         $dataUser-> status = $request->status;
         $dataUser-> password = $request->passwordUserModal;
         $dataUser-> email = $request->emailModal; 
-        $dataUser-> profile = $request->profileUserModal;
+
+        // dd($request->profileUserModal);
+
+        $fotoBaru = $request->profileUserModal;
+
+        if( $fotoBaru != null){
+            $this->validate($request, [
+                'profileUserModal' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+     
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('profileUserModal');
+     
+            $nama_file = time()."_".$file->getClientOriginalName();
+
+              // isi dengan nama folder tempat kemana file diupload
+              $tujuan_upload =public_path().'/img/profile';
+              $file->move($tujuan_upload,$nama_file);
+              
+              $dataUser-> profile = $nama_file;
+            // dd($dataUser);
+        }else{
+            $dataUser-> profile = $request->gambarLama;
+            
+        }
         $dataUser->update();
 
-        return redirect('/admin')->with('Success User', 'Data Berhasil Di Ubah');
+        return redirect('/admin')->with('Success User', 'Data Berhasil Diubah');
 
     }
 
@@ -84,9 +108,23 @@ class userAdmin extends Controller
         return redirect('/admin')->with('Success User', 'Data Berhasil Di Hapus');
 
     }
-
+ 
     // Produk
     public function createDataProduk(Request $request){
+
+        $this->validate($request, [
+            'fotoProduk' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+ 
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('fotoProduk');
+ 
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+          // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload =public_path().'/img/produk';
+        $file->move($tujuan_upload,$nama_file);
+        
 
         $dataProduk = new Produk;
         $dataProduk-> idProduk = $request->idProduk;
@@ -94,6 +132,7 @@ class userAdmin extends Controller
         $dataProduk-> tipeProduk = $request->tipeProduk;
         $dataProduk-> jumlahProduk = $request->jumlahProduk;
         $dataProduk-> hargaProduk = $request->hargaProduk;
+        $dataProduk-> fotoProduk = $nama_file;
         $dataProduk->save();
 
         return redirect('/admin')->with('Success Produk', 'Data Berhasil Di Tambahkan');
@@ -123,6 +162,30 @@ class userAdmin extends Controller
         $dataProduk-> tipeProduk = $request->tipeProduk;
         $dataProduk-> jumlahProduk = $request->jumlahProduk;
         $dataProduk-> hargaProduk = $request->hargaProduk;
+
+        $fotoBaru = $request->fotoProdukBaru;
+
+        if( $fotoBaru != null){
+            $this->validate($request, [
+                'fotoProdukBaru' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+     
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('fotoProdukBaru');
+     
+            $nama_file = time()."_".$file->getClientOriginalName();
+
+              // isi dengan nama folder tempat kemana file diupload
+              $tujuan_upload =public_path().'/img/produk';
+              $file->move($tujuan_upload,$nama_file);
+              
+              $dataProduk-> fotoProduk = $nama_file;
+            // dd($dataProduk);
+        }else{
+            $dataProduk-> fotoProduk = $request->fotoProdukLama;
+            
+        }
+
         $dataProduk->update();
 
         return redirect('/admin')->with('Success Update Produk', 'Data Berhasil Di Ubah');
@@ -161,7 +224,7 @@ class userAdmin extends Controller
             'status'=> 200,
             'dataBarang'=> $dataBarang
         ]);
-    }
+    } 
 
     public function updateBarang(Request $request){
         $id = $request->input('idPKBarang');

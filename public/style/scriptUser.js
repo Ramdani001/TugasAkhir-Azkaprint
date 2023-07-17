@@ -88,15 +88,25 @@ $(document).on('click', '.btnEdituser', function(){
                $('#bgModalEdit').removeClass('hidden');
                $('#modalEditUser').removeClass('hidden');
 
+               var form = $('#formDataEditUser')[0];
+               // console.log(form);
+               var formData = new FormData(form);
+
                $.ajax({  
                    type: "GET",
                    url: "/editDataUser/"+b,
+                   processData: false,
+                   contentType: false,
+                   data: formData,
                    success: function(response){
                        console.log("Response")
                        console.log(response.DataUser);
 
+                    var profilLama = 'img/profile/' + response.DataUser.profile;
+
                        $('#idModalUser').val(response.DataUser.id);
-                       $('#profileUserModal').val(response.DataUser.profile);
+                       $('#gambarLama').val(response.DataUser.profile);
+                       $("#profileLama").attr('src',profilLama);
                        $('#idUserModal').val(response.DataUser.idUser);
                        $('#namaUserModal').val(response.DataUser.namaUser);
                        $('#passwordUserModal').val(response.DataUser.password);

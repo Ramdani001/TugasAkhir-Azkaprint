@@ -10,12 +10,13 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="content mt-5">
         <div class="w-full rounded-md shadow-md">
             <table class="w-full pr-8">
                 <thead class=" bg-white">
                     <tr class="border text-center">
+                        <th>Produk</th>
                         <th>ID Produk</th>
                         <th>Nama Produk</th>
                         <th>Type Produk</th>
@@ -27,6 +28,9 @@
                 <tbody> 
                     @foreach ($dataProduk as $produk)
                         <tr class="border text-center">
+                            <td class="py-2 text-center">
+                                <img src="{{ 'img/produk/' }}{{ $produk->fotoProduk }} " class="w-10 mx-auto">
+                            </td>
                             <td class="py-2">
                                 {{ $produk->idProduk }}
                             </td>

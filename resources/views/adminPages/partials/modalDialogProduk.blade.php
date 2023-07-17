@@ -17,6 +17,8 @@
                     <input type="text" id="namaProduk" name="namaProduk" placeholder="Nama Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <input type="text" id="tipeProduk" name="tipeProduk" placeholder="Tipe Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    
+                    <input type="file" id="fotoProduk" name="fotoProduk" placeholder="Tipe Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <input type="text" id="jumlahProduk" name="jumlahProduk" placeholder="Jumlah Produk" value="" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
@@ -44,12 +46,18 @@
             <h1 class="text-xl font-semibold">Edit Data Produk</h1>
             <hr>
             <div class="mt-3">
-                <form action="/updateDataProduk" method="post" enctype="multipart/form-data">
+                <form action="/updateDataProduk" method="post" enctype="multipart/form-data" id="formEditProduk">
 
                     @csrf
                     @method('PUT')
 
                     <input type="text" name="idPK" id="idPK">
+
+                    <img src="" alt="Foto Produk" class="w-24 mx-auto" id="gambarLama">
+
+                    <input type="text" id="fotoProdukLama" name="fotoProdukLama" placeholder="Foto Produk Lama" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    
+                    <input type="file" id="fotoProdukBaru" name="fotoProdukBaru" placeholder="Id Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <input type="text" id="idModalProduk" name="idProduk" placeholder="Id Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 

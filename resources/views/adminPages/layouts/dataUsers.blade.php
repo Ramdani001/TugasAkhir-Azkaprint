@@ -31,6 +31,9 @@
                 <tbody>
                     @foreach ($dataUser as $user)
                     <tr class="border text-center">
+                        <td class="py-2 text-center">
+                            <img src="{{ 'img/profile/' }}{{ $user->profile }} " class="w-10 mx-auto">
+                        </td>
                         <td class="py-2">
                             {{ $user->idUser }}
                         </td>
@@ -45,9 +48,6 @@
                         </td>
                         <td class="py-2">
                             {{ $user->email }}
-                        </td>
-                        <td class="py-2">
-                            {{ $user->profile }} 
                         </td>
                         <td class="py-2">
                             {{ $user->created_at }}

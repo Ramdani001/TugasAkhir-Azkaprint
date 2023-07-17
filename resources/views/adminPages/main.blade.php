@@ -257,5 +257,9 @@
     {{-- Script Barang --}}
     <script src="{{ 'style/scriptBarang.js' }}"></script>
 
+    {{-- Landing Page --}}
+    {{-- Hero & Navbar Section --}}
+    <script src="{{ 'style/scriptHeroSection.js' }}"></script>
+
 </body>
 </html>

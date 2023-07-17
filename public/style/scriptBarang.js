@@ -34,7 +34,7 @@
 
                 }
             })
-
+ 
         }else if(e == 'Close'){
                 console.log("Close Modal");
                 $('#bgModalBarang').addClass('hidden');

@@ -49,14 +49,18 @@
             <h1 class="text-xl font-semibold">Edit Data User Admin</h1>
             <hr>
             <div class="mt-3">
-                <form action="/updateDataUser" method="POST" enctype="multipart/form-data">
+                <form action="/updateDataUser" method="POST" enctype="multipart/form-data" id="formDataEditUser">
                     
                     @csrf 
                     @method('PUT')
 
                     <input type="text" id="idModalUser" name="idModalUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <input type="text" id="profileUserModal" name="profileUserModal" placeholder="Profile User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <img src="" alt="profile" id="profileLama" name="profileLama" width="w-5">
+
+                    <input type="text" id="gambarLama" name="gambarLama" placeholder="Profile User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+
+                    <input type="file" id="profileUserModal" name="profileUserModal" placeholder="Profile User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <input type="text" id="idUserModal" name="idUserModal" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 

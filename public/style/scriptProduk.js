@@ -23,10 +23,19 @@ $(document).on('click', '.btnTmbhProduk', function() {
             $('#bgModalEdit').removeClass('hidden');
             $('#modalEditProduk').removeClass('hidden');
 
+            var form = $('#formEditProduk')[0];
+            // console.log(form);
+            var formData = new FormData(form);
+
             $.ajax({  
                 type: "GET",
                 url: "/editDataProduk/"+b,
+                processData: false,
+                contentType: false,
+                data: formData,
                 success: function(response){
+
+                    var produkLama = 'img/produk/' + response.dataProduk.fotoProduk;
 
                     $('#idPK').val(response.dataProduk.id)
                     $('#idModalProduk').val(response.dataProduk.idProduk);
@@ -34,6 +43,9 @@ $(document).on('click', '.btnTmbhProduk', function() {
                     $('#tipeModalProduk').val(response.dataProduk.tipeProduk);
                     $('#jumlahModalProduk').val(response.dataProduk.jumlahProduk);
                     $('#hargaModalProduk').val(response.dataProduk.hargaProduk);
+                    $('#fotoProdukLama').val(response.dataProduk.fotoProduk);
+                    $("#gambarLama").attr('src',produkLama);
+
 
                     console.log("Response")
                     console.log(response.dataProduk);
