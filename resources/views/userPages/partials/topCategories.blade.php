@@ -5,7 +5,7 @@
             {{-- Categorie 1 --}}
             <div class="w-24 h-full shadow-md rounded-md hover:scale-105 m-1 transition-transform ease-linear duration-300 group cursor-default">
                 <div class="relative overflow-hidden">
-                    <img src="{{ 'img/stempel.jpg' }}" alt="stempel" class="w-full">
+                    <img src="{{ 'img/user/stempel.jpg' }}" alt="stempel" class="w-full aspect-[4/4]">
                 
                     <div class="absolute h-full w-full bg-blue-400/60 flex items-center justify-center transition-all duration-500 ease-linear -bottom-14 opacity-0 group-hover:bottom-0 group-hover:opacity-100">
                         <h4 class="text-white font-semibold text-sm font-sans">Stempel</h4>
@@ -16,10 +16,10 @@
             {{-- Categorie 2 --}}
             <div class="w-24 h-full shadow-md rounded-md hover:scale-105 m-1 transition-transform ease-linear duration-300 group cursor-default">
                 <div class="relative overflow-hidden">
-                    <img src="{{ 'img/stempel.jpg' }}" alt="stempel" class="w-full">
+                    <img src="{{ 'img/user/undangan.jpg' }}" alt="stempel" class="w-full aspect-[4/4]">
                 
                     <div class="absolute h-full w-full bg-blue-400/60 flex items-center justify-center transition-all duration-500 ease-linear -bottom-14 opacity-0 group-hover:bottom-0 group-hover:opacity-100">
-                        <h4 class="text-white font-semibold text-sm font-sans">Stempel</h4>
+                        <h4 class="text-white font-semibold text-sm font-sans">Undangan</h4>
                     </div>
                 </div>
             </div>
@@ -27,10 +27,10 @@
             {{-- Categorie 3 --}}
             <div class="w-24 h-full shadow-md rounded-md hover:scale-105 m-1 transition-transform ease-linear duration-300 group cursor-default">
                 <div class="relative overflow-hidden">
-                    <img src="{{ 'img/stempel.jpg' }}" alt="stempel" class="w-full">
+                    <img src="{{ 'img/user/lanyard.jpg' }}" alt="stempel" class="w-full aspect-[4/4]">
                 
                     <div class="absolute h-full w-full bg-blue-400/60 flex items-center justify-center transition-all duration-500 ease-linear -bottom-14 opacity-0 group-hover:bottom-0 group-hover:opacity-100">
-                        <h4 class="text-white font-semibold text-sm font-sans">Stempel</h4>
+                        <h4 class="text-white font-semibold text-sm font-sans">Lanyard</h4>
                     </div>
                 </div>
             </div>
@@ -38,21 +38,21 @@
             {{-- Categorie 4 --}}
             <div class="w-24 h-full shadow-md rounded-md hover:scale-105 m-1 transition-transform ease-linear duration-300 group cursor-default">
                 <div class="relative overflow-hidden">
-                    <img src="{{ 'img/stempel.jpg' }}" alt="stempel" class="w-full">
+                    <img src="{{ 'img/user/banner.jpg' }}" alt="stempel" class="w-full aspect-[4/4]">
                 
                     <div class="absolute h-full w-full bg-blue-400/60 flex items-center justify-center transition-all duration-500 ease-linear -bottom-14 opacity-0 group-hover:bottom-0 group-hover:opacity-100">
-                        <h4 class="text-white font-semibold text-sm font-sans">Stempel</h4>
+                        <h4 class="text-white font-semibold text-sm font-sans">Banner /<br> Spanduk</h4>
                     </div>
                 </div>
-            </div>
+            </div> 
             {{-- Categorie 4 --}}
             {{-- Categorie 5 --}}
             <div class="w-24 h-full shadow-md rounded-md hover:scale-105 m-1 transition-transform ease-linear duration-300 group cursor-default">
                 <div class="relative overflow-hidden">
-                    <img src="{{ 'img/stempel.jpg' }}" alt="stempel" class="w-full">
+                    <img src="{{ 'img/user/idCard.png' }}" alt="stempel" class="w-full aspect-[4/4]">
                 
                     <div class="absolute h-full w-full bg-blue-400/60 flex items-center justify-center transition-all duration-500 ease-linear -bottom-14 opacity-0 group-hover:bottom-0 group-hover:opacity-100">
-                        <h4 class="text-white font-semibold text-sm font-sans">Stempel</h4>
+                        <h4 class="text-white font-semibold text-sm font-sans">Id Card</h4>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
             {{-- Categorie 6 --}}
             <div class="w-24 h-full shadow-md rounded-md hover:scale-105 m-1 transition-transform ease-linear duration-300 group cursor-default">
                 <div class="relative overflow-hidden">
-                    <img src="{{ 'img/stempel.jpg' }}" alt="stempel" class="w-full">
+                    <img src="{{ 'img/user/stempel.jpg' }}" alt="stempel" class="w-full aspect-[4/4]">
                 
                     <div class="absolute h-full w-full bg-blue-400/60 flex items-center justify-center transition-all duration-500 ease-linear -bottom-14 opacity-0 group-hover:bottom-0 group-hover:opacity-100">
                         <h4 class="text-white font-semibold text-sm font-sans">Stempel</h4>

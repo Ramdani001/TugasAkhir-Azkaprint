@@ -10,8 +10,8 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- Tailwindcss --}}
-    @vite('resources/css/app.css')
+    {{-- Tailwindcss --}} 
+    @vite('resources/css/app.css') 
 
     {{-- Fontawesome --}}
     <link rel="stylesheet" href="{{ 'fontawesome/css/all.css' }}">
@@ -37,47 +37,6 @@
           font-size: 22px;
           font-weight: bold;
           color: #fff;
-        }
-    
-        .swiper-slide:nth-child(1) {
-          /* background-color: rgb(206, 17, 17); */
-          background-image: url('{{ "img/stempel.jpg" }}')
-        }
-    
-        .swiper-slide:nth-child(2) {
-          background-color: rgb(0, 140, 255);
-        }
-    
-        .swiper-slide:nth-child(3) {
-          background-color: rgb(10, 184, 111);
-        }
-    
-        .swiper-slide:nth-child(4) {
-          background-color: rgb(211, 122, 7);
-        }
-    
-        .swiper-slide:nth-child(5) {
-          background-color: rgb(118, 163, 12);
-        }
-    
-        .swiper-slide:nth-child(6) {
-          background-color: rgb(180, 10, 47);
-        }
-    
-        .swiper-slide:nth-child(7) {
-          background-color: rgb(35, 99, 19);
-        }
-    
-        .swiper-slide:nth-child(8) {
-          background-color: rgb(0, 68, 255);
-        }
-    
-        .swiper-slide:nth-child(9) {
-          background-color: rgb(218, 12, 218);
-        }
-    
-        .swiper-slide:nth-child(10) {
-          background-color: rgb(54, 94, 77);
         }
     </style>
     {{-- Swiper Style --}}
@@ -201,6 +160,23 @@
            alert()->question('Title','Lorem Lorem Lorem');
             echo '<script>
                 alert("'.Session::get('Success Update Barang').'")
+                    console.log('.$message.');
+                </script>'
+    ?>
+         <script>
+                
+            const content = $('#contentAdmin');
+            let route = localStorage.getItem("Value Route");
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>
+    <?php 
+        }elseif ($message = Session()->has('Succes Kirim Email')) {
+           // alert()->success(Session::get('Success'));
+           alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Succes Kirim Email').'")
                     console.log('.$message.');
                 </script>'
     ?>

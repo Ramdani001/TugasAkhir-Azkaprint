@@ -16,7 +16,15 @@
 
                     <input type="text" id="namaProduk" name="namaProduk" placeholder="Nama Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <input type="text" id="tipeProduk" name="tipeProduk" placeholder="Tipe Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <select name="tipeProduk" id="tipeProduk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                        <option value="">-- Tipe Produk --</option>
+                        <option value="Stempel">Stempel </option>
+                        <option value="Undangan">Undangan </option>
+                        <option value="Banner">Banner </option>
+                        <option value="XBanner">XBanner </option>
+                        <option value="Lanyard">Lanyard </option>
+                        <option value="IdCard">Id Card </option>
+                    </select>
                     
                     <input type="file" id="fotoProduk" name="fotoProduk" placeholder="Tipe Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 

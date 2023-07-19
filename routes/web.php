@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\allProduk;
+use App\Http\Controllers\SendEmail;
 use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\ValidateController;
 use App\Http\Controllers\viewController;
 use Illuminate\Support\Facades\Route;  
 
 //User 
-
+ 
 // Route Dashboard User
 Route::controller(userController::class)->group(function() {
     Route::get('/', 'index');
@@ -22,6 +24,11 @@ Route::controller(allProduk::class)->group(function() {
     Route::get('/idCard', 'idCard');
     Route::get('/banner', 'banner');
     Route::get('/xbanner', 'xbanner'); 
+    
+    // Detail All Produk
+    Route::get('/detailAllProduk/{id}', 'detailAllProduk');
+    // Detail Stempel
+    Route::get('/detailStempel/{id}', 'detailProduk');
 });
 
 // Admin
@@ -70,4 +77,13 @@ Route::controller(userAdmin::class)->group(function() {
     Route::get('/editDataBarang/{id}', 'editBarang');
     Route::put('/updateDataBarang', 'updateBarang');
     Route::get('/hapusDataBarang', 'hapusBarang');
+});
+
+Route::controller(SendEmail::class)->group(function() {
+    Route::post('/kirimEmail', 'SendEmail');
+});
+
+// Login Register
+Route::controller(ValidateController::class)->group(function() {
+    Route::get('/login', 'loginIndex');
 });

@@ -37,16 +37,7 @@ $(document).on('click', '.btnEdituser', function(){
             processData: false,
             contentType: false,
             data: formData,
-            // data: { 
-            //     idUsers: $('#idUser').val(), 
-            //     namaUsers: $('#namaUser').val(),
-            //     username: $('#username').val(),
-            //     password: $('#password').val(),
-            //     profile: $('#profile').val(),
-            //     status: $('#status').val(),
-            //     email: $('#email').val(),
-            //     _token: $('meta[name="csrf-token"]').attr('content') 
-            // },
+
             success: function(response){
                 localStorage.setItem("Value Route", id);
                 let route = localStorage.getItem("Value Route");

@@ -10,8 +10,11 @@
 
     <link rel="stylesheet" href="{{ 'style/swiper.css' }}" />
 
-    {{-- Tailwindcss --}}
+    {{-- Tailwindcss --}}  
     @vite('resources/css/app.css')
+
+    {{-- Fontawesome --}}
+    <link rel="stylesheet" href="{{ 'fontawesome/css/all.css' }}">
 
 <style>
     .swiper {
@@ -129,19 +132,19 @@
       </script>
 
       {{-- SPA AllProduk --}}
-      <script>
+      <script> 
         $(document).ready(function() {
           const link = $('.spa-route'),
                 content = $('#contentProduk');
 
-          link.on('click', function(e) {
+          link.on('click', function(e) { 
             e.preventDefault()
             let route = $(this).attr('value');
-            // console.log(route);
 
-            $.get(route, function(data) {
-              content.html(data);
-            });
+              $.get(route, function(data) {
+                    content.html(data);
+              });
+
           });
         })
 
@@ -159,6 +162,8 @@
           });
       });
       </script>
+
+      <script src="{{ 'style/modalDetail.js' }}"></script>
 
 </body>
 </html>

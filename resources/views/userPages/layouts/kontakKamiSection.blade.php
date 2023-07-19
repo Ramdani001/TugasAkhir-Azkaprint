@@ -6,13 +6,14 @@
 
         {{-- Form Message Email --}}
         <div class="mt-10">
-            <form action="">
-                <div>
-                    <input type="text" class="w-[70%] mt-2 rounded-md shadow-md p-2" placeholder="Enter Your Name">
-                    <input type="text" class="w-[70%] mt-2 rounded-md shadow-md p-2" placeholder="Enter Your Email Address">
-                    <textarea name="" id="" cols="30" rows="10" class="mt-2 rounded-md shadow-md p-2 w-[70%]" placeholder="Enter Your Message"></textarea>
+            <form action="/kirimEmail" method="POST">
+                @csrf
+                <div class="">
+                    <input name="namaLengkap" type="text" class="w-[70%] mt-2 rounded-md shadow-md p-2" placeholder="Enter Your Name">
+                    <input name="pengirim" type="text" class="w-[70%] mt-2 rounded-md shadow-md p-2" placeholder="Enter Your Email Address">
+                    <textarea name="pesanEmail" id="" cols="30" rows="10" class="mt-2 rounded-md shadow-md p-2 w-[70%]" placeholder="Enter Your Message"></textarea>
                 </div>
-                <button class="bg-yellow-400 py-1 px-8 text-white mt-2 shadow-md">Kirim</button>
+                <button type="submit" class="bg-yellow-400 py-1 px-8 text-white mt-2 shadow-md">Kirim</button>
             </form>
         </div>
 

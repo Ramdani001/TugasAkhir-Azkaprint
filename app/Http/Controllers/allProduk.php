@@ -2,60 +2,91 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class allProduk extends Controller
 {
     public function index(){
 
-        return view('userPages/layouts/allProduk');
+        $dataProduk = Produk::all();
+
+        return view('userPages/layouts/allProduk', \compact('dataProduk'));
     }
 
-    public function stempel(){
+    public function stempel(){ 
+
+        $stempel = "Stempel"; 
+
+        $dataStempel =  Produk::where('tipeProduk', $stempel)->get();
+
+        return view('userPages/layouts/produk/stempel', \compact('dataStempel'));
+    }
+ 
+    public function lanyard() { 
+        $lanyard = "Lanyard";
+        $dataLanyard = Produk::where('tipeProduk', $lanyard)->get();
+
         
-        $name = "Stempel";
-        $price = "Rp. 78,000";
-
-        return view('userPages/layouts/produk/stempel', \compact('name', 'price'));
-    }
-
-    public function lanyard() {
-        $name = "Lanyard";
-        $price = "Rp. 13,000";
-
-        return view('userPages/layouts/produk/lanyard', \compact('name', 'price'));
+        return view('userPages/layouts/produk/lanyard', \compact('dataLanyard'));
 
     }
 
     public function undangan() {
-        $name = "Undangan";
-        $price = "Rp. 300";
+         
+        $undangan = "Undangan";
+        $dataUndangan = Produk::where('tipeProduk', $undangan)->get();
 
-        return view('userPages/layouts/produk/undangan', \compact('name', 'price'));
+        return view('userPages/layouts/produk/undangan', \compact('dataUndangan'));
 
     }
 
     public function idCard() {
-        $name = "Id Card";
-        $price = "Rp. 23,000";
+        
+        $idCard = "IdCard";
+        $dataIdCard = Produk::where('tipeProduk', $idCard)->get();
 
-        return view('userPages/layouts/produk/idCard', \compact('name', 'price'));
+        return view('userPages/layouts/produk/idCard', \compact('dataIdCard'));
 
     }
 
     public function banner() {
-        $name = "Banner";
-        $price = "Rp. 18,000";
+        $Bbanner = "Banner";
+        $dataBanner = Produk::where('tipeProduk', $Bbanner)->get(); 
 
-        return view('userPages/layouts/produk/idCard', \compact('name', 'price'));
+        return view('userPages/layouts/produk/banner', \compact('dataBanner'));
+
+    } 
+
+    public function xbanner() {
+        $XBanner = "XBanner";
+        $dataXBanner = Produk::where('tipeProduk', $XBanner)->get();
+
+        return view('userPages/layouts/produk/xbanner', \compact('dataXBanner'));
 
     }
 
-    public function xbanner() {
-        $name = "X-Banner";
-        $price = "Rp. 40,000";
+    // Detail All Produk
+    public function detailAllProduk($id){
+        $dataAllDetail = Produk::where('id',$id)->first();
 
-        return view('userPages/layouts/produk/idCard', \compact('name', 'price'));
+
+        return response()->json([
+            'status'=> 200,
+            'dataAllDetail'=> $dataAllDetail
+        ]);
+
+    }
+    
+    // Detail Produk
+    public function detailProduk($id){
+        $dataDetailstempel = Produk::where('id',$id)->first();
+
+
+        return response()->json([
+            'status'=> 200,
+            'dataDetailstempel'=> $dataDetailstempel
+        ]);
 
     }
 

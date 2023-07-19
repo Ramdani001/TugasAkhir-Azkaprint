@@ -35,7 +35,7 @@
                             <img src="{{ 'img/profile/' }}{{ $user->profile }} " class="w-10 mx-auto">
                         </td>
                         <td class="py-2">
-                            {{ $user->idUser }}
+                            {{ $user->idUser }} 
                         </td>
                         <td class="py-2">
                             {{ $user->namaUser }}
