@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-
+ 
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
@@ -49,6 +49,17 @@
 
     {{-- SweetAlert --}}
     <script src="{{ 'vendor/sweetalert/sweetalert.all.js' }}"></script>
+
+    <?php
+        if($message = Session()->has('LoginError')){
+            // alert()->success(Session::get('Success'));
+            alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('LoginError').'")
+                    console.log('.$message.');
+                </script>';
+        }
+    ?> 
 
     <script>
             function changeButton($value){
@@ -65,7 +76,9 @@
                     console.log($value);
                 }
             }
-    </script>
+    </script> 
+
+    <script src="{{ 'style/login/register.js' }}"></script>
 
 </body>
 </html>

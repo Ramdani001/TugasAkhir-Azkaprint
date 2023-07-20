@@ -1,14 +1,21 @@
 <?php
 
 use App\Http\Controllers\allProduk;
+use App\Http\Controllers\LoginRegisController;
 use App\Http\Controllers\SendEmail;
 use App\Http\Controllers\userAdmin;
+use App\Http\Controllers\viewController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\ValidateController;
-use App\Http\Controllers\viewController;
 use Illuminate\Support\Facades\Route;  
 
-//User 
+//User  
+
+// Login & Register
+Route::controller(LoginRegisController::class)->group(function() {
+    Route::post('/authLogin', 'login');
+    Route::post('/authRegist', 'register');
+});
  
 // Route Dashboard User
 Route::controller(userController::class)->group(function() {
@@ -29,6 +36,16 @@ Route::controller(allProduk::class)->group(function() {
     Route::get('/detailAllProduk/{id}', 'detailAllProduk');
     // Detail Stempel
     Route::get('/detailStempel/{id}', 'detailProduk');
+    // Detail Undangan
+    Route::get('/detailProdukUndangan/{id}', 'detailUndangan');
+    // Detail Banner
+    Route::get('/detailProdukBanner/{id}', 'detailBanner');
+    // Detail XBanner
+    Route::get('/detailProdukXBanner/{id}', 'detailXBanner');
+    // Detail Lanyard
+    Route::get('/detailProdukLanyard/{id}', 'detailLanyard');
+    // Detail IdCard
+    Route::get('/detailProdukIdCard/{id}', 'detailIdCard');
 });
 
 // Admin

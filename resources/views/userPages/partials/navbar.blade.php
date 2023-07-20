@@ -20,11 +20,12 @@
                         <a href="#">Kontak Kami</a>
                     </div>
                 </div>
-            </div>
+            </div> 
             <a href="/login">
-                <button class="px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 shadow-lg mr-4 btnLogin">
+                <button class=" px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 shadow-lg mr-4 btnLogin">
                     Login
                 </button>
+                         
             </a>
         </div>
     </div>
@@ -51,10 +52,29 @@
                 </div>
             </div>
             <a href="/login">
-                <button class="px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 text-white shadow-lg mr-4 btnLogin">
+                <button class="hidden px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 text-white shadow-lg mr-4 btnLogin">
                     Login
                 </button>
             </a>
+                <div class="py-1 flex w-[250px] items-center justify-center">
+                    <button class="text-white ml-9 mr-3 btnCard">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                    <div class="text-white flex w-36">
+                        <h2 class="w-full pr-1">Rizkan Ramdani</h2>
+                        <div class="h-8 w-8 bg-gray-400 rounded-full">
+
+                        </div>
+                    </div>
+                </div>   
+            
         </div>
     </div>    
 @endif
+
+<div class="bg-gray-700/40 hidden h-screen w-full fixed right-0 z-50 bgSideCard transition-all duration-700 " id="bgSideCard">
+
+</div>
+<div class="bg-red-700 h-screen w-80 fixed right-0 z-50 sideCard hidden transition-all" id="sideCard">
+    <button>LKJ</button>
+</div>

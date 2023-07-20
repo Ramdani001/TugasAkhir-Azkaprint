@@ -82,9 +82,13 @@
     @yield('content')
     {{-- End Body Content --}}
 
+
     {{-- Footer --}}
     @include('userPages/partials/footerSection')
 
+
+
+    
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
@@ -164,6 +168,17 @@
       </script>
 
       <script src="{{ 'style/modalDetail.js' }}"></script>
+      
+      {{-- Card Bar --}}
+      <script>
+          $(document).on('click', '.btnCard',function(){
+              console.log("Card Bard Actived");
+
+            $('#bgSideCard').removeClass('hidden');
+            $('#sideCard').removeClass('hidden');
+
+          })
+      </script>
 
 </body>
 </html>

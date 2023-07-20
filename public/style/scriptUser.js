@@ -31,7 +31,7 @@ $(document).on('click', '.btnEdituser', function(){
     var form = $('#formDataUser')[0];
     // console.log(form);
     var formData = new FormData(form);
-        $.ajax({ 
+        $.ajax({  
             type: "POST",
             url: "/createUser1", 
             processData: false,

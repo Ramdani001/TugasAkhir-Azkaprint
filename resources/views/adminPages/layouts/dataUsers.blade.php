@@ -18,6 +18,7 @@
             <table class="w-full pr-8">
                 <thead class=" bg-white">
                     <tr class="border text-center">
+                        <th>Profile</th>
                         <th>ID User</th>
                         <th>Nama User</th>
                         <th>Username</th>

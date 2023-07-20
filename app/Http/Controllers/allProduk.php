@@ -89,5 +89,56 @@ class allProduk extends Controller
         ]);
 
     }
+    
+    // Detail Produk Undangan
+    public function detailUndangan($id){
+        $dataDetailUndangan = Produk::where('id',$id)->first();
+
+
+        return response()->json([
+            'status'=> 200,
+            'dataDetailUndangan'=> $dataDetailUndangan
+        ]);
+
+    }
+
+    public function detailBanner($id){
+        $dataDetailBanner = Produk::where('id',$id)->first();
+
+        return response()->json([
+            'status'=> 200,
+            'dataDetailBanner'=> $dataDetailBanner
+        ]);
+
+    }
+    public function detailXBanner($id){
+        $dataDetailXBanner = Produk::where('id',$id)->first();
+
+        return response()->json([
+            'status'=> 200,
+            'dataDetailXBanner'=> $dataDetailXBanner
+        ]);
+
+    }
+
+    public function detailLanyard($id){
+        $dataDetailLanyard = Produk::where('id',$id)->first();
+
+        return response()->json([
+            'status'=> 200,
+            'dataDetailLanyard'=> $dataDetailLanyard
+        ]);
+
+    }
+
+    public function detailIdCard($id){
+        $dataDetailIdCard = Produk::where('id',$id)->first();
+
+        return response()->json([
+            'status'=> 200,
+            'dataDetailIdCard'=> $dataDetailIdCard
+        ]);
+
+    }
 
 }

@@ -51,10 +51,9 @@
                 
             </div>
         </div>
-    </div>
+    </div> 
 
-    
-{{-- Modal Detail Produk Stempel--}}
+{{-- Modal Detail All Produk--}}
 <button class="w-full h-screen top-0 left-0 bg-blue-800/30 absolute z-10 bgModal hidden transition-colors duration-700 ease-linear" id="bgmodalDetailAll">
 
 </button>
@@ -109,7 +108,7 @@
         </div>
     </div>
 </div>
-{{-- Modal Detail Produk Stempel--}}
+{{-- Modal Detail All Produk--}}
 
 
     <script>
