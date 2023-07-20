@@ -21,12 +21,39 @@
                     </div>
                 </div>
             </div> 
-            <a href="/login">
+            @if (!Auth::user())
+            <a href="/login"> 
                 <button class=" px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 shadow-lg mr-4 btnLogin">
                     Login
                 </button>
-                         
             </a>
+            @endif
+            @if (Auth::user())
+                <div class="py-1 flex w-[250px] items-center justify-center">
+                    {{-- @php
+                        $produkByid = $dataListProduk->groupBy('idProduk');
+                    @endphp                     --}}
+                    <a href="/cartView">
+                        <div class="bg-green-400 text-center rounded-full h-4 w-4 text-sm absolute ml-7 -mt-1">
+                            {{-- @foreach ($produkByid as $idProduk => $produkGroup) --}}
+                                <div class="">
+                                    {{ $userSama }}
+                                </div>
+                            {{-- @endforeach --}}
+                        </div>
+                        <button class="text-white ml-9 mr-3">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </a>
+                    <div class="text-white flex w-36">
+                        <h2 class="w-full pr-1">Rizkan Ramdani</h2>
+                        <div class="h-8 w-8 bg-gray-400 rounded-full">
+
+                        </div>
+                    </div>
+                </div>
+            @endif
+            
         </div>
     </div>
 @else
@@ -49,32 +76,33 @@
                     <div class="hover:text-yellow-200 hover:underline">
                         <a href="#kontakKami">Kontak Kami</a>
                     </div>
-                </div>
+                </div> 
             </div>
+             
+            
+            @if (!Auth::user())
             <a href="/login">
-                <button class="hidden px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 text-white shadow-lg mr-4 btnLogin">
+                <button class=" px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 text-white shadow-lg mr-4 btnLogin">
                     Login
                 </button>
             </a>
+            @endif
+            @if (Auth::user())
                 <div class="py-1 flex w-[250px] items-center justify-center">
                     <button class="text-white ml-9 mr-3 btnCard">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                     <div class="text-white flex w-36">
-                        <h2 class="w-full pr-1">Rizkan Ramdani</h2>
+                        <h2 class="w-full pr-1">
+                            {{ Auth::user()->namaUser }}
+                        </h2>
                         <div class="h-8 w-8 bg-gray-400 rounded-full">
 
                         </div>
                     </div>
-                </div>   
-            
+                </div>
+                <a href="/logoutUser">Logout</a>
+            @endif
         </div>
     </div>    
 @endif
-
-<div class="bg-gray-700/40 hidden h-screen w-full fixed right-0 z-50 bgSideCard transition-all duration-700 " id="bgSideCard">
-
-</div>
-<div class="bg-red-700 h-screen w-80 fixed right-0 z-50 sideCard hidden transition-all" id="sideCard">
-    <button>LKJ</button>
-</div>

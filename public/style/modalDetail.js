@@ -102,6 +102,7 @@
                       
                       var FtoProduk = 'img/produk/' + response.dataAllDetail.fotoProduk;
 
+                      $('#idDetailProduk').val(response.dataAllDetail.id);
                       $('#detailAllNamaProduk').html(response.dataAllDetail.namaProduk);
                       $("#fotoAllDetailProduk").attr('src',FtoProduk);
                       $('#hargaAllDetailProduk').html(rupiah);

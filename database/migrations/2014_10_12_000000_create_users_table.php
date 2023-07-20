@@ -8,19 +8,19 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     */
+     */ 
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             
             $table->id();
             $table->char('idUser')->nullable(false)->unique();
-            $table->char('namaUser')->nullable(false);
-            $table->char('username')->nullable(false);
-            $table->char('status')->nullable(false); 
-            $table->char('password')->nullable(false); 
-            $table->char('email')->nullable(false); 
-            $table->char('profile')->nullable(false);
+            $table->string('namaUser')->nullable(false);
+            $table->string('username')->nullable(false);
+            $table->string('status')->nullable(false); 
+            $table->string('password')->nullable(false); 
+            $table->string('email')->nullable(false)->unique(); 
+            $table->string('profile')->nullable(false);
             
             $table->rememberToken();
             $table->timestamps();

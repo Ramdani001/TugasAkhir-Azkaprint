@@ -2,16 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartModels;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class allProduk extends Controller
 {
     public function index(){
 
-        $dataProduk = Produk::all();
+        if(!empty(Auth::user()->idUser)){
+            $idUserLogin = Auth::user()->id;
+        }
 
-        return view('userPages/layouts/allProduk', \compact('dataProduk'));
+        $dataProduk = Produk::all();
+        if(!empty(Auth::user()->idUser)){
+            $userSama = CartModels::where('idUser', $idUserLogin)->count();
+        }
+
+        $dataListProduk["dataListProduk"] = CartModels::with('getProduk', 'getUser')->get();
+        // $getProduk = Produk::all();
+ 
+        // $dataUsersDetail["dataUsersDetail"] =CartModels::with('getUser')->get();
+        $getCart = CartModels::all();
+
+        if(!empty(Auth::user()->idUser)){
+            return view('userPages/layouts/allProduk', $dataListProduk ,\compact('dataProduk', 'getCart', 'userSama'));
+        }else{
+            return view('userPages/layouts/allProduk', $dataListProduk ,\compact('dataProduk', 'getCart'));
+        }
     }
 
     public function stempel(){ 

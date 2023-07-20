@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Produk;
-use App\Models\tblUser; 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class userAdmin extends Controller
@@ -24,7 +24,7 @@ class userAdmin extends Controller
         $tujuan_upload =public_path().'/img/profile';
 		$file->move($tujuan_upload,$nama_file);
 
-        $dataUser = new tblUser;
+        $dataUser = new User;
         $dataUser-> idUser = $request->idUser;
         $dataUser-> namaUser = $request->namaUser;
         $dataUser-> username = $request->username;
@@ -46,7 +46,7 @@ class userAdmin extends Controller
         // var_dump($id);
 
         // $idUsers = $id;
-        $dataUser = tblUser::find($id);
+        $dataUser = User::find($id);
         
         return response()->json([
             'status'=> 200,
@@ -57,7 +57,7 @@ class userAdmin extends Controller
     public function updateUser(Request $request){
 
         $id = $request->input('idModalUser');
-        $dataUser = tblUser::find($id);
+        $dataUser = User::find($id);
         // dd($request->idmembers);
   
         // dd($dataUser);
@@ -102,7 +102,7 @@ class userAdmin extends Controller
     public function hapusUser(Request $request){
         $id = $request->idUser;
 
-        $dataUser = tblUser::where('id',$id);
+        $dataUser = User::where('id',$id);
         $dataUser->delete();
 
         return redirect('/admin')->with('Success User', 'Data Berhasil Di Hapus');

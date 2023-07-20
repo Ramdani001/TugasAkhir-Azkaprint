@@ -2,36 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tblUser;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginRegisController extends Controller
 {
   
-    public function login(Request $request){
+    public function authenticate (Request $request){
         $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required'
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
-
+        
+          
+        // dd(Auth::attempt($credentials));
+         
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
      
-                dd("Berhasil");
-                return redirect()->intended('/');
+                $route = $this->redirectDash();
+
+                return redirect()->intended($route); 
+
+                // return redirect($route);
+
             }
+        
+        
 
         return back()->with('LoginError', "Username Atau Password Salah !!!");
-
     } 
+
+    public function redirectDash(){
+        $redirect = '';
+
+        if(Auth::user() && Auth::user()->status == 'Admin'){
+            $redirect = '/admin';
+        }else if(Auth::user() && Auth::user()->status == 'Manajer'){
+            $redirect = '/admin';
+        }else if(Auth::user() && Auth::user()->status == 'Users'){
+            $redirect = '/';
+        }
+
+        return $redirect;
+
+    }
 
     public function register(Request $request){
 
-        $this->validate($request, [
+        $this->validate($request, [ 
             'profile' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
@@ -56,13 +78,15 @@ class LoginRegisController extends Controller
         $dataRegist-> profile = $nama_file;
         $dataRegist->save();
 
-        // $message = "Selamat Datang, $request->namaProfile";
-        
-        // return response()->json([
-        //     'status'=>200,
-        //     // 'dataRegist' => $dataRegist,
-        //     'message'=> $message
-        // ]);
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('Logout Berhasil', "Anda Berhasil Keluar");
+
     }
 
 }

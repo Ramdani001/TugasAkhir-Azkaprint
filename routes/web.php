@@ -1,20 +1,23 @@
 <?php
 
+use App\Http\Controllers\addToCart;
 use App\Http\Controllers\allProduk;
 use App\Http\Controllers\LoginRegisController;
 use App\Http\Controllers\SendEmail;
 use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\viewController;
 use App\Http\Controllers\userController;
-use App\Http\Controllers\ValidateController;
+use App\Http\Controllers\ValidateController; 
 use Illuminate\Support\Facades\Route;  
 
 //User  
 
+
 // Login & Register
 Route::controller(LoginRegisController::class)->group(function() {
-    Route::post('/authLogin', 'login');
+    Route::post('/authLogin', 'authenticate');
     Route::post('/authRegist', 'register');
+    Route::get('/logoutUser', 'logout');
 });
  
 // Route Dashboard User
@@ -75,7 +78,7 @@ Route::controller(viewController::class)->group(function() {
     Route::get('/EditFAQSection', 'EditFAQSection');
 
 });
-
+  
 // CRUD Data User Admin
 Route::controller(userAdmin::class)->group(function() {
     Route::post('/createUser1', 'createUser');
@@ -104,3 +107,8 @@ Route::controller(SendEmail::class)->group(function() {
 Route::controller(ValidateController::class)->group(function() {
     Route::get('/login', 'loginIndex');
 });
+
+Route::controller(addToCart::class)->group(function() {
+    Route::post('/addToCart', 'addToCart'); 
+    Route::get('/cartView', 'cartView');
+}); 

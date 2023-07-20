@@ -60,7 +60,8 @@
                             </span>
                         </p>
                     <div class="mt-10">
-                            <button class="bg-blue-400 text-white w-full py-2 rounded-md shadow-md">Login</button>
+                        <button class="bg-blue-400 hidden text-white w-full py-2 rounded-md shadow-md">Login</button>
+                        <button class="bg-green-400  text-white w-full py-2 rounded-md shadow-md">Add To Card <i class="fa-solid fa-cart-plus ml-3"></i></button>
                             {{-- <button class="bg-gray-400 text-white w-full py-2 rounded-md shadow-md">Add To Card </button> --}}
                             <div class="text-center mt-40">
                                 <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500">

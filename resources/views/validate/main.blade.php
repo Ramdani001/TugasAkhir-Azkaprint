@@ -58,7 +58,7 @@
                 alert("'.Session::get('LoginError').'")
                     console.log('.$message.');
                 </script>';
-        }
+        } 
     ?> 
 
     <script>

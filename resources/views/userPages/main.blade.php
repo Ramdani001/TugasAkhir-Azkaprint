@@ -77,14 +77,21 @@
 </head>
 <body class="bg-slate-200">
     @include('userPages/partials/navbar')
+    
+    {{-- @php
+    dd(Auth::user()->namaUser)
+    @endphp --}}
 
     {{-- Body Content --}}
     @yield('content')
     {{-- End Body Content --}}
 
+    @if ($path = request()->path() !== "/cartView")      
+    @else
+      @include('userPages/partials/footerSection')
+    @endif
 
     {{-- Footer --}}
-    @include('userPages/partials/footerSection')
 
 
 
@@ -94,7 +101,7 @@
     <script src="{{ 'style/jquery.min.js' }}"></script>
 
     {{-- Script Change Color Scrolling Navbar --}}
-    @if ($path = request()->path() !== "allProduk")
+    @if ($path = request()->path() === "/")
       <script>
         $(document).ready(function(){  
             $(window).scroll(function(){
@@ -113,6 +120,13 @@
         })
       </script>   
       @elseif($path = request()->path() === "allProduk")
+      <script>
+        $(document).ready(function(){  
+            $(".navbar").addClass('bg-blue-800 ', 'opacity-50').removeClass('bg-Transparent', 'opacity-10');
+            $(".btnLogin").removeClass('bg-blue-800').addClass('bg-yellow-400', 'shadow-md');
+        })
+      </script>   
+      @elseif($path = request()->path() === "cartView")
       <script>
         $(document).ready(function(){  
             $(".navbar").addClass('bg-blue-800 ', 'opacity-50').removeClass('bg-Transparent', 'opacity-10');
@@ -169,16 +183,6 @@
 
       <script src="{{ 'style/modalDetail.js' }}"></script>
       
-      {{-- Card Bar --}}
-      <script>
-          $(document).on('click', '.btnCard',function(){
-              console.log("Card Bard Actived");
-
-            $('#bgSideCard').removeClass('hidden');
-            $('#sideCard').removeClass('hidden');
-
-          })
-      </script>
 
 </body>
 </html>

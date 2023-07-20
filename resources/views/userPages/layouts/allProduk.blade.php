@@ -46,6 +46,33 @@
                             </div>
                         </div>
                     @endforeach
+                
+                    {{-- @php
+                        $dataListProdukGrouped = $dataListProduk->groupBy('idUser');
+                    @endphp
+                    @if (!$dataListProduk)
+                        <h2>Data Tidak ada</h2> 
+                    @else
+                        <div>
+                            @if ($dataListProdukGrouped->count() > 0)
+                            @if (!empty($userSama))
+                                <h1> {{ $userSama }} </h1>
+                            @endif
+                            @foreach ($dataListProdukGrouped as $data => $item)
+                                @foreach ($item as $data)
+                                    <div>
+                                        <h1>Nama Produk :{{ $data->getProduk->namaProduk }}</h1>
+                                        <h1>Pemesan : {{ $data->getUser->namaUser }}</h1>
+                                    </div>
+                                @endforeach
+                            @endforeach
+                                
+                            @else
+                                <h1>Data Tidak ada Ui</h1>
+                            @endif
+
+                        </div>
+                    @endif --}}
                 </div>
                 </div>
                 
@@ -73,7 +100,7 @@
                     <div class="w-full h-[95%]">
                         <img alt="" class="w-full h-full" id="fotoAllDetailProduk">
                     </div>
-                    <form action="/" method="post" enctype="multipart/form-data" class=" w-full h-[95%] p-4">
+                    <div class=" w-full h-[95%] p-4">
                     <h1 class="text-black font-semibold text-3xl mb-2 detailNamaProduk" id="detailAllNamaProduk"></h1>
                     <h3>
                         <del class="text-red-500 italic font-semibold">Rp. 75.000</del>
@@ -81,14 +108,33 @@
                            
                         </b>
                         <span class="font-semibold text-green-500 underline">Promo </span>
+                        
                     </h3>
                     <p class="mt-3">Keterangan : 
                             <span>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita modi distinctio quibusdam dolorem recusandae non, beatae quod culpa provident saepe quasi soluta eligendi dolores sapiente repellendus, maiores error omnis dolor?
                             </span>
-                        </p>
-                    <div class="mt-10">
-                            <button class="bg-blue-400 text-white w-full py-2 rounded-md shadow-md">Login</button>
+                        </p> 
+                    <div class="mt-10"> 
+                            @if (!Auth::user())
+                                <a href="/login" class="bg-blue-400 text-white w-full py-2 rounded-md shadow-md">
+                                    {{-- <button class="bg-blue-400 text-white w-full py-2 rounded-md shadow-md">Login</button> --}}
+                                    login
+                                </a>
+                            @endif
+                            @if (Auth::user())
+                                <form action="/addToCart" method="post">
+                                    @csrf
+                                    <input type="text" name="idUserLogin" value="{{ Auth::user()->id }}" placeholder="{{ Auth::user()->id }}">
+
+                                    <input type="text" placeholder="Id Produk" id="idDetailProduk" name="idDetailProduk">
+
+                                    <button type="submit" class="bg-green-400  text-white w-full py-2 rounded-md shadow-md">
+                                        Add To Card  
+                                        <i class="fa-solid fa-cart-plus ml-3"></i>
+                                    </button>
+                                </form>
+                            @endif
                             {{-- <button class="bg-gray-400 text-white w-full py-2 rounded-md shadow-md">Add To Card </button> --}}
                             <div class="text-center mt-40">
                                 <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500">
@@ -102,11 +148,12 @@
                                 </a>
                             </div>
                     </div>
-                    </form> 
+                </div> 
                 </div>
             {{-- @endforeach --}}
         </div>
     </div>
+    
 </div>
 {{-- Modal Detail All Produk--}}
 

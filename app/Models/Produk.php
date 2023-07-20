@@ -10,8 +10,13 @@ class Produk extends Model
     use HasFactory;
 
     protected $table = "Produk"; 
-    protected  $primaryKey = 'id';
+    protected  $primaryKey = 'id'; 
 
     protected $guard = [];
+
+
+    public function produk(){
+    	return $this->hasMany('App\Models\CartModels');
+    }
 
 }

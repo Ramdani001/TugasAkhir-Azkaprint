@@ -13,14 +13,14 @@
                         </label>
                     @enderror
 
-                    <input type="text" placeholder="Username" class=" border border-slate-200 w-full py-3 px-2 text-md rounded-xl my-2 text-slate-600" id="email" name="username" required>
+                    <input type="text" placeholder="Username" class=" border border-slate-200 w-full py-3 px-2 text-md rounded-xl my-2 text-slate-600" id="email" name="email" required>
                     
                 </div>
 
                 <input type="text" placeholder="Password" class=" border border-slate-200 w-full py-3 px-2 text-md rounded-xl my-2 text-slate-600" id="password" name="password" required>
 
                 <div class="flex flex-col-reverse text-sm text-slate-200 gap-10 mt-2">
-                    
+                     
                     <div class="">
                         <h4>
                             <a class="hover:text-yellow-200 cursor-pointer">Lupa Password?</a>

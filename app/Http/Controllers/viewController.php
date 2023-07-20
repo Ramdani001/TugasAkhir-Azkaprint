@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Produk;
-use App\Models\tblUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class viewController extends Controller
-{
+{ 
     public function index(){
         return view('adminPages.main');
     }
 
     public function dataUser(){
 
-        $dataUser = tblUser::all();
+        $dataUser = User::all();
 
         return view('adminPages.layouts.dataUsers', \compact('dataUser'));
     }
-
+ 
     public function produk(){
 
         $dataProduk = Produk::all();
