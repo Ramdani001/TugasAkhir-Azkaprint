@@ -29,10 +29,28 @@
             </a>
             @endif
             @if (Auth::user())
+                @php
+                    $produkByid = $dataListProduk->groupBy('idProduk');
+                    $idProduk = 0;
+                @endphp
+
+                {{-- @foreach ($produkByid as $idProduk => $produkGroup)
+                    <div>
+                        <h1>idProduk: </h1>
+                        <input type="text" value="{{ $idProduk }}">
+                        <h2>Jumlah Produk: </h2>
+                        <input type="text" value="{{ $produkGroup->count() }}">
+                    </div>
+                @endforeach --}}
                 <div class="py-1 flex w-[250px] items-center justify-center">
-                    {{-- @php
-                        $produkByid = $dataListProduk->groupBy('idProduk');
-                    @endphp                     --}}
+                    @if (!Auth::user())
+                    <a href="/login">
+                        <button class=" px-7 py-1 rounded-lg transition-colors ease-in duration-700 bg-blue-800 text-white shadow-lg mr-4 btnLogin">
+                            Login
+                        </button>
+                    </a>
+                    @endif
+                    @if (Auth::user())
                     <a href="/cartView">
                         <div class="bg-green-400 text-center rounded-full h-4 w-4 text-sm absolute ml-7 -mt-1">
                             {{-- @foreach ($produkByid as $idProduk => $produkGroup) --}}
@@ -46,12 +64,15 @@
                         </button>
                     </a>
                     <div class="text-white flex w-36">
-                        <h2 class="w-full pr-1">Rizkan Ramdani</h2>
+                        <h2 class="w-full pr-1">
+                            {{ Auth::user()->namaUser }}
+                        </h2>
                         <div class="h-8 w-8 bg-gray-400 rounded-full">
 
                         </div>
                     </div>
                 </div>
+                    @endif
             @endif
             
         </div>

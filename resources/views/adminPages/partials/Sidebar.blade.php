@@ -9,7 +9,7 @@
             <button value="admin" class="spa-admin mt-1 dashboard bg-slate-200 text-black py-1 pl-2 rounded-md pr-[66px] -rounded-tr-lg">
                 Dashboard
             </button>
-            <button class="text-white font-normal mt-2">Transaksi</button>
+            <button class="text-white font-normal mt-2 spa-admin" value="transaksiAdmin">Transaksi</button>
 
             <div class="mt-1 relative sideData" id="">
                 <h2 class="text-sm text-slate-300">Data</h2>

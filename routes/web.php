@@ -54,6 +54,9 @@ Route::controller(allProduk::class)->group(function() {
 // Admin
 Route::controller(viewController::class)->group(function() {
     Route::get('/admin', 'index');
+
+    Route::get('/transaksiAdmin', 'transaksi');
+
     // User
     Route::get('/dataUserSection', 'dataUser');
 

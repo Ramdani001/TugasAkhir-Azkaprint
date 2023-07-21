@@ -8,12 +8,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class viewController extends Controller
-{ 
+{  
     public function index(){
-        return view('adminPages.main');
+        return view('adminPages.layouts.DashboardAdmin');
     }
 
-    public function dataUser(){
+    public function transaksi(){
+        return view('adminPages/layouts/dataTransaksi');
+    }
+
+    public function dataUser(){ 
 
         $dataUser = User::all();
 

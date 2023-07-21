@@ -6,6 +6,7 @@ use App\Models\CartModels;
 use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class addToCart extends Controller 
 {
@@ -42,8 +43,43 @@ class addToCart extends Controller
     }
 
     public function cartView(){
-        return view('userPages/layouts/cartView');
-    }
+
+        // $dataCart = CartModels::all();
+
+        // Mengelompokkan data berdasarkan idproduk dan menghitung jumlah data dalam setiap grup
+        // $dataSama = CartModels::select('idProduk', 'idUser', 'jumlah')
+        // ->selectRaw('COUNT(*) as total')
+        // ->groupBy('idProduk', 'idUser', 'jumlah')
+        // ->get();
+
+        // foreach ($dataSama as $data) {
+        //     dd(  "ID Produk: " . $data->idProduk . " Total Data: " . $data->total . "\n");
+        // echo "ID Produk: " . $data->idProduk . ", Nama Produk: " . $data->idUser . ", jumlah: " . $data->jumlah . ", Total Data: " . $data->total . "\n";
+        // }
+
+        
+        // $dataSama = CartModels::select('Cart.idproduk', 'Cart.idUser', DB::raw('COALESCE(Cart.total, 1) as total'))
+        // ->leftJoin(DB::raw('(SELECT idProduk, COUNT(*) as total FROM Cart GROUP BY idProduk) as subquery'), 'Cart.idProduk', '=', 'subquery.idProduk')
+        // ->get();
+
+        // foreach ($dataSama as $data) {
+        //     dd(  "ID Produk: " . $data->idProduk . " Total Data: " . $data->total . "\n");
+        // echo "ID Produk: " . $data->idproduk . ", Nama Produk: " . $data->namaProduk . ", Deskripsi: " . $data->deskripsi . ", Total Data: " . $data->total . "\n";
+        // }
+ 
+        // $userSama = CartModels::where('idUser', $idUserLogin)->count();
+
+        // $produkSama = CartModels::where('idProduk', $idDetailProduk)->count();
+
+        $dataListProduk['dataListProduk'] =CartModels::with('getProduk')->get();
+        $dataProduk = Produk::all();
+
+        // $ListProduk = Produk::where('id', $idProduk)->count();
+
+
+
+        return view('userPages/layouts/cartView',$dataListProduk, \compact('dataProduk'));
+    } 
 
 
 }

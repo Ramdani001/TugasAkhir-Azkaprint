@@ -9,10 +9,10 @@ class CartModels extends Model
 {
     use HasFactory;
 
-    protected $table = 'Cart'; 
+    protected $table = 'Cart';  
       
-    // protected  $primaryKey = 'id';
-
+    protected  $primaryKey = 'id'; 
+ 
     protected $guarded = [];
 
     public function getProduk(){

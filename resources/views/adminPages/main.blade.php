@@ -43,16 +43,17 @@
 
 </head>
 <body class="bg-slate-200">
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert') --}}
     
     <div class="flex flex-rows-2 w-full h-full border-3 border-red-500">
-        <div class="">
+        <div class=""> 
             @include('adminPages/partials/Sidebar')
         </div>
         <div class="w-full">
             @include('adminPages/partials/Topside')
             <div>
                 <div id="contentAdmin">
+                    @yield('contentAdmin')
 
                 </div>
                 
