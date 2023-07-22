@@ -57,7 +57,7 @@ Route::controller(viewController::class)->group(function() {
 
     Route::get('/transaksiAdmin', 'transaksi');
 
-    // User
+    // User 
     Route::get('/dataUserSection', 'dataUser');
 
     // Produk
@@ -114,4 +114,5 @@ Route::controller(ValidateController::class)->group(function() {
 Route::controller(addToCart::class)->group(function() {
     Route::post('/addToCart', 'addToCart'); 
     Route::get('/cartView', 'cartView');
+    Route::get('/cariDataProduk/{id}', 'cariDataProduk');
 }); 

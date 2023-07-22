@@ -13,33 +13,34 @@
                         @foreach ($dataListProduk as $cart => $data)
                         {{-- @php
                             dd($data->getProduk['id']);
-                        @endphp --}}
+                        @endphp --}} 
                         <div class="grid grid-cols-5 gap-2 mb-2">
                                 <div>
                                     <div>
-                                        <input type="checkbox" name="idCart" id="idCart" class="border-2 " value="{{ $data->id }}" onclick="checkCart('{{ $data->id }}')">
+                                        <input type="checkbox" name="idCart" id="idCart" class="border-2 " value="{{ $data->id }}" onclick="checkCart(this, '{{ $data->id }}')">
                                     </div>
                                     <img src="{{ 'img/produk/'}}{{$data->getProduk['fotoProduk']}}" alt="profil" class="w-full">
                                 </div>
                                 <div>
-                                    <h1 class="font-bold text-xl">Stempel</h1>
-                                    <h6 class="text-sm italic text-slate-500">Type : D3</h6>
-                                    <h6 class="text-sm italic text-slate-500">Stock : Ready</h6>
+                                    <h1 class="font-bold text-xl">
+                                        {{ $data->getProduk['namaProduk'] }}
+                                    </h1>
+                                    <h6 class="text-sm italic text-slate-500">Type : {{ $data->getProduk['tipeProduk'] }}</h6>
+                                    <h6 class="text-sm italic text-slate-500">Stock : {{ $data->getProduk['jumlahProduk'] }}</h6>
                                 </div>
                                 <div>
                                     <h1>Harga </h1>
-                                    <span class="font-bold italic">Rp. 45.000</span>
+                                    <span class="font-bold italic">
+                                        <?php $harga = $data->getProduk['hargaProduk'];
+                                            echo "Rp. ". number_format($harga, 0, ".", ".");
+                                        ?>
+                                    </span>
                                 </div>
                                 <div>
                                     <h1>Jumlah</h1>
                                     <input type="number" name="jumlahPesanan" id="jumlahPesanan" class="border-slate-400 border"
-                                    
+                                    onkeyup="onInputChange(this.value, {{ $data->getProduk['id'] }})"
                                     >
-                                </div>
-                                <div>
-                                    <h1>Total</h1>
-                                    <span class="font-bold"> Rp. </span>
-                                    <input type="number" name="jumlahPesanan" id="jumlahPesanan" class="font-bold italic w-32" value="45.000" >
                                 </div>
                             </div>
                         @endforeach
@@ -62,7 +63,7 @@
                             </div>
                             <div class="grid grid-cols-2 mt-3">
                                 <h1>Total Bayar</h1>
-                                <h3 class="text-right">Rp. 45.000</h3>
+                                <span class="font-bold text-right" id="totalBayar"></span>
                             </div>
                             <button class="mt-[180px] absolute text-md font-semibold w-[310px] h-10 bg-yellow-400">Bayar</button>    
                         </div>
@@ -72,9 +73,52 @@
         </div>
     </div>
     <script>
-        function checkCart(e){
-            $idHapusCart = [e];
-            console.log("Id Cart Yang mau dihapu: ", $idHapusCart);
+        let idHapusCart = [];
+        let totalHarga = 0;
+        let pilihIdProduk = [];
+        function checkCart(checkbox, e){
+           if(checkbox.checked){
+                idHapusCart.push(e);
+                // console.log("Id Cart Yang mau dihapu: ", idHapusCart);
+           }else{
+            let index = idHapusCart.indexOf(e);
+                if (index !== -1) {
+                    idHapusCart.splice(index, 1);
+                }
+            }
+            console.log("Id Cart Yang mau dihapus: ", idHapusCart);
         }
+
+        function onInputChange(val, idProduk){
+            console.log("Id Produk : ", idProduk);
+            console.log("Jumlah Beli : ", val);
+
+            if(val > 0){
+                    $.ajax({  
+                    type: "GET",
+                    url: "/cariDataProduk/"+idProduk,
+                    success: function(response){
+                        let harga = response.hasilIdProduk.hargaProduk;
+
+                        totalHarga = val * harga;
+
+                        let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
+
+                        console.log(rupiah);
+                        $('#totalBayar').html(rupiah);
+                    }
+                })
+
+            }else{
+                totalHarga = 0;
+                let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
+
+                console.log(rupiah);
+                $('#totalBayar').html(rupiah);
+            }
+        }
+
+        
+
     </script>
 @endsection

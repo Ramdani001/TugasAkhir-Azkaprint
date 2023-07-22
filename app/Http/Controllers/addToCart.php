@@ -81,5 +81,14 @@ class addToCart extends Controller
         return view('userPages/layouts/cartView',$dataListProduk, \compact('dataProduk'));
     } 
 
+    public function cariDataProduk($id){
+        $hasilIdProduk = Produk::where('id', $id)->first();
+
+        return response()->json([
+            'status'=> 200,
+            'hasilIdProduk'=> $hasilIdProduk
+        ]);
+    }
+
 
 }

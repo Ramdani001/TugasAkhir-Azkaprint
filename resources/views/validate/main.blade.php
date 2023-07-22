@@ -34,7 +34,7 @@
             <button class="transition-all duration-700 ease-linear bg-blue-900 px-8 py-1 absolute hidden z-50 text-center btnChangeLogin ml-[377px] mt-1 text-white rounded-md shadow-md btnChange" id="btnChange" onclick="changeButton('login')">Login</button>
             {{-- Button --}}
             {{-- Button --}}
-            <div class=" bg-[url('../../public/img/user/bgLogin.jpg')] bg-cover bg-center no-repeat absolute ml-[442px] z-40 w-[434px] h-[527px] bgPemisah transition-all duration-700 ease-linear">
+            <div class=" bg-[url('../../public/img/user/bgLogin.jpg')] bg-cover bg-center no-repeat absolute ml-[442px] z-10 w-[434px] h-[527px] bgPemisah transition-all duration-700 ease-linear">
 
             </div>
         </div>
