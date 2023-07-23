@@ -66,11 +66,31 @@ $(document).on('click', '.btnEdituser', function(){
        function modal(e, b){
            
            if(e == 'Tambah'){
-               console.log("Value : " + e);
+               console.log("Value : " + b);
                
-               // Show Modal
-               $('#bgModal').removeClass('hidden');
-               $('#modalTambahUser').removeClass('hidden');
+            // generate data user
+                // Generate a random prefix
+                // let prefix = b;
+                if(b = "Admin"){
+                    prefix = "ADM-";
+                }else if(b = "Users"){ 
+                    prefix = "USR-";
+                }
+
+                // Generate a random suffix
+                let suffix = "";
+                for (let i = 0; i < 4; i++) {
+                suffix += Math.floor(Math.random() * 10);
+                }
+
+                // Combine the prefix and suffix to form the code
+                let code = prefix + suffix;       
+                // generate data user
+                console.log(code); 
+                $('#idUser').val(code);
+                // Show Modal
+                $('#bgModal').removeClass('hidden');
+                $('#modalTambahUser').removeClass('hidden');
 
            }else if(e == 'Edit'){
                console.log("Value : " + e + b);
@@ -183,3 +203,31 @@ $(document).on('click', '.btnEdituser', function(){
                    disableOnInteraction: false,
                },
            });
+
+           
+// Generate code
+function generateCodeIdkaryawan(e) {
+    
+    // Generate a random prefix
+    let prefix = e;
+    if(e == "Admin"){
+        prefix = "ADM-";
+    }else if(e == "Users"){
+        prefix = "USR-";
+    }
+    
+    // Generate a random suffix
+    let suffix = "";
+    for (let i = 0; i < 4; i++) {
+      suffix += Math.floor(Math.random() * 10);
+    }
+    
+    // Combine the prefix and suffix to form the code
+    let code = prefix + suffix;
+    
+    // document.getElementsByClassName('.tambahBtn').innerHTML = code;
+
+    console.log(code);
+
+    return code;
+  }

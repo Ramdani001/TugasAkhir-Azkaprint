@@ -38,8 +38,20 @@
                                 </div>
                                 <div>
                                     <h1>Jumlah</h1>
+                                    {{-- <input type="number" name="jumlahPesanan" id="jumlahPesanan" class="border-slate-400 border"
+                                    onchange="onInputChange(this.value, {{ $data->getProduk['hargaProduk'] }}, {{ $data->getProduk['id'] }})"
+                                    value= "{{ $data->jumlah }}"
+                                    > --}}
                                     <input type="number" name="jumlahPesanan" id="jumlahPesanan" class="border-slate-400 border"
-                                    onkeyup="onInputChange(this.value, {{ $data->getProduk['id'] }})"
+                                    value= "{{ $data->jumlah }}"
+                                    >
+                                    <div class="grid grid-cols-2 gap-3 mt-1">
+                                        <button class="px-1 py-1 bg-gray-200 shadow-md"onclick="tambahCart({{ $data->id }}, 'Tambah')" >+</button>
+                                        <button class="px-1 py-1 bg-gray-200 shadow-md">-</button>
+                                    </div>
+                                    <input type="text" class="hidden" name="jumlahPesanan{{ $data->getProduk['id'] }}" id="jumlahPesanan{{ $data->getProduk['id'] }}" class="border-slate-400 border"
+                                   
+                                    value= "{{ $data->jumlah }}"
                                     >
                                 </div>
                             </div>
@@ -72,10 +84,38 @@
             </div>
         </div>
     </div>
+
+    {{-- CartView --}}
+    // {{-- Jquery --}}
+    <script src="{{ 'style/jquery.js' }}"></script>
+    <script src="{{ 'style/jquery.min.js' }}"></script>
     <script>
+
+
         let idHapusCart = [];
         let totalHarga = 0;
-        let pilihIdProduk = [];
+        let pilihIdProduk = []; 
+        let totalHargaAwal = 0;
+
+        var keranjang = '{{ (json_encode($dataListProduk))}}';
+
+        var decodedData = JSON.parse(keranjang.replace(/&quot;/g, '"'));
+
+        console.log(decodedData);
+
+        for(var i = 0; i< decodedData.length; i++){
+          
+          var jumlahBarang = decodedData[i]["jumlah"];
+          var harga = decodedData[i]["get_produk"]["hargaProduk"];
+     
+          var tempJumlah = jumlahBarang * harga;
+          totalHarga = totalHarga + tempJumlah;
+        //   totalHargaAwal = totalHargaAwal + tempJumlah;
+          let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
+          $('#totalBayar').html(rupiah);
+
+        }
+        
         function checkCart(checkbox, e){
            if(checkbox.checked){
                 idHapusCart.push(e);
@@ -89,36 +129,76 @@
             console.log("Id Cart Yang mau dihapus: ", idHapusCart);
         }
 
-        function onInputChange(val, idProduk){
-            console.log("Id Produk : ", idProduk);
-            console.log("Jumlah Beli : ", val);
+        $(document).on('ready', function(){
 
-            if(val > 0){
-                    $.ajax({  
-                    type: "GET",
-                    url: "/cariDataProduk/"+idProduk,
-                    success: function(response){
-                        let harga = response.hasilIdProduk.hargaProduk;
+        })
 
-                        totalHarga = val * harga;
+        function onInputChange(jumlahOrder, hargaProduk, idProduk){
+        //   var inputText = parseInt($('#jumlahPesanan'+idProduk).val(), 10);
+         var inputText = $('#jumlahPesanan'+idProduk).val();
+          console.log(totalHarga);
 
-                        let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
+          var tempTotalSebelum = inputText * hargaProduk;
+          var tempTotalSesudah = jumlahOrder * hargaProduk;
+          var tempSementara = 0;
+          if(jumlahOrder < inputText){
+            console.log("Baris 1");
+            tempSementara = tempTotalSesudah - tempTotalSebelum;
+          }else if(jumlahOrder > inputText){
+            console.log("Baris 2");
+            tempSementara = (tempTotalSebelum + tempTotalSesudah)-tempTotalSebelum;
+          }else{
+            console.log("Baris 3");
+            tempSementara = tempTotalSebelum;
+          }
 
-                        console.log(rupiah);
-                        $('#totalBayar').html(rupiah);
-                    }
-                })
+          totalHarga = totalHarga + tempSementara;
 
-            }else{
-                totalHarga = 0;
-                let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
+          let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
+          $('#totalBayar').html(rupiah);
 
-                console.log(rupiah);
-                $('#totalBayar').html(rupiah);
-            }
+          $('#jumlahPesanan'+idProduk).val(jumlahOrder);
+
         }
 
         
 
     </script>
+      {{-- CartView --}}
+
+
+    <script>
+        function tambahCart(idInpt, cls){
+            var totalHargaBaru = 0;
+            $.ajax({  
+                type: "GET", 
+                url: "/cariDataProduk/"+idInpt,
+                success: function(response){
+                    console.log(response.dataListProdukBaru);
+
+                    var dataListProdukBaru = response.dataListProdukBaru.dataListProdukBaru;
+
+                    console.log(dataListProdukBaru);
+
+                    for(var i = 0; i< dataListProdukBaru.length; i++){
+                        console.log("Data Ke : ", i, "Jumlah : ", dataListProdukBaru[i]["jumlah"])
+                        console.log("Data Ke : ", i, "Harga : ", dataListProdukBaru[i]["get_produk"].hargaProduk)
+                        var jumlahBarang = dataListProdukBaru[i]["jumlah"];
+                        var harga = dataListProdukBaru[i]["get_produk"].hargaProduk;
+                    
+                        var tempJumlah = jumlahBarang * harga;
+                        totalHargaBaru = totalHargaBaru + tempJumlah;
+                        
+                        let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHargaBaru);
+                        $('#totalBayar').html(rupiah);
+                    }
+
+
+                }
+
+            })
+        }
+        // console.log("Total Harga Baru : ",totalHargaBaru)
+    </script>
+
 @endsection

@@ -4,8 +4,8 @@
             <h1 class="text-xl font-semibold">Data User</h1>
         </div>
         <div class="ml-3"> 
-            <div class="mb-2 relative w-[100%]">
-                <button onclick="modal('Tambah')" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambahUser" id="btnTambahUser">
+            <div class="mb-2 relative w-[100%]"> 
+                <button onclick="modal('Tambah', 'Admin')" class="cursor-pointer shadow-md text-white bg-blue-400 px-8 py-1 mb-2 rounded-md btnTambahUser" id="btnTambahUser">
                     Tambah
                 </button>
                 {{-- @include('adminPages.partials.modalDataBarang') --}}

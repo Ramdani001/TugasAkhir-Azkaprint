@@ -86,15 +86,12 @@
     @yield('content')
     {{-- End Body Content --}}
 
-    @if ($path = request()->path() !== "/cartView")      
+    @if ($path = request()->path() !== "cartView")      
     @else
       @include('userPages/partials/footerSection')
     @endif
 
     {{-- Footer --}}
-
-
-
     
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>

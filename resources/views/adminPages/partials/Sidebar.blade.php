@@ -19,7 +19,6 @@
                     <button value="dataUserSection" class="mb-4 w-[150px] hidden spa-admin side1 bg-slate-200 text-black py-1 pl-2 rounded-md absolute pr-12 -rounded-tr-lg">Data Users</button>
                     <button value="dataUserSection" class="mb-4 spa-admin side">Data Users</button>
 
-
                     <div id="dropdown" class="mb-4 dropdown inline-block relative">
                         <button onclick="dropdownProduk()" class="rounded inline-flex items-center">
                           <span class="mr-1">Data Gudang</span>
@@ -42,17 +41,6 @@
                 </div>
             </div>
             <hr class="text-slate-300">
-            <div class="mt-4">
-                <h2 class="text-sm text-slate-300">Landing Pages</h2>
-                <hr class="w-4 ">
-                <div class="mt-4">
-                    <div class="mb-4 spa-admin cursor-pointer" value="EditHeroSection">Hero Section</div>
-                    <div class="mb-4 spa-admin cursor-pointer" value="EditTopCategories">Top Categories </div>
-                    <div class="mb-4 spa-admin cursor-pointer" value="EditTentangKami">Tentang Kami </div>
-                    <div class="mb-4 spa-admin cursor-pointer" value="EditProdukSection">Produk </div>
-                    <div class="mb-4 spa-admin cursor-pointer" value="EditFAQSection">FAQ </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

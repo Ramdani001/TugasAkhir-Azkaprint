@@ -10,13 +10,15 @@
             <hr>
             <div class="mt-3">
                 <form action="/createProduk1" method="post" enctype="multipart/form-data">
-                    @csrf
+                    @csrf 
                     
-                    <input type="text" id="idProduk" name="idProduk" placeholder="Id Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="text" id="idProduk" name="idProduk" placeholder="Id Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1" readonly>
 
                     <input type="text" id="namaProduk" name="namaProduk" placeholder="Nama Produk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
-                    <select name="tipeProduk" id="tipeProduk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <select name="tipeProduk" id="tipeProduk" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1"
+                    onchange="generateCodeProduk(this.value)"
+                    >
                         <option value="">-- Tipe Produk --</option>
                         <option value="Stempel">Stempel </option>
                         <option value="Undangan">Undangan </option>
@@ -117,3 +119,36 @@
     </div>
 </div>
 {{-- Modal Hapus Produk --}}
+{{-- Generate Code --}}
+<script>
+prefix = "";
+    function generateCodeProduk(b){
+            console.log(b);
+            
+            if(b == "Stempel"){
+                prefix = "STM-";
+            }else if(b == "Undangan"){ 
+                prefix = "UND-";
+            }else if(b == "Banner"){ 
+                prefix = "BNR-";
+            }else if(b == "XBanner"){ 
+                prefix = "XNR-";
+            }else if(b == "Lanyard"){ 
+                prefix = "LYD-";
+            }else if(b == "IdCard"){ 
+                prefix == "ICD-";
+            }
+
+            // Generate a random suffix
+            let suffix = "";
+            for (let i = 0; i < 4; i++) {
+            suffix += Math.floor(Math.random() * 10);
+            }
+    
+            // Combine the prefix and suffix to form the code
+            let code = prefix + suffix; 
+            $('#idProduk').val(code);
+        }
+
+</script>
+{{-- Generate Code --}}

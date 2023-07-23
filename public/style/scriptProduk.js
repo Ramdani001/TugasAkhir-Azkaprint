@@ -10,7 +10,7 @@ $(document).on('click', '.btnTmbhProduk', function() {
       function modalProduk(e, b){
         if(e == 'Tambah'){
             console.log("Value : " + e);
-            
+
             // Show Modal
             $('#bgModalProduk').removeClass('hidden');
             $('#modalTambahProduk').removeClass('hidden');
@@ -76,4 +76,7 @@ $(document).on('click', '.btnTmbhProduk', function() {
             $('#bgModalHapus').addClass('hidden');
             $('#modalHapusProduk').addClass('hidden');
         }
+
     }
+
+   

@@ -16,7 +16,7 @@
                     <input type="text" id="namaBarang" name="namaBarang" placeholder="Nama Barang" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     <input type="text" id="tipeBarang" name="tipeBarang" placeholder="Tipe Barang" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
-
+ 
                     <input type="text" id="jumlahBarang" name="jumlahBarang" placeholder="Jumlah Barang" value="" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
 
                     {{-- <input type="text" id="hargaBarang" name="hargaBarang" placeholder="Harga Barang" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1"> --}}

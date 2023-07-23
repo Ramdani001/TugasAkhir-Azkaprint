@@ -11,7 +11,7 @@
             <div class="mt-3"> 
                 <form id="formDataUser" enctype="multipart/form-data">
                     @csrf
-                    <input type="text" id="idUser" name="idUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="text" id="idUser" name="idUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1" readonly>
 
                     <input type="file" id="profile" name="file" placeholder="Profile" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
                     
@@ -54,7 +54,7 @@
                     @csrf 
                     @method('PUT')
 
-                    <input type="text" id="idModalUser" name="idModalUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1">
+                    <input type="text" id="idModalUser" name="idModalUser" placeholder="Id User" class="border-2 my-2 rounded-sm shadow-md bg-white w-full px-3 py-1" readonly>
 
                     <img src="" alt="profile" id="profileLama" name="profileLama" width="w-5">
 

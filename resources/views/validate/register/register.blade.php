@@ -12,7 +12,7 @@
                 </div>
 
                 <input type="text" placeholder="Id User" id="idUser" name="idUser" 
-                    class=" border border-slate-200 w-full py-2 px-2 text-md rounded-xl my-2 text-slate-600" required>
+                    class=" border border-slate-200 w-full py-2 px-2 text-md rounded-xl my-2 text-slate-600" required readonly>
                 
                 <input type="text" placeholder="Nama Lengkap" id="namaUser" name="namaUser" class=" border border-slate-200 w-full py-2 px-2 text-md rounded-xl my-2 text-slate-600" required>
 

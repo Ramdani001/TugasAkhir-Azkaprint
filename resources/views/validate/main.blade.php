@@ -65,6 +65,19 @@
             function changeButton($value){
 
                 if($value == 'register'){
+
+                    let prefix = "USR-"; 
+
+                    // Generate a random suffix
+                    let suffix = "";
+                    for (let i = 0; i < 4; i++) {
+                    suffix += Math.floor(Math.random() * 10);
+                    }
+            
+                    // Combine the prefix and suffix to form the code
+                    let code = prefix + suffix; 
+                    $('#idUser').val(code);
+
                     $('.bgPemisah').removeClass('ml-[442px]')
                     $('.btnChangeRegister').addClass('hidden');
                     $('.btnChangeLogin').removeClass('hidden');

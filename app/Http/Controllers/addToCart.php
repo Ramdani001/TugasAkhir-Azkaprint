@@ -13,14 +13,25 @@ class addToCart extends Controller
     public function addToCart(Request $request){ 
 
         $idUserLogin = $request->idUserLogin;
-        $idDetailProduk = $request->idDetailProduk; 
-        $jumlah = 1;
+        $idDetailProduk = $request->idDetailProduk;     
 
-        $addCart = new CartModels;
-        $addCart-> idProduk = $idDetailProduk;
-        $addCart-> idUser = $idUserLogin;
-        $addCart-> jumlah = $jumlah; 
-        $addCart->save();
+        $SameData = CartModels::with('getProduk')
+        ->where('idUser', $idUserLogin)
+        ->where('idProduk', $idDetailProduk)
+        ->first();
+
+        if($SameData){
+            $carModel =  CartModels::where('idUser', $idUserLogin)
+            ->where('idProduk', $idDetailProduk)->update([
+                'jumlah'=>$SameData->jumlah+1,
+            ]);
+        }else{
+            $addCart = new CartModels;
+            $addCart-> idProduk = $idDetailProduk;
+            $addCart-> idUser = $idUserLogin;
+            $addCart-> jumlah = 1;  
+            $addCart->save();
+        }
 
         // return redirect('/allProduk')->with('Success Add Cart', 'Data Tersimpan');
 
@@ -44,34 +55,17 @@ class addToCart extends Controller
 
     public function cartView(){
 
-        // $dataCart = CartModels::all();
-
-        // Mengelompokkan data berdasarkan idproduk dan menghitung jumlah data dalam setiap grup
-        // $dataSama = CartModels::select('idProduk', 'idUser', 'jumlah')
-        // ->selectRaw('COUNT(*) as total')
-        // ->groupBy('idProduk', 'idUser', 'jumlah')
-        // ->get();
-
-        // foreach ($dataSama as $data) {
-        //     dd(  "ID Produk: " . $data->idProduk . " Total Data: " . $data->total . "\n");
-        // echo "ID Produk: " . $data->idProduk . ", Nama Produk: " . $data->idUser . ", jumlah: " . $data->jumlah . ", Total Data: " . $data->total . "\n";
-        // }
-
-        
-        // $dataSama = CartModels::select('Cart.idproduk', 'Cart.idUser', DB::raw('COALESCE(Cart.total, 1) as total'))
-        // ->leftJoin(DB::raw('(SELECT idProduk, COUNT(*) as total FROM Cart GROUP BY idProduk) as subquery'), 'Cart.idProduk', '=', 'subquery.idProduk')
-        // ->get();
-
-        // foreach ($dataSama as $data) {
-        //     dd(  "ID Produk: " . $data->idProduk . " Total Data: " . $data->total . "\n");
-        // echo "ID Produk: " . $data->idproduk . ", Nama Produk: " . $data->namaProduk . ", Deskripsi: " . $data->deskripsi . ", Total Data: " . $data->total . "\n";
-        // }
- 
-        // $userSama = CartModels::where('idUser', $idUserLogin)->count();
-
         // $produkSama = CartModels::where('idProduk', $idDetailProduk)->count();
 
-        $dataListProduk['dataListProduk'] =CartModels::with('getProduk')->get();
+        // $dataListProduk['dataListProduk'] =CartModels::with('getProduk')->get();
+        $dataListProduk['dataListProduk'] = CartModels::distinct('idProduk')
+        // ->selectRaw('count(price_date)')
+        ->with('getProduk')
+        ->get(); 
+
+
+
+        // dd($dataListProduk['dataListProduk']);
         $dataProduk = Produk::all();
 
         // $ListProduk = Produk::where('id', $idProduk)->count();
@@ -82,11 +76,19 @@ class addToCart extends Controller
     } 
 
     public function cariDataProduk($id){
-        $hasilIdProduk = Produk::where('id', $id)->first();
+        $hasilProduk = CartModels::where('id', $id)->first();
+
+        
+        $hasilProduk-> jumlah = $hasilProduk->jumlah + 1;
+        $hasilProduk->update();
+        
+        $dataListProdukBaru["dataListProdukBaru"] = CartModels::with('getProduk', 'getUser')->get();
+
 
         return response()->json([
             'status'=> 200,
-            'hasilIdProduk'=> $hasilIdProduk
+            'hasilProduk'=> $hasilProduk,
+            'dataListProdukBaru'=>$dataListProdukBaru
         ]);
     }
 

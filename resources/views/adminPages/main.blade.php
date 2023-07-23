@@ -208,7 +208,7 @@
 
                     $.get(route, function(data) {
                     content.html(data);
-                    
+                     
                     if(route === 'dataUser'){
                         $('.side1').removeClass('hidden');
                         $('.side').addClass('hidden');

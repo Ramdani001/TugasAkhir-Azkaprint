@@ -20,7 +20,7 @@
                         <th>Bukti Transfer</th>
                         <th>Status Transaksi</th>
                         <th>Aksi</th>
-                    </tr>
+                    </tr> 
                 </thead>
                 <tbody>
                     <tr class="border text-center">
@@ -35,13 +35,14 @@
                         </td>
                         <td class="py-2">
                             <div class="grid grid-cols-2 gap-2">
-                                <button class="bg-green-500 px-5 py-1 text-white rounded-md shadow-md">Detail</button>
+                                <button class="bg-green-500 px-5 py-1 text-white rounded-md shadow-md"
+                                onclick="modalTransaksi('Detail', 1)">Detail</button>
                                 <button class="bg-red-500 px-5 py-1 text-white rounded-md shadow-md">Hapus</button>
-                            </div>
+                            </div> 
                         </td>
                     </tr>
                 </tbody>
-                {{-- <tbody> 
+                {{-- <tbody>  
                     @foreach ($dataProduk as $produk)
                         <tr class="border text-center">
                             <td class="py-2 text-center">
@@ -58,7 +59,7 @@
                             </td>
                             <td class="py-2">
                                 {{ $produk->jumlahProduk }}
-                            </td>
+                            </td> 
                             <td class="py-2">
                                 <?php // $harga = $produk->hargaProduk;
                                     //echo "Rp. ". number_format($harga, 0, ".", ".")."/Item";
@@ -75,4 +76,60 @@
         </div>
     </div>
 </div>
-@include('adminPages.partials.modalDialogProduk')
+<script>
+    
+      // Modal Dialog Transaksi
+      function modalTransaksi(e, b){
+        if(e == 'Tambah'){
+            console.log("Value : " + e);
+            
+            // Show Modal
+            $('#bgModalTransaksi').removeClass('hidden');
+            $('#modalTambahTransaksi').removeClass('hidden');
+
+        }else if(e == 'Detail' && b == b){
+            // console.log("Value : " + e);
+            // console.log("Id Transaksi : " + b);
+
+            // Show Modal
+            $('#bgModalEditTransaksi').removeClass('hidden');
+            $('#modalDetailTransaksi').removeClass('hidden');
+
+            // var form = $('#formEditTransaksi')[0];
+            // console.log(form);
+            // var formData = new FormData(form);
+
+            // $.ajax({  
+            //     type: "GET",
+            //     url: "/editDataTransaksi/"+b,
+            //     processData: false,
+            //     contentType: false,
+            //     data: formData,
+            //     success: function(response){
+
+            //         var TransaksiLama = 'img/Transaksi/' + response.dataTransaksi.fotoTransaksi;
+
+            //         $('#idPK').val(response.dataTransaksi.id)
+            //         $('#idModalTransaksi').val(response.dataTransaksi.idTransaksi);
+            //         $('#namaModalTransaksi').val(response.dataTransaksi.namaTransaksi);
+            //         $('#tipeModalTransaksi').val(response.dataTransaksi.tipeTransaksi);
+            //         $('#jumlahModalTransaksi').val(response.dataTransaksi.jumlahTransaksi);
+            //         $('#hargaModalTransaksi').val(response.dataTransaksi.hargaTransaksi);
+            //         $('#fotoTransaksiLama').val(response.dataTransaksi.fotoTransaksi);
+            //         $("#gambarLama").attr('src',TransaksiLama);
+
+
+            //         console.log("Response")
+            //         console.log(response.dataTransaksi);
+
+            //     }
+            // })
+
+        }else if(e == 'CloseDetail'){
+            $('#bgModalEditTransaksi').addClass('hidden');
+            $('#modalDetailTransaksi').addClass('hidden');
+        }
+    }
+
+</script>
+@include('adminPages.partials.modalDialogTransaksi')
