@@ -75,7 +75,7 @@ class addToCart extends Controller
         return view('userPages/layouts/cartView',$dataListProduk, \compact('dataProduk'));
     } 
 
-    public function cariDataProduk($id){
+    public function cartTmbh($id){
         $hasilProduk = CartModels::where('id', $id)->first();
 
         
@@ -90,7 +90,35 @@ class addToCart extends Controller
             'hasilProduk'=> $hasilProduk,
             'dataListProdukBaru'=>$dataListProdukBaru
         ]);
+   
     }
 
+    public function cartKrng($id){
+        $hasilProdukKrng = CartModels::where('id', $id)->first();
+
+        
+        if($id > 0){
+            $hasilProdukKrng-> jumlah = $hasilProdukKrng->jumlah - 1;
+            $hasilProdukKrng->update();
+            
+            $dataListProdukBaruKrng["dataListProdukBaruKrng"] = CartModels::with('getProduk', 'getUser')->get();
+
+
+            return response()->json([
+                'status'=> 200,
+                'hasilProdukKrng'=> $hasilProdukKrng,
+                'dataListProdukBaruKrng'=>$dataListProdukBaruKrng
+            ]);
+        }else if($id <= 0){
+
+            $hasilProdukKrng-> jumlah = 0;
+            $hasilProdukKrng->update();
+
+            return response()->json([
+                'status'=> 200,
+                'jumlah'=> 0
+            ]);
+        }
+    }
 
 }

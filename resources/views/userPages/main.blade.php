@@ -146,7 +146,7 @@
         });
       </script>
 
-      {{-- SPA AllProduk --}}
+      {{-- SPA AllProduk --}} 
       <script> 
         $(document).ready(function() {
           const link = $('.spa-route'),

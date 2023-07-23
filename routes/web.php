@@ -114,5 +114,6 @@ Route::controller(ValidateController::class)->group(function() {
 Route::controller(addToCart::class)->group(function() {
     Route::post('/addToCart', 'addToCart'); 
     Route::get('/cartView', 'cartView');
-    Route::get('/cariDataProduk/{id}', 'cariDataProduk');
+    Route::get('/cartTmbh/{id}', 'cartTmbh');
+    Route::get('/cartKrng/{id}', 'cartKrng');
 }); 

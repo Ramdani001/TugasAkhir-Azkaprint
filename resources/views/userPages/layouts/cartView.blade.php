@@ -11,9 +11,7 @@
                 <div class="bg-white col-span-3 shadow-md rounded-md p-2">
                     <hr> 
                         @foreach ($dataListProduk as $cart => $data)
-                        {{-- @php
-                            dd($data->getProduk['id']);
-                        @endphp --}} 
+
                         <div class="grid grid-cols-5 gap-2 mb-2">
                                 <div>
                                     <div>
@@ -38,17 +36,29 @@
                                 </div>
                                 <div>
                                     <h1>Jumlah</h1>
-                                    {{-- <input type="number" name="jumlahPesanan" id="jumlahPesanan" class="border-slate-400 border"
-                                    onchange="onInputChange(this.value, {{ $data->getProduk['hargaProduk'] }}, {{ $data->getProduk['id'] }})"
-                                    value= "{{ $data->jumlah }}"
-                                    > --}}
-                                    <input type="number" name="jumlahPesanan" id="jumlahPesanan" class="border-slate-400 border"
-                                    value= "{{ $data->jumlah }}"
-                                    >
-                                    <div class="grid grid-cols-2 gap-3 mt-1">
-                                        <button class="px-1 py-1 bg-gray-200 shadow-md"onclick="tambahCart({{ $data->id }}, 'Tambah')" >+</button>
-                                        <button class="px-1 py-1 bg-gray-200 shadow-md">-</button>
-                                    </div>
+                                    <?php 
+                                        $jmlh = $data->jumlah;
+                                        if($jmlh > 0){ 
+                                    ?>
+                                        <input type="number" name="jumlahPesanan" id="jumlahPesanan" class=" border-slate-400 border bg-slate-300" value= "{{ $jmlh }}" readonly >
+
+                                        <div class="grid grid-cols-2 gap-3 mt-1">
+                                            <button class="px-1 py-1 bg-gray-200 shadow-md" onclick="updateCart({{ $data->id }}, 'Tambah')" >+</button>
+                                            <button class="px-1 py-1 bg-gray-200 shadow-md" onclick="updateCart({{ $data->id }}, 'Kurang')">-</button>
+                                        </div>
+
+                                    <?php
+                                         }else if ($jmlh <= 0){
+                                    ?>
+                                         <input type="number" name="jumlahPesanan" id="jumlahPesanan" class=" border-slate-400 border bg-slate-300" value= "{{ $jmlh }}" readonly >
+
+                                         <div class="grid grid-cols-2 gap-3 mt-1">
+                                             <button class="px-1 py-1 bg-gray-200 shadow-md" onclick="updateCart({{ $data->id }}, 'Tambah')" >+</button>
+                                             <button class="px-1 py-1 shadow-md bg-gray-400" disabled onclick="updateCart({{ $data->id }}, 'Kurang')">-</button>
+                                         </div>
+
+                                    <?php } ?>
+                                    
                                     <input type="text" class="hidden" name="jumlahPesanan{{ $data->getProduk['id'] }}" id="jumlahPesanan{{ $data->getProduk['id'] }}" class="border-slate-400 border"
                                    
                                     value= "{{ $data->jumlah }}"
@@ -166,39 +176,86 @@
     </script>
       {{-- CartView --}}
 
-
     <script>
-        function tambahCart(idInpt, cls){
+        // TambahCart
+        function updateCart(idInpt, cls){
             var totalHargaBaru = 0;
-            $.ajax({  
-                type: "GET", 
-                url: "/cariDataProduk/"+idInpt,
-                success: function(response){
-                    console.log(response.dataListProdukBaru);
+                if(cls == "Tambah"){
+                    $.ajax({  
+                    type: "GET", 
+                    url: "/cartTmbh/"+idInpt,
+                    success: function(response){
+                        console.log(response.dataListProdukBaru);
 
-                    var dataListProdukBaru = response.dataListProdukBaru.dataListProdukBaru;
-
-                    console.log(dataListProdukBaru);
-
-                    for(var i = 0; i< dataListProdukBaru.length; i++){
-                        console.log("Data Ke : ", i, "Jumlah : ", dataListProdukBaru[i]["jumlah"])
-                        console.log("Data Ke : ", i, "Harga : ", dataListProdukBaru[i]["get_produk"].hargaProduk)
-                        var jumlahBarang = dataListProdukBaru[i]["jumlah"];
-                        var harga = dataListProdukBaru[i]["get_produk"].hargaProduk;
-                    
-                        var tempJumlah = jumlahBarang * harga;
-                        totalHargaBaru = totalHargaBaru + tempJumlah;
+                        var dataListProdukBaru = response.dataListProdukBaru.dataListProdukBaru;
+                        var jumlahBaru = response.hasilProduk.jumlah;
+                        var id = response.hasilProduk.id;
                         
-                        let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHargaBaru);
-                        $('#totalBayar').html(rupiah);
+                        
+                        for(var i = 0; i< dataListProdukBaru.length; i++){
+                            
+                            var jumlahBarang = dataListProdukBaru[i]["jumlah"];
+                            var harga = dataListProdukBaru[i]["get_produk"].hargaProduk;
+                        
+                            if(jumlahBarang > 0){
+                                var tempJumlah = jumlahBarang * harga;
+                                totalHargaBaru = totalHargaBaru + tempJumlah;
+                            }else if (jumlahBarang < 0){
+                                var tempJumlah = 0 * harga;
+                                totalHargaBaru = totalHargaBaru + tempJumlah;
+                            }
+                            
+                            if(jumlahBarang > 0){
+                                let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHargaBaru);
+                                $('#totalBayar').html(rupiah);
+                                $('#jumlahPesanan').val(jumlahBarang);
+                            }else if(jumlahBarang < 0){
+                                let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHargaBaru);
+                                $('#totalBayar').html(rupiah);
+                                $('#jumlahPesanan').val(jumlahBarang);
+                            }
+                        }
+
+
                     }
 
+                })
+            }else if(cls == "Kurang"){
+                console.log("Id Input : ", idInpt);
+                console.log("Class : ", cls); 
 
-                }
+                $.ajax({  
+                    type: "GET", 
+                    url: "/cartKrng/"+idInpt,
+                    success: function(response){
+                        console.log(response.dataListProdukBaruKrng);
 
-            })
+                        var dataListProdukBaruKrng = response.dataListProdukBaruKrng.dataListProdukBaruKrng;
+                        var jumlahBaru = response.hasilProdukKrng.jumlah;
+                        
+                        
+                        for(var i = 0; i< dataListProdukBaruKrng.length; i++){
+                            
+                            var jumlahBarang = dataListProdukBaruKrng[i]["jumlah"];
+                            var harga = dataListProdukBaruKrng[i]["get_produk"].hargaProduk;
+                        
+                            var tempJumlah = jumlahBarang * harga;
+                            totalHargaBaru = totalHargaBaru + tempJumlah;
+                            
+                            let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHargaBaru);
+                            $('#totalBayar').html(rupiah);
+                            $('#jumlahPesanan').val(jumlahBarang);
+                        }
+
+
+                    }
+
+                })
+
+            }
         }
-        // console.log("Total Harga Baru : ",totalHargaBaru)
+
     </script>
 
+    
 @endsection
