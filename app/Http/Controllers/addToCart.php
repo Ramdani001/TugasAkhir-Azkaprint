@@ -6,6 +6,7 @@ use App\Models\CartModels;
 use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class addToCart extends Controller 
@@ -24,7 +25,7 @@ class addToCart extends Controller
             $carModel =  CartModels::where('idUser', $idUserLogin)
             ->where('idProduk', $idDetailProduk)->update([
                 'jumlah'=>$SameData->jumlah+1,
-            ]);
+            ]); 
         }else{
             $addCart = new CartModels;
             $addCart-> idProduk = $idDetailProduk;
@@ -63,16 +64,23 @@ class addToCart extends Controller
         ->with('getProduk')
         ->get(); 
 
-
-
         // dd($dataListProduk['dataListProduk']);
         $dataProduk = Produk::all();
+
+        if(!empty(Auth::user()->idUser)){
+            $idUserLogin = Auth::user()->id;
+        }
+
+        if(!empty(Auth::user()->idUser)){
+            $userSama = CartModels::where('idUser', $idUserLogin)->count();
+        }
+
 
         // $ListProduk = Produk::where('id', $idProduk)->count();
 
 
 
-        return view('userPages/layouts/cartView',$dataListProduk, \compact('dataProduk'));
+        return view('userPages/layouts/cartView',$dataListProduk, \compact('dataProduk', 'userSama'));
     } 
 
     public function cartTmbh($id){

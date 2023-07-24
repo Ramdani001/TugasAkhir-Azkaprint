@@ -5,19 +5,19 @@
             <div class="text-white font-semibold text-2xl mx-3 w-full ml-7">
                 <a href="{{ '/' }}">Azkaprint</a> 
             </div> 
-            <div class="text-white text-xl mx-6 w-full">
+            <div class="text-white text-xl mx-6 w-full"> 
                 <div class="flex w-full justify-around">
                     <div class="hover:text-yellow-200 hover:underline">
-                        <a href="#">Tentang Kami</a> 
+                        <a href="/#tentangKami">Tentang Kami</a> 
                     </div> 
                     <div class="hover:text-yellow-200 hover:underline">
                         <a href="{{ '/allProduk' }}">Produk</a>
                     </div>
                     <div class="hover:text-yellow-200 hover:underline">
-                        <a href="#">FAQ</a>
+                        <a href="/#FAQ">FAQ</a>
                     </div>
                     <div class="hover:text-yellow-200 hover:underline">
-                        <a href="#">Kontak Kami</a>
+                        <a href="/#kontakKami">Kontak Kami</a>
                     </div>
                 </div>
             </div> 
@@ -33,15 +33,6 @@
                     $produkByid = $dataListProduk->groupBy('idProduk');
                     $idProduk = 0;
                 @endphp
-
-                {{-- @foreach ($produkByid as $idProduk => $produkGroup)
-                    <div>
-                        <h1>idProduk: </h1>
-                        <input type="text" value="{{ $idProduk }}">
-                        <h2>Jumlah Produk: </h2>
-                        <input type="text" value="{{ $produkGroup->count() }}">
-                    </div>
-                @endforeach --}}
                 <div class="py-1 flex w-[250px] items-center justify-center">
                     @if (!Auth::user())
                     <a href="/login">
@@ -67,8 +58,13 @@
                         <h2 class="w-full pr-1">
                             {{ Auth::user()->namaUser }}
                         </h2>
-                        <div class="h-8 w-8 bg-gray-400 rounded-full">
-
+                        <div class="">
+                            <img src="{{ 'img/profile/' }}{{ Auth::user()->profile }}" alt="profile" class="w-8 h-8 rounded-full mr-5">
+                        </div>
+                        <div class="bg-blue-800 rounded-tl-md rounded-br-md rounded-bl-md w-[120px] h-full p-2 absolute ml-[20px] mt-10">
+                            <a href="">Profile</a>
+                            <hr>
+                            <a href="/logoutUser">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -110,6 +106,13 @@
             @endif
             @if (Auth::user())
                 <div class="py-1 flex w-[250px] items-center justify-center">
+                    <div class="bg-green-400 text-center rounded-full h-4 w-4 text-sm absolute -ml-[137px] -mt-5">
+                        {{-- @foreach ($produkByid as $idProduk => $produkGroup) --}}
+                            <div class="">
+                                {{ $userSama }}
+                            </div>
+                        {{-- @endforeach --}}
+                    </div>
                     <button class="text-white ml-9 mr-3 btnCard">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
@@ -117,12 +120,16 @@
                         <h2 class="w-full pr-1">
                             {{ Auth::user()->namaUser }}
                         </h2>
-                        <div class="h-8 w-8 bg-gray-400 rounded-full">
-
+                        <div class="">
+                            <img src="{{ 'img/profile/' }}{{ Auth::user()->profile }}" alt="profile" class="w-8 h-8 rounded-full mr-5">
+                        </div>
+                        <div class="bg-blue-800 rounded-tl-md rounded-br-md rounded-bl-md w-[120px] h-full p-2 absolute ml-[20px] mt-10">
+                            <a href="">Profile</a>
+                            <hr>
+                            <a href="/logoutUser">Logout</a>
                         </div>
                     </div>
                 </div>
-                <a href="/logoutUser">Logout</a>
             @endif
         </div>
     </div>    

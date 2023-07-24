@@ -19,7 +19,7 @@
                                     </div>
                                     <img src="{{ 'img/produk/'}}{{$data->getProduk['fotoProduk']}}" alt="profil" class="w-full">
                                 </div>
-                                <div>
+                                <div> 
                                     <h1 class="font-bold text-xl">
                                         {{ $data->getProduk['namaProduk'] }}
                                     </h1>
@@ -88,8 +88,8 @@
                                 <span class="font-bold text-right" id="totalBayar"></span>
                             </div>
                             <button class="mt-[180px] absolute text-md font-semibold w-[310px] h-10 bg-yellow-400"
-                            onclick="konfirmasiBayar({{ Auth::user()->id }})"
-                            >Bayar</button>    
+                            onclick="konfirmasiBayar('Bayar',{{ Auth::user()->id }})"
+                            >Konfirmasi</button>    
                         </div>
                     </div>
                 </div>
@@ -97,16 +97,82 @@
         </div>
     </div>
 
+    {{-- Modal Dialog Pembayaran --}}
+    
+    <button class="w-full h-screen top-0 left-0 bg-blue-800/30 absolute z-10 bgModal hidden transition-colors duration-700 ease-linear" id="bgModalBayar">
+
+    </button>
+
+    <div id="ModalBayar" class="h-screen w-full  absolute top-0 left-0 z-50 hidden transition-transform duration-700 ease-linear">
+        <div class="flex justify-center mt-8">
+            <div class="bg-slate-100 shadow-lg p-5 w-[500px] rounded-md shadow-black ">
+                <h1 class="text-xl font-semibold">Konfirmasi Pemesanan</h1>
+                <hr>
+                <div class="mt-3">
+                <form action="/" method="get">
+                        @csrf 
+                        <div class="w-full shadow-md flex text-md font-semibold text-xl mb-2">
+                            <label>Id Transaksi : </label>
+                            <input type="text" name="idTransaksiModal" id="idTransaksiModal" class="bg-transparent ml-1" value="TRI-0002">
+                        </div>
+                        @foreach ($dataListProduk as $cart => $data)
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-2 w-full">
+                            <div class="">
+                                <h1 class="font-bold text-xl">
+                                    {{ $data->getProduk['namaProduk'] }}
+                                </h1>
+                            </div>
+                            <div class="ml-8">
+                                <h1>Harga </h1>
+                                <span class="font-bold italic w-full">
+                                    <?php $harga = $data->getProduk['hargaProduk'];
+                                        echo "Rp. ". number_format($harga, 0, ".", ".");
+                                    ?>
+                                </span>
+                            </div>
+                            <div>
+                                <h1>Jumlah</h1>
+                                <?php 
+                                    $jmlh = $data->jumlah;
+                                    if($jmlh > 0){ 
+                                ?>
+                                <label>
+                                    {{ $jmlh }}x
+                                </label>
+                                     
+                                <?php } ?>
+                                
+                                <input type="text" class="hidden" name="jumlahPesanan{{ $data->getProduk['id'] }}" id="jumlahPesanan{{ $data->getProduk['id'] }}" class="border-slate-400 border"
+                               
+                                value= "{{ $data->jumlah }}"
+                                >
+                            </div>
+                            
+                        </div>
+
+                        @endforeach
+                        <hr>
+                        <div class="flex text-xl font-semibold justify-between">
+                            <span class="mr-2">Total Bayar</span>
+                            <span class="">Rp. 114.500,00</span>
+                        </div>
+                        <div class="flex w-full mt-3">
+                            <button type="button" onclick="konfirmasiBayar('CloseModal')" class="py-1 w-full bg-gray-800 rounded-md text-white shadow-md mr-2 btnBatalModalBarang" id="btnBatalBarang">Batal</button>
+                            <button type="submit" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Pesan</button>
+                        </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- End Modal Dialog Pembayaran --}}
+
+
     {{-- CartView --}}
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
-
-    <script>
-        function konfirmasiBayar(idUser){
-            console.log("Id User =", idUser)
-        }
-    </script>
 
     <script>
         let idHapusCart = [];
@@ -185,9 +251,11 @@
 
     <script>
         // TambahCart
+        var totalHargaBaru = 0;
+        tempJumlah = 0
         function updateCart(idInpt, cls){
-            var totalHargaBaru = 0;
                 if(cls == "Tambah"){
+                    
                     $.ajax({  
                     type: "GET", 
                     url: "/cartTmbh/"+idInpt,
@@ -205,10 +273,10 @@
                             var harga = dataListProdukBaru[i]["get_produk"].hargaProduk;
                         
                             if(jumlahBarang > 0){
-                                var tempJumlah = jumlahBarang * harga;
+                                tempJumlah = jumlahBarang * harga;
                                 totalHargaBaru = totalHargaBaru + tempJumlah;
                             }else if (jumlahBarang < 0){
-                                var tempJumlah = 0 * harga;
+                                tempJumlah = 0 * harga;
                                 totalHargaBaru = totalHargaBaru + tempJumlah;
                             }
                             
@@ -222,7 +290,7 @@
                                 $('#jumlahPesanan').val(jumlahBarang);
                             }
                         }
-
+                        location.reload();
 
                     }
 
@@ -230,7 +298,7 @@
             }else if(cls == "Kurang"){
                 console.log("Id Input : ", idInpt);
                 console.log("Class : ", cls); 
-
+                
                 $.ajax({  
                     type: "GET", 
                     url: "/cartKrng/"+idInpt,
@@ -256,13 +324,35 @@
 
 
                     }
-
                 })
+                location.reload();
+                
 
             }
         }
 
     </script>
+
+    {{-- Modal Pesan --}}
+    <script>
+        function konfirmasiBayar(cls,idUser){
+            if(cls =='Bayar'){
+                // location.reload();
+                $('#bgModalBayar').removeClass('hidden');
+                $('#ModalBayar').removeClass('hidden');
+
+                // console.log(totalHarga);
+
+            }else if(cls == 'CloseModal'){
+                location.reload();
+                $('#bgModalBayar').addClass('hidden');
+                $('#ModalBayar').addClass('hidden');
+                
+            }
+        }
+    </script>
+    {{-- Modal Pesan --}}
+
 
     
 @endsection

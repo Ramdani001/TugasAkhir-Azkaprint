@@ -7,8 +7,8 @@
             <h1 class="text-2xl font-semibold font-sans">Welcome To Dashboard</h1>
             <h5 class="italic text-sm font-serif text-slate-400">Home/ Project Dashboard</h5>
         </div>
-        <div class="flex mt-3">
-            <div class="bg-[url('../../public/img/bgTitleAdmin.jpg')] w-full rounded-md h-32 bg-cover shadow-md">
+        <div class="flex mt-3 ,">
+            <div class="bg-[url('../../public/img/bgTitleAdmin.jpg')] mb-4 w-full rounded-md h-32 bg-cover shadow-md">
                  <img src="{{ 'img/ilustrasi3.png' }}" alt="ilustrasi" class="absolute w-44 -mt-7 ml-5">
                  <div class="ml-52 mt-5 text-white">
                     <h1 class="text-2xl font-semibold">Rizkan Ramdani</h1>
@@ -16,7 +16,7 @@
                         Hadapilah Dengan Senyuman, <br> Semuanya Akan Baik Pada Waktu Yang Tepat . . .
                     </p>
                  </div>
-                 <div class="bg-white w-full mt-12 h-80 rounded-md shadow-md p-4">
+                 <div class="bg-white w-full mt-12 h-[480px] rounded-md shadow-md p-4 mb-5">
                     <h1 class="text-md font-semibold font-sans">
                         Penjualan
                     </h1>
@@ -24,7 +24,7 @@
                         Grafik untuk menampilkan penjualan setiap bulannya . . .
                     </p>
                     {{-- Chart Js --}}
-                    <div class="w-[800px]">
+                    <div class="w-full">
                         <canvas id="myChart"></canvas>
                       </div>
                     {{-- <canvas id="myChart" width="100%" class=" h-60 rounded-md"></canvas> --}}
