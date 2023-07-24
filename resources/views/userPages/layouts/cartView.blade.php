@@ -87,7 +87,9 @@
                                 <h1>Total Bayar</h1>
                                 <span class="font-bold text-right" id="totalBayar"></span>
                             </div>
-                            <button class="mt-[180px] absolute text-md font-semibold w-[310px] h-10 bg-yellow-400">Bayar</button>    
+                            <button class="mt-[180px] absolute text-md font-semibold w-[310px] h-10 bg-yellow-400"
+                            onclick="konfirmasiBayar({{ Auth::user()->id }})"
+                            >Bayar</button>    
                         </div>
                     </div>
                 </div>
@@ -96,14 +98,19 @@
     </div>
 
     {{-- CartView --}}
-    // {{-- Jquery --}}
+    {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
+
     <script>
+        function konfirmasiBayar(idUser){
+            console.log("Id User =", idUser)
+        }
+    </script>
 
-
+    <script>
         let idHapusCart = [];
-        let totalHarga = 0;
+        let totalHarga = 0; 
         let pilihIdProduk = []; 
         let totalHargaAwal = 0;
 

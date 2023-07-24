@@ -24,9 +24,10 @@
                         Grafik untuk menampilkan penjualan setiap bulannya . . .
                     </p>
                     {{-- Chart Js --}}
-                    <div class="w-full h-60 bg-red-500 rounded-md">
-
-                    </div>
+                    <div class="w-[800px]">
+                        <canvas id="myChart"></canvas>
+                      </div>
+                    {{-- <canvas id="myChart" width="100%" class=" h-60 rounded-md"></canvas> --}}
                  </div>
             </div>
             <div class="grid grid-col-2">
@@ -62,4 +63,56 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ 'style/chart.js' }}"></script>
+    {{-- <script src="{{'path/to/chartjs/dist/chart.umd.js'}}"></script> --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var labels = ['HJanuari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+          var data = [12, 19, 3, 123, 2, 3, 200, 120, 430, 10, 23, 11];
+          
+          // Menyiapkan array warna yang akan digunakan untuk setiap bar
+          var backgroundColors = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)'
+          ];
+          
+          // Menyiapkan array untuk menyimpan objek dataset
+          var datasets = [{
+            label: 'Januari',
+            data: data,
+            backgroundColor: backgroundColors,
+            borderWidth: 1
+          }];
+    
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: datasets,
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        });
+      </script>
+       
+
 @endsection 
