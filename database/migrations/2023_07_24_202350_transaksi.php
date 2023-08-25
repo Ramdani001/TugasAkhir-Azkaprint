@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Cart', function (Blueprint $table) {
+        Schema::create('Transaksi', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idProduk'); 
+            $table->string('idTransaksi')->unique();
             $table->bigInteger('idUser');
-            $table->integer('jumlah');
+            $table->bigInteger('jumlahProduk');
+            $table->bigInteger('totalHarga'); 
+            $table->string('statusTransaksi');
             $table->timestamps(); 
 
-            $table->foreign('idProduk')->references('id')->on('Produk');
             $table->foreign('idUser')->references('id')->on('users');
-
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

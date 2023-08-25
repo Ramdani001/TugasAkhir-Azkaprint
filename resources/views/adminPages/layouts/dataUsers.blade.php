@@ -24,7 +24,6 @@
                         <th>Username</th>
                         <th>Status</th>
                         <th>Email</th>
-                        <th>Profile</th>
                         <th>Tanggal Daftar</th>
                         <th>Aksi</th>
                     </tr>

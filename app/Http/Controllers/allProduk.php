@@ -17,7 +17,7 @@ class allProduk extends Controller
 
         $dataProduk = Produk::all();
         if(!empty(Auth::user()->idUser)){
-            $userSama = CartModels::where('idUser', $idUserLogin)->count();
+            $userSama = CartModels::where(['idUser'=> $idUserLogin, 'status'=> 'Pending'])->count();
         }
 
         $dataListProduk["dataListProduk"] = CartModels::with('getProduk', 'getUser')->get();

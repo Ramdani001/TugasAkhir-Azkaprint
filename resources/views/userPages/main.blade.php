@@ -17,10 +17,17 @@
     <link rel="stylesheet" href="{{ 'fontawesome/css/all.css' }}">
 
 <style>
+    /* Medium Screen */
     .swiper {
+      width: 240px;
+      height: 320px;
+    }
+    /* Medium Screen */
+
+    /* .swiper {
       width: 340px;
       height: 420px;
-    }
+    } */
 
     .swiper-slide {
       display: flex;
@@ -94,8 +101,11 @@
     {{-- Footer --}}
     
     {{-- Jquery --}}
-    <script src="{{ 'style/jquery.js' }}"></script>
-    <script src="{{ 'style/jquery.min.js' }}"></script>
+    <script src="{{ 'style/jquery.js' }}"></script> 
+    <script src="{{ 'style/jquery.min.js' }}"></script> 
+    {{-- Payment Gateway --}}
+
+    
 
     {{-- Script Change Color Scrolling Navbar --}}
     @if ($path = request()->path() === "/")
@@ -180,6 +190,14 @@
 
       <script src="{{ 'style/modalDetail.js' }}"></script>
       
+
+      {{-- Dropdown Profile --}}
+      <script>
+        function dropdownPrf(){
+          $('#dropdownProfile').toggle('hidden');
+        }
+    </script>
+      {{-- End Dropdown Profile --}}
 
 </body>
 </html>

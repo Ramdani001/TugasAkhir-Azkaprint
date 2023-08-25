@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -25,6 +26,18 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            ['idUser' => 'MNG-0001',
+             'namaUser' => 'Rizkan Ramdani',
+             'username' => 'Ramdani090',
+             'status' => 'Manager',
+             'password' => '$2y$10$VoGniNhvRBXnLaeihCgIX.cQ6LLb9CAs8w3HbybHoLqmzhd2ycnsC',
+             'email' => 'rizkan090@gmail.com',
+             'profile' => 'manager.jpg'
+            ],
+        ]);
+
     }
 
     /**

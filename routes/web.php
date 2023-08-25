@@ -4,13 +4,14 @@ use App\Http\Controllers\addToCart;
 use App\Http\Controllers\allProduk;
 use App\Http\Controllers\LoginRegisController;
 use App\Http\Controllers\SendEmail;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\viewController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\ValidateController; 
 use Illuminate\Support\Facades\Route;  
 
-//User  
+//User   
 
 
 // Login & Register
@@ -18,12 +19,28 @@ Route::controller(LoginRegisController::class)->group(function() {
     Route::post('/authLogin', 'authenticate');
     Route::post('/authRegist', 'register');
     Route::get('/logoutUser', 'logout');
+
+    // Forgot Password
+    Route::post('/forgot-password', 'forgotPassword');
+    Route::get('/reset/{token}', 'resetPassword'); 
+    Route::post('/reset/{token}', 'postPassword');
+ 
 });
  
 // Route Dashboard User
 Route::controller(userController::class)->group(function() {
     Route::get('/', 'index');
-});
+  
+    // Profile Pages
+    Route::get('/profilePages', 'profileIndex');
+
+    // Spa Profile
+    Route::get('/profileContent', 'profileContent');
+    Route::get('/changePasswordContent', 'changePasswordContent');
+    Route::get('/historyContent', 'historyContent');
+    // Spa Profile
+
+}); 
 
 // Route Filter Produk
 Route::controller(allProduk::class)->group(function() {
@@ -54,8 +71,12 @@ Route::controller(allProduk::class)->group(function() {
 // Admin
 Route::controller(viewController::class)->group(function() {
     Route::get('/admin', 'index');
-
-    Route::get('/transaksiAdmin', 'transaksi');
+    Route::get('/getGrafik', 'getGrafik');
+    Route::post('/getFilter', 'getFilter');
+    Route::post('/bulanTahunFilter', 'bulanTahun');
+    // =====
+ 
+    Route::get('/transaksiAdmin', 'transaksiAdmin');
 
     // User 
     Route::get('/dataUserSection', 'dataUser');
@@ -116,4 +137,12 @@ Route::controller(addToCart::class)->group(function() {
     Route::get('/cartView', 'cartView');
     Route::get('/cartTmbh/{id}', 'cartTmbh');
     Route::get('/cartKrng/{id}', 'cartKrng');
-}); 
+
+    Route::get('/cart_pesan/{id}', 'cart_pesan');
+    Route::get('/percobaan', 'percobaan');
+});
+  
+Route::controller(TransaksiController::class)->group(function() {
+    Route::post('/hapusTransaksi', 'hapusTransaksi');
+    Route::get('detailTransaksi/{idTransaksi}', 'detailTransaksi');
+});

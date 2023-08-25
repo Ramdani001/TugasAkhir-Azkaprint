@@ -5,7 +5,7 @@
         <div class="w-full h-full bg-white rounded-md shadow-lg grid grid-rows-8">
             <h1 class="text-center text-3xl font-bold pt-5">
                 Keranjang Saya
-            </h1>
+            </h1> 
             {{-- <hr class="mt-3 border-slate-200"> --}}
             <div class="grid grid-cols-4 bg-blue-300 row-span-6 p-2 gap-3">
                 <div class="bg-white col-span-3 shadow-md rounded-md p-2">
@@ -87,15 +87,17 @@
                                 <h1>Total Bayar</h1>
                                 <span class="font-bold text-right" id="totalBayar"></span>
                             </div>
-                            <button class="mt-[180px] absolute text-md font-semibold w-[310px] h-10 bg-yellow-400"
-                            onclick="konfirmasiBayar('Bayar',{{ Auth::user()->id }})"
-                            >Konfirmasi</button>    
+                            <button class="mt-[180px] absolute text-md font-semibold w-[270px] h-10 bg-yellow-400"
+                            onclick="konfirmasiBayar('Bayar', {{ Auth::user()->id }})"
+                            >Konfirmasi</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {{-- onclick="konfirmasiBayar('Bayar',{{ Auth::user()->id }})" --}}
+    
 
     {{-- Modal Dialog Pembayaran --}}
     
@@ -109,7 +111,7 @@
                 <h1 class="text-xl font-semibold">Konfirmasi Pemesanan</h1>
                 <hr>
                 <div class="mt-3">
-                <form action="/" method="get">
+                <form action="/pesan" method="get">
                         @csrf 
                         <div class="w-full shadow-md flex text-md font-semibold text-xl mb-2">
                             <label>Id Transaksi : </label>
@@ -155,11 +157,11 @@
                         <hr>
                         <div class="flex text-xl font-semibold justify-between">
                             <span class="mr-2">Total Bayar</span>
-                            <span class="">Rp. 114.500,00</span>
+                            <span class="" id=totalBayarPesan></span>
                         </div>
                         <div class="flex w-full mt-3">
                             <button type="button" onclick="konfirmasiBayar('CloseModal')" class="py-1 w-full bg-gray-800 rounded-md text-white shadow-md mr-2 btnBatalModalBarang" id="btnBatalBarang">Batal</button>
-                            <button type="submit" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Pesan</button>
+                            <button type="button" id="pay-button" class="py-1 w-full bg-blue-800 rounded-md text-white shadow-md">Pesan</button>
                         </div>
                 </form>
                 </div>
@@ -239,6 +241,7 @@
 
           let rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalHarga);
           $('#totalBayar').html(rupiah);
+          $('#totalBayarPesan').html(rupiah);
 
           $('#jumlahPesanan'+idProduk).val(jumlahOrder);
 
@@ -253,6 +256,7 @@
         // TambahCart
         var totalHargaBaru = 0;
         tempJumlah = 0
+        var snapToken = ""
         function updateCart(idInpt, cls){
                 if(cls == "Tambah"){
                     
@@ -337,12 +341,26 @@
     <script>
         function konfirmasiBayar(cls,idUser){
             if(cls =='Bayar'){
-                // location.reload();
-                $('#bgModalBayar').removeClass('hidden');
-                $('#ModalBayar').removeClass('hidden');
+                console.log("Id User Yang DIkirim : ", idUser);
+                $.ajax({  
+                    type: "GET", 
+                    url: "/cart_pesan/"+idUser,
+                    success: function(response){
 
-                // console.log(totalHarga);
+                        snapToken = response.snapToken;
 
+                        console.log(response);
+                        console.log(response.dataKeranjang);
+
+                        $('#bgModalBayar').removeClass('hidden');
+                        $('#ModalBayar').removeClass('hidden');
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.responseText);
+                        console.log(thrownError);
+                    }
+                })
             }else if(cls == 'CloseModal'){
                 location.reload();
                 $('#bgModalBayar').addClass('hidden');
@@ -352,7 +370,60 @@
         }
     </script>
     {{-- Modal Pesan --}}
+{{-- Jquery --}}
+<script src="{{ 'style/jquery.js' }}"></script> 
+<script src="{{ 'style/jquery.min.js' }}"></script> 
+{{-- Payment Gateway --}}
+    {{-- Payment Gateway --}} 
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+    
+    <script type="text/javascript">
+      // For example trigger on button clicked, or any time you need
+      var payButton = document.getElementById('pay-button');
 
+      payButton.addEventListener('click', function () {
+        // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+        window.snap.pay(snapToken, {
+          onSuccess: function(result){
+            alert("payment success!");
+            
+            $.ajax({  
+                type: "POST", 
+                url: "/api/callback_transaksi",
+                data: {
+                    'result':result
+                },
+
+                
+                success: function(response){
+                    console.log("Hasil Response -> ", response);
+                    // console.log("Request All -> ", response.request);
+                }, 
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                }
+            })
+
+          },
+          onPending: function(result){
+            /* You may add your own implementation here */
+            alert("wating your payment!"); console.log(result);
+          },
+          onError: function(result){
+            /* You may add your own implementation here */
+            alert("payment failed!"); console.log(result);
+          },
+          onClose: function(){
+            /* You may add your own implementation here */
+            alert('you closed the popup without finishing the payment');
+          }
+        })
+      });
+    </script>
+    
+    {{-- Payment Gateway --}}
 
     
 @endsection

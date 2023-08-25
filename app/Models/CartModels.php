@@ -23,6 +23,10 @@ class CartModels extends Model
         return $this->hasOne(User::class, 'id', 'idUser');
     }
 
+    public function getTransaksi(){
+        return $this->hasMany(User::class, 'idTransaksi', 'idTransaksi');
+    }
+
     // protected $fillable = [
     //     'idUser', 'namaUser', 'username', 'password' ,'status', 'email', 'profile'
     // ];

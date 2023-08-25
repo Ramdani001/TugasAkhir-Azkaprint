@@ -19,6 +19,9 @@
     {{-- Swiper --}}
     <link rel="stylesheet" href="{{ 'style/swiper.css' }}" />
 
+    {{-- Loading --}}
+    <link rel="stylesheet" href="{{ 'style/loading/loader.css' }}">
+ 
     {{-- Swiper Style --}}
     <style>
         .swiper {
@@ -43,24 +46,39 @@
 
 </head>
 <body class="bg-slate-200">
-    {{-- @include('sweetalert::alert') --}}
+    {{-- Auth Admin --}}
     
+    {{-- Loading --}}
+    <div class="loading bg-blue-400/50 w-full h-screen z-50 absolute text-center hidden" id="loading">
+        <div class="h-full w-full font-serif text-5xl text-white pt-[20%] font-semibold">
+            <h1 class="text-white typeWriter bg-gray-400/40x">
+                Azkaprint . . .
+            </h1>
+        </div>
+    </div>
+    {{-- Loading --}}
+
     <div class="flex flex-rows-2 w-full h-full border-3 border-red-500">
         <div class=""> 
             @include('adminPages/partials/Sidebar')
         </div>
+        
         <div class="w-full">
-            @include('adminPages/partials/Topside')
+            @include('adminPages/partials/Topside') 
             <div>
                 <div id="contentAdmin">
-                    @yield('contentAdmin')
+                    @if (Auth::user()->status === 'Manager')
+                        @yield('contentManager');
+                        {{-- <div id="contentManager">
+                        </div> --}}
+                    @endif
 
                 </div>
                 
             </div>
         </div>
     </div>
- 
+
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script>
     <script src="{{ 'style/jquery.min.js' }}"></script>
@@ -68,8 +86,23 @@
     {{-- Fontawesome --}}
     <script src="{{ 'fontawesome/js/all.js' }}"></script>
 
+    {{-- Loading --}}
+    <script src="{{ 'style/loading/loader.js' }}"></script>
+
     {{-- SweetAlert --}}
     <script src="{{ 'vendor/sweetalert/sweetalert.all.js' }}"></script>
+    @if (Auth::user()->status === 'Admin')
+        <script>
+                    
+            const content = $('#contentAdmin');
+            let route = "transaksiAdmin";
+            $.get(route, function(data) {
+                content.html(data);
+            });
+        </script>   
+    @endif
+    {{-- Auth Admin --}}
+
     <?php
         if($message = Session()->has('Success User')){
             // alert()->success(Session::get('Success'));
@@ -189,9 +222,23 @@
                 content.html(data);
             });
         </script>
-    <?php
-        }
+    <?php 
+        }elseif($message = Session()->has('Success Hapus')) {
+            alert()->question('Title','Lorem Lorem Lorem');
+            echo '<script>
+                alert("'.Session::get('Success Hapus').'")
+                    console.log('.$message.');
+                </script>'
     ?>
+    <script>
+        const content = $('#contentAdmin');
+        let route = "transaksiAdmin";
+        $.get(route, function(data) {
+            content.html(data);
+        });
+    </script>
+
+    <?php } ?>
     
 
     <script>
@@ -237,6 +284,107 @@
     {{-- Landing Page --}}
     {{-- Hero & Navbar Section --}}
     <script src="{{ 'style/scriptHeroSection.js' }}"></script>
+
+   <?php
+       if(Auth::user()->status === 'Manager'){
+    ?>
+         {{-- Chart Js --}}
+            <script>
+                // var dataGrafik;
+
+                var dataChart = [];
+                var labelGrafik = [];
+                var labelChart = [];
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var chart;
+
+                async function getGrafik(){
+                    var dataGrafik = 0;
+                    const result = $.ajax({
+                        type: "GET",
+                        url: "/getGrafik",
+                    
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(xhr.responseText);
+                            console.log(thrownError);
+                        }
+                        
+                    })
+                    // console.log(result);
+                    return result; 
+                }
+
+                document.addEventListener("DOMContentLoaded", async function () {
+                    
+                    var penjualan = [];
+                    var dataGrafik = await getGrafik();
+
+                    for ($i = 0; $i < dataGrafik.dataBaru; $i++) {
+                        dataChart.push(dataGrafik.penjualan[$i]['totalHarga']);
+                    }
+
+                    for($i = 0; $i < dataGrafik.jmlhChart; $i++){
+                        labelGrafik.push(dataGrafik.filterDate[$i]);
+                    }
+                    
+                    var labels = labelGrafik;
+                    var data = dataChart;
+                    // console.log("Get Grafik", dataGrafik);
+                    
+                    // Menyiapkan array warna yang akan digunakan untuk setiap bar
+                    var backgroundColors = [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(255, 159, 64, 0.7)'
+                    ];
+                    
+                    // Menyiapkan array untuk menyimpan objek dataset
+                    var datasets = [{
+                    //   label: [labels,],
+                    data: data,
+                    backgroundColor: backgroundColors,
+                    borderWidth: 1
+                    }];
+            
+                    chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: datasets,
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                        },
+                        plugins: {
+                            legend:{
+                                display: false
+                            }
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem){
+                                    return tooltipItem.yLabel;
+                                }
+                            }
+                        }
+                    }
+                    });
+        
+                });
+                
+            </script>
+            {{-- Chart Js --}}
+       <?php }?>
+   
+
 
 </body>
 </html>

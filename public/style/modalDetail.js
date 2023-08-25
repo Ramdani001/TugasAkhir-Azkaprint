@@ -11,13 +11,13 @@
                       $('#bgModalProduk').removeClass('hidden');
                       $('#modalDetailStempel').removeClass('hidden');
 
-                      console.log(response.output);
+                      // console.log(response.output);
 
                       let rupiah = response.dataDetailstempel.hargaProduk;
                       
                       let angka = response.dataDetailstempel.hargaProduk;
                       rupiah = formatRupiah(angka, 'Rp. ');
-
+                      console.log("Modal Detail");
                       /* Fungsi formatRupiah */
                       function formatRupiah(angka, prefix){
                             var number_string = String(angka).replace(/[^,\d]/g, ''),
@@ -39,6 +39,7 @@
                           
                       var FtoProduk = 'img/produk/' + response.dataDetailstempel.fotoProduk;
 
+                      
                       $("#fotoDetailProduk").attr('src',FtoProduk);
                       $('#detailNamaProduk').html(response.dataDetailstempel.namaProduk);
                       $('#hargaDetailProduk').html(rupiah);
@@ -76,13 +77,19 @@
 
                       console.log(response.dataAllDetail);
 
+                      var hargaPer = response.dataAllDetail.hargaProduk;
+
                       let rupiah = response.dataAllDetail.hargaProduk;
+                      let rupiahDiskon = response.dataAllDetail.hargaProduk;
                       
                       let angka = response.dataAllDetail.hargaProduk;
                       rupiah = formatRupiah(angka, 'Rp. ');
+                      
+                      var realHarga = angka + (hargaPer * 0.5);
+                      rupiahDiskon = formatRupiah(realHarga, 'Rp. ');
 
                       /* Fungsi formatRupiah */
-                      function formatRupiah(angka, prefix){
+                      function formatRupiah(realHarga, prefix){
                             var number_string = String(angka).replace(/[^,\d]/g, ''),
                             split   		= number_string.split(','),
                             sisa     		= split[0].length % 3,
@@ -98,6 +105,22 @@
                             rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
                             return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
                           }
+                      function formatRupiah(angka, prefix){
+                            var number_string = String(angka).replace(/[^,\d]/g, ''),
+                            split   		= number_string.split(','),
+                            sisa     		= split[0].length % 3,
+                            rupiahDiskon     		= split[0].substr(0, sisa),
+                            ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+                      
+                            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+                            if(ribuan){
+                              separator = sisa ? '.' : '';
+                              rupiahDiskon += separator + ribuan.join('.');
+                            }
+                      
+                            rupiahDiskon = split[1] != undefined ? rupiahDiskon + ',' + split[1] : rupiahDiskon;
+                            return prefix == undefined ? rupiahDiskon : (rupiahDiskon ? 'Rp. ' + rupiahDiskon : '');
+                          }
                       // Detail Produk
                       
                       var FtoProduk = 'img/produk/' + response.dataAllDetail.fotoProduk;
@@ -106,6 +129,9 @@
                       $('#detailAllNamaProduk').html(response.dataAllDetail.namaProduk);
                       $("#fotoAllDetailProduk").attr('src',FtoProduk);
                       $('#hargaAllDetailProduk').html(rupiah);
+                      $('#delHargaDiskon').html(rupiahDiskon);
+
+                      
 
                 }
               });

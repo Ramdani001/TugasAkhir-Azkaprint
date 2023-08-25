@@ -1,11 +1,11 @@
-<div class="border w-full h-screen mt-8 p-2" id="FAQ">
+<div class="border w-full lg:h-screen mt-8 p-2" id="FAQ">
     <h1></h1>
     <div class="p-2 flex justify-around pt-5">
         <div class="">
-            <img src="{{ 'img/imgFAQ.png' }}" alt="FAQ">
+            <img src="{{ 'img/imgFAQ.png' }}" alt="FAQ" class="md:w-[300px]">
         </div >
         <div class="rounded-md shadow-md w-[50%] p-5 mt-6">
-            <h1 class="text-center text-4xl text-blue-800 mb-5 font-serif">FAQ</h1>
+            <h1 class="text-center md:text-sm lg:text-4xl text-blue-800 mb-5 font-serif">FAQ</h1>
             <div>
                 {{-- Question 1 --}}
                 <div class="relative overflow-hidden bg-white w-full shadow-md">

@@ -6,7 +6,7 @@
             <form action="/authLogin" method="post">
                 @csrf
 
-                <div class="text-left">
+                <div class="text-left"> 
                     @error('username')
                         <label class="text-md text-left text-red-500 font-semibold">
                             {{ $message }}
@@ -33,7 +33,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> 
 
 <!-- Modal dialog -->
 <div class="fixed inset-0 items-center justify-center z-40 hidden" id="modal">
@@ -42,17 +42,37 @@
       <!-- Konten modal -->
       <h2 class="text-xl font-semibold mb-4">Disarankan Username/Email & Password dicatat :)</h2>
       <label for="" class="text-sm text-slate-500 mb-1">Masukan Email Yang Sudah Terdaftar</label>
-      <form action="" method="post">
-        <input type="text" name="emailLupaPassword" id="emailLupaPassword" placeholder="Email Address" class="border-2 border-slate-500 px-2 w-full py-1">
-      </form>
+      
+      <div>
+          @if (!empty(session()->has('success')))
+            <?php 
+            if ($message = session()->has('success')){
+            echo ' <script>
+                    alert("'.Session::get('success').'");
+                  </script>';
+            }else{ 
+            echo ' <script>
+                    alert("'.Session::get('error').'");
+                  </script>';
+              };
+            ?>
+          @endif
+      </div>
+          
+
+      <form action="/forgot-password" method="post">
+        @csrf
+        <input type="text" name="email" id="emailLupaPassword" placeholder="Email Address" class="border-2 border-slate-500 px-2 w-full py-1" required>
+      
       <!-- Tombol untuk menutup modal -->
       <div class="grid grid-cols-2 gap-3">
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" id="closeModalBtn">
+        <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" id="closeModalBtn">
             Batal
           </button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" id="closeModalBtn">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" >
             Submit
           </button>
+        </form>
       </div>
     </div>
   </div>

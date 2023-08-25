@@ -1,4 +1,4 @@
-<div class="w-full h-52 p-4">
+<div class="w-full h-52 p-4 ">
     <div class="p-3 text-center h-40">
         <h3 class="text-sm font-sans font-semibold">Top Categories</h3>
         <div class="flex items-center justify-around mt-3">

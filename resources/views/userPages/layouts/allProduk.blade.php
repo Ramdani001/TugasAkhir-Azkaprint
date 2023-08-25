@@ -27,7 +27,7 @@
 
                 {{-- Menampilkan Data --}}
                 <div id="contentProduk">
-                    <div class="grid grid-cols-6 gap-10 px-10">
+                    <div class="grid md:grid-cols-4 lg:grid-cols-6 gap-10 px-10">
                         @foreach ($dataProduk as $produk)
                         <div class="bg-white w-40 h-64 rounded-md shadow-md">
                             <div class="bg-blue-400 w-full h-36">
@@ -46,33 +46,6 @@
                             </div>
                         </div>
                     @endforeach
-                
-                    {{-- @php
-                        $dataListProdukGrouped = $dataListProduk->groupBy('idUser');
-                    @endphp
-                    @if (!$dataListProduk)
-                        <h2>Data Tidak ada</h2> 
-                    @else
-                        <div>
-                            @if ($dataListProdukGrouped->count() > 0)
-                            @if (!empty($userSama))
-                                <h1> {{ $userSama }} </h1>
-                            @endif
-                            @foreach ($dataListProdukGrouped as $data => $item)
-                                @foreach ($item as $data)
-                                    <div>
-                                        <h1>Nama Produk :{{ $data->getProduk->namaProduk }}</h1>
-                                        <h1>Pemesan : {{ $data->getUser->namaUser }}</h1>
-                                    </div>
-                                @endforeach
-                            @endforeach
-                                
-                            @else
-                                <h1>Data Tidak ada Ui</h1>
-                            @endif
-
-                        </div>
-                    @endif --}}
                 </div>
                 </div>
                 
@@ -87,7 +60,7 @@
 
 <div id="modalDetailAll" class="h-screen w-full  absolute top-0 left-0 z-50 hidden transition-transform duration-700 ease-linear" >
     <div class="flex justify-center mt-8">
-        <div class="bg-slate-100 shadow-lg p-5 w-[700px] rounded-md shadow-black h-[600px]">
+        <div class="bg-slate-100 shadow-lg p-5 w-[700px] rounded-md shadow-black h-full">
             <div class="flex flex-row-reverse relative -mt-5">
                 <button class="text-rigth text-2xl font-semibold btnCloseStempel z-50" onclick="modalAllproduk('CloseDetail')" >
                         &#215;
@@ -96,14 +69,16 @@
             <h1 class="text-xl font-semibold relative -mt-5">Detail Data </h1>
             <hr>
             {{-- @foreach ($dataDetailstempel as $stempel) --}}
-                <div class="mt-3 grid grid-cols-2 bg-white w-full h-[95%]">
-                    <div class="w-full h-[95%]">
+                <div class="mt-3 grid grid-cols-2 bg-white w-full h-[80%]">
+                    <div class="w-full h-full">
                         <img alt="" class="w-full h-full" id="fotoAllDetailProduk">
                     </div>
                     <div class=" w-full h-[95%] p-4">
                     <h1 class="text-black font-semibold text-3xl mb-2 detailNamaProduk" id="detailAllNamaProduk"></h1>
                     <h3>
-                        <del class="text-red-500 italic font-semibold">Rp. 75.000</del>
+                        <del class="text-red-500 italic font-semibold" id="delHargaDiskon">
+                            {{-- Diskon --}}
+                        </del>
                         <b class="text-black italic font-semibold hargaDetailProduk" id="hargaAllDetailProduk">
                            
                         </b>
@@ -117,17 +92,18 @@
                         </p> 
                     <div class="mt-10"> 
                             @if (!Auth::user())
-                                <a href="/login" class="bg-blue-400 text-white w-full py-2 rounded-md shadow-md">
-                                    {{-- <button class="bg-blue-400 text-white w-full py-2 rounded-md shadow-md">Login</button> --}}
-                                    login
+                            <a href="/login" class="">
+                                <div class="bg-yellow-500 text-white py-2 rounded-md shadow-md w-full text-center">
+                                        login
+                                    </div>
                                 </a>
                             @endif
                             @if (Auth::user())
                                 <form action="/addToCart" method="post">
                                     @csrf
-                                    <input type="text" name="idUserLogin" value="{{ Auth::user()->id }}" placeholder="{{ Auth::user()->id }}">
+                                    <input type="text" name="idUserLogin" value="{{ Auth::user()->id }}" placeholder="{{ Auth::user()->id }}" hidden>
 
-                                    <input type="text" placeholder="Id Produk" id="idDetailProduk" name="idDetailProduk">
+                                    <input type="text" placeholder="Id Produk" id="idDetailProduk" name="idDetailProduk" hidden>
 
                                     <button type="submit" class="bg-green-400  text-white w-full py-2 rounded-md shadow-md">
                                         Add To Card  
@@ -136,14 +112,14 @@
                                 </form>
                             @endif
                             {{-- <button class="bg-gray-400 text-white w-full py-2 rounded-md shadow-md">Add To Card </button> --}}
-                            <div class="text-center mt-40">
-                                <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500">
+                            <div class="text-center mt-11">
+                                <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500 cursor-pointer">
                                     <i class="fa-brands fa-facebook"></i>
                                 </a>
-                                <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500">
+                                <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500 cursor-pointer">
                                     <i class="fa-brands fa-instagram"></i>
                                 </a>
-                                <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500">
+                                <a class=" rounded-full text-md px-2 py-1 mx-3 text-black hover:text-blue-500 cursor-pointer">
                                     <i class="fa-solid fa-envelope"></i>
                                 </a>
                             </div>

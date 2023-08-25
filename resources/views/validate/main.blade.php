@@ -22,11 +22,11 @@
 
     <div class="bg-slate-300 w-full h-screen pt-10">
         <div class="bg-white w-[900px] h-[550px] mx-auto rounded-md shadow-lg p-3 grid grid-cols-2 gap-2">
-            <div class="bg-red-500 w-full h-full">
+            <div class=" w-full h-[90%]">
                 {{-- Login --}}
                 @include('validate/login/login')
             </div>
-            <div class="bg-blue-200 w-full h-full"> 
+            <div class="w-full h-[90%]"> 
                 {{-- Register --}}
                 @include('validate/register/register')
             </div>
