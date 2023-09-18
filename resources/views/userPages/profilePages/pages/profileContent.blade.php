@@ -3,4 +3,4 @@
         <h1 class="mb-1 text-center text-2xl font-semibold">My Profile</h1>
         <hr>
     </div>
-</div>
+</div> 

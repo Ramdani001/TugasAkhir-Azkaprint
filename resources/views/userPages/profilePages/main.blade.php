@@ -47,7 +47,7 @@
                     e.preventDefault()
                     
                     let route = $(this).attr('value');
-                    
+                     
                     console.log(route);
 
                     $.get(route, function(data) {

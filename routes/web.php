@@ -2,14 +2,15 @@
 
 use App\Http\Controllers\addToCart;
 use App\Http\Controllers\allProduk;
-use App\Http\Controllers\LoginRegisController;
 use App\Http\Controllers\SendEmail;
-use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\userAdmin;
-use App\Http\Controllers\viewController;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\ValidateController; 
 use Illuminate\Support\Facades\Route;  
+use App\Http\Controllers\userController;
+use App\Http\Controllers\viewController;
+use App\Http\Controllers\CetakController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\ValidateController; 
+use App\Http\Controllers\LoginRegisController;
 
 //User   
 
@@ -25,7 +26,7 @@ Route::controller(LoginRegisController::class)->group(function() {
     Route::get('/reset/{token}', 'resetPassword'); 
     Route::post('/reset/{token}', 'postPassword');
  
-});
+}); 
  
 // Route Dashboard User
 Route::controller(userController::class)->group(function() {
@@ -126,7 +127,7 @@ Route::controller(userAdmin::class)->group(function() {
 Route::controller(SendEmail::class)->group(function() {
     Route::post('/kirimEmail', 'SendEmail');
 });
-
+ 
 // Login Register
 Route::controller(ValidateController::class)->group(function() {
     Route::get('/login', 'loginIndex');
@@ -145,4 +146,11 @@ Route::controller(addToCart::class)->group(function() {
 Route::controller(TransaksiController::class)->group(function() {
     Route::post('/hapusTransaksi', 'hapusTransaksi');
     Route::get('detailTransaksi/{idTransaksi}', 'detailTransaksi');
+});
+
+// Cetak Laporan
+Route::controller(CetakController::class)->group(function() {
+    Route::post('/getFilterDataUser', 'getFilterDataUser');
+    Route::post('/getAllData', 'getAllData');
+    Route::get('/cetakPdf/{name}', 'cetakPdf');
 });

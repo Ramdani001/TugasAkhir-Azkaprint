@@ -41,6 +41,16 @@
           font-weight: bold;
           color: #fff;
         }
+
+        /* Style Tbody Tabel Modal dialog Cetak */
+
+        #tabelDataUser tbody tr:nth-child(even){
+            background-color: rgb(126, 126, 126, .5);
+        }
+
+        /* Style Tbody Tabel Modal dialog Cetak */
+
+
     </style>
     {{-- Swiper Style --}}
 
@@ -246,7 +256,6 @@
         $(document).ready(function() {
                 const link = $('.spa-admin'),
                 content = $('#contentAdmin');
-
                 link.on('click', function(e) {
                     e.preventDefault()
                     // let route = $(this).attr('value');
@@ -255,6 +264,7 @@
 
                     $.get(route, function(data) {
                     content.html(data);
+                    console.log(route);
                      
                     if(route === 'dataUser'){
                         $('.side1').removeClass('hidden');

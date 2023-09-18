@@ -9,7 +9,7 @@ class tblUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'Users'; 
+    protected $table = 'users'; 
     
     protected  $primaryKey = 'id';
 

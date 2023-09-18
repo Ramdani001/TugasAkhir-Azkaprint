@@ -100,7 +100,7 @@ class viewController extends Controller
         if ($dataLength == 1){
             $filterTahun->whereYear('created_at', '=', $data);
         }else if ($dataLength == 2){
-
+ 
             $tahun = $data[0];
             $bulan = $data[1];
 

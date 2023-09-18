@@ -34,7 +34,7 @@ class userController extends Controller
             $idUserLogin = Auth::user()->id;
         }
 
-        $dataProduk = Produk::all();
+        $dataProduk = Produk::all(); 
         if(!empty(Auth::user()->idUser)){
             $userSama = CartModels::where('idUser', $idUserLogin)->count();
         }
@@ -43,15 +43,15 @@ class userController extends Controller
     }
  
     public function profileContent() {
-        return view('userPages/profilePages/profileContent');
+        return view('userPages/profilePages/pages/profileContent');
     }
 
     public function changePasswordContent() {
-        return view('userPages/profilePages/chagePasswordContent');
+        return view('userPages/profilePages/pages/changePasswordContent');
     }
     
     public function historyContent() {
-        return view('userPages/profilePages/historyContent');
+        return view('userPages/profilePages/pages/historyContent');
     }
 
 }
