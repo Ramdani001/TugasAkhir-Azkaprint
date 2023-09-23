@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\tblUser;
 use Illuminate\Http\Request;
+use App\Models\TransaksiModels;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class CetakController extends Controller
@@ -73,6 +74,13 @@ class CetakController extends Controller
                 'DataAll'=> $DataAll,
                 'CountDataAll'=> $CountDataAll
             ]);
+       }else if($status == "DataTransaksi"){ 
+            $DataAll = TransaksiModels::with('getUser')->get();
+            $CountDataAll = TransaksiModels::all()->count();
+        
+            return response()->json([
+                'DataAll'=>$DataAll
+            ]);
        }
 
     }
@@ -119,7 +127,46 @@ class CetakController extends Controller
             $titleData = "Tahun ". $dataTahun ." " ;
 
             $pdf = Pdf::loadView('adminPages.cetak.laporan', compact('namaData', 'nameStatus', 'dataUser', 'titleData', 'today', 'chData'));
-            return $pdf->stream('Laporan'. $namaData .'.pdf');
+            return $pdf->stream('Laporan'. $namaData .'-Tahun.pdf');
+
+        }else if ($nameStatus == "User-Bulan"){
+
+            $dataTahun1 = $request->dataTahun1;
+            $dataBulan1 = $request->dataBulan1;
+
+            $date = Carbon::now();
+
+            $today = Carbon::parse($date)->addMonths(1)->format('d F Y');
+            $chData = "Data User";
+
+            $namaData = "Data User";
+            $titleData = "Tahun :". $dataTahun1 ." - Bulan : ". $dataBulan1 ."" ;
+
+            $dataUser = tblUser::whereYear('created_at', '=', $dataTahun1)
+                        ->whereMonth('created_at', '=', $dataBulan1)
+                        ->get();
+
+            $pdf = Pdf::loadView('adminPages.cetak.laporan', compact('dataUser', 'namaData', 'titleData', 'today', 'chData'));
+            return $pdf->stream('Laporan'. $namaData .'-Bulan.pdf');
+
+        }else if($nameStatus == "User-Tanggal"){
+            $dateFrom = $request->filterDateFromUser;
+            $dateTo = $request->filterDateToUser;
+
+            $date = Carbon::now();
+
+            $today = Carbon::parse($date)->addMonths(1)->format('d F Y');
+            $chData = "Data User";
+
+            $namaData = "Data User";
+            $titleData = "Tanggal : ". $dateFrom ." s/d ". $dateTo ."";
+
+            $dataUser = tblUser::whereDate('created_at', '>=', $dateFrom)
+                      ->whereDate('created_at', '<=', $dateTo)
+                      ->get();
+
+            $pdf = Pdf::loadView('adminPages.cetak.laporan', compact('dataUser', 'namaData', 'titleData', 'today', 'chData'));
+            return $pdf->stream('Laporan'. $namaData .'perTanggal.pdf');
 
         }
 

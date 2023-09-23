@@ -77,7 +77,7 @@
                         <th class="py-2">Created</th>
                     </tr>
                 </thead>
-                <tbody class="class=text-center py-2">
+                <tbody class="text-center py-2">
 
                 </tbody>
                 
@@ -134,38 +134,37 @@
             </div>
 
             {{-- Form Filter Cetak --}}
-            <div class="mx-auto w-full grid grid-cols-3 gap-5 px-2 mt-3">
-
-                <select name="dataTahun1" id="dataTahun1" class="border mb-1 shadow-md text-sm h-[100%] px-5 py-1">
-                    <option value="">-- Tahun --</option>
-                        <?php
-                            for($i=date('Y'); $i>=date('Y')-32; $i-=1){
-                            echo "<option value='$i'> $i </option>";
-                            }
-                        ?>
-                </select>
-
-                {{-- Bulan --}}
-                <select name="dataBulan1" id="dataBulan1" class="border mb-1 shadow-md text-sm h-[100%] px-5 py-1">
-                    <option value="">-- Bulan --</option>
-                    <option value="1">Januari</option>
-                    <option value="2">Februari</option>
-                    <option value="3">Maret</option>
-                    <option value="4">April</option>
-                    <option value="5">Mei</option>
-                    <option value="6">Juni</option>
-                    <option value="7">Juli</option>
-                    <option value="8">Agustus</option>
-                    <option value="9">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                </select>
-                <button name="btnCetakBulan" id="btnCetakBulan" class="bg-blue-400 px-4 py-1 font-semibold rounded-md shadow-md text-white">
-                    CETAK
-                    <i class="fa-solid fa-print"></i>
-                </button>
-            </div>
+            <form action="/cetakPdf/{{ 'User-Bulan' }}" target="_blank" class="mx-auto w-full grid grid-cols-3 gap-5 px-2 mt-3">
+                    <select name="dataTahun1" id="dataTahun1" class="border mb-1 shadow-md text-sm h-[100%] px-5 py-1">
+                        <option value="">-- Tahun --</option>
+                            <?php
+                                for($i=date('Y'); $i>=date('Y')-32; $i-=1){
+                                echo "<option value='$i'> $i </option>";
+                                }
+                            ?>
+                    </select>
+    
+                    {{-- Bulan --}}
+                    <select name="dataBulan1" id="dataBulan1" class="border mb-1 shadow-md text-sm h-[100%] px-5 py-1">
+                        <option value="">-- Bulan --</option>
+                        <option value="1">Januari</option>
+                        <option value="2">Februari</option>
+                        <option value="3">Maret</option>
+                        <option value="4">April</option>
+                        <option value="5">Mei</option>
+                        <option value="6">Juni</option>
+                        <option value="7">Juli</option>
+                        <option value="8">Agustus</option>
+                        <option value="9">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
+                    <button type="submit" name="btnCetakBulan" id="btnCetakBulan" class="bg-blue-400 px-4 py-1 font-semibold rounded-md shadow-md text-white">
+                        CETAK
+                        <i class="fa-solid fa-print"></i>
+                    </button>
+            </form>
 
         </div>
     </div>
@@ -186,7 +185,7 @@
             </div>
 
             {{-- Form Filter Cetak --}}
-            <div class="mx-auto w-full grid grid-cols-2 gap-5 px-2 mt-3">
+            <form action="/cetakPdf/{{ 'User-Tanggal' }}" target="_blank" class="mx-auto w-full grid grid-cols-2 gap-5 px-2 mt-3">
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label> Date From : </label>
@@ -197,11 +196,11 @@
                         <input type="date" name="filterDateToUser" id="filterDateToUser" class="border shadow-md">
                     </div>
                 </div>
-                <button name="btnCetakTglUser" id="btnCetakTglUser" class="bg-blue-400 px-4 py-1 font-semibold rounded-md shadow-md text-white w-full h-full">
+                <button type="submit" name="btnCetakTglUser" id="btnCetakTglUser" class="bg-blue-400 px-4 py-1 font-semibold rounded-md shadow-md text-white w-full h-full">
                     CETAK
                     <i class="fa-solid fa-print"></i>
                 </button>
-            </div>
+            </form>
 
         </div>
     </div>
@@ -228,10 +227,10 @@
         <div class="p-3">
 
             <div class="mb-2 flex">
-                <button class="bg-blue-400 px-4 py-2 font-semibold rounded-md shadow-md text-white mr-2">
+                <a href="/cetakPdf/{{ 'dataTransaksi' }}" class="bg-blue-400 px-4 py-2 font-semibold rounded-md shadow-md text-white mr-2">
                     Cetak Semua
                     <i class="fa-solid fa-print"></i>
-                </button>
+                </a>
                 <button onclick="periodeCetakTransaksi('Tahun')" class="bg-blue-400 px-4 py-2 font-semibold rounded-md shadow-md text-white mr-2" name="cetakPeriodeTahun">
                     Cetak Periode Tahun
                     <i class="fa-solid fa-print"></i>
@@ -246,24 +245,20 @@
                 </button>
             </div>
 
-            <table class="border w-full h-full mx-auto">
-                <tr class="text-center border-b bg-blue-500">
-                    <th class="py-2">No</th>
-                    <th class="py-2">Id Transaksi</th>
-                    <th class="py-2">Nama Pemesan</th>
-                    <th class="py-2">Jumlah Item</th>
-                    <th class="py-2">Total Bayar</th>
-                    <th class="py-2">Status Transaksi</th>
-                </tr>
-                <tr class="text-center py-2">
-                    <td class="py-2">No</td>
-                    <td class="py-2">Id Transaksi</td>
-                    <td class="py-2">Nama Pemesan</td>
-                    <td class="py-2">Jumlah Item</td>
-                    <td class="py-2">Total Bayar</td>
-                    <td class="py-2">Status Transaksi</td>
-                </tr>
+            <table class="border w-full h-full mx-auto"  id="tabelDataTransaksi">
+                <thead>
+                    <tr class="text-center border-b bg-blue-500">
+                        <th class="py-2">No</th>
+                        <th class="py-2">Id Transaksi</th>
+                        <th class="py-2">Nama Pemesan</th>
+                        <th class="py-2">Jumlah Item</th>
+                        <th class="py-2">Total Bayar</th>
+                        <th class="py-2">Status Transaksi</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center py-2">
 
+                </tbody>
             </table>
 
         </div>
@@ -628,6 +623,7 @@
 
                 $('#closeModalUser').addClass('hidden');
                 $('#bgModalTableUser').addClass('hidden');
+                
             });    
         });
 
@@ -647,6 +643,45 @@
         $('#menuDataTransaksi').on('click', function() {
             $('#bgModalTableTransaksi').removeClass('hidden');
             $('#closeModalTransaksi').removeClass('hidden');
+
+            $data = "DataTransaksi";
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'Status': $data
+                },
+                url: '/getAllData',
+                success: function(response){
+                    // console.log("Data Hasil Filter = ", response.DataAll);
+                    // console.log("Count Data Hasil Filter = ", response.CountDataAll);
+                    for (let i = 0; i < response.CountDataAll; i++) {
+                        DataAll.push(response.DataAll);
+                    }
+                        console.log(response);
+                    if (Array.isArray(response.DataAll)) {
+                        AllDataUser = response.DataAll; 
+                    }
+
+                    $.each(AllDataUser, function(index, item) {        
+                        var row = $('<tr>');
+                        row.append($('<td>').text(index+1));
+                            row.append($('<td>').text(item.idTransaksi));
+                            row.append($('<td>').text(item.get_user['namaUser']));
+                            row.append($('<td>').text(item.jumlahProduk));
+                            row.append($('<td>').text(item.totalHarga));
+                            row.append($('<td>').text(formatDate(item.statusTransaksi)));
+                     
+                        $('#tabelDataTransaksi tbody').append(row);
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                }
+            })
 
             $('#closeModalTransaksi').on('click', function() {
                 $('#closeModalTransaksi').addClass('hidden');
@@ -739,29 +774,29 @@
                     $dataBulan1 = $('#dataBulan1').val();
 
                     console.log("Cetak Data Tahun =", $dataTahun1 ,"&","Bulan = ", $dataBulan1);
-                    $.ajax({
-                        type: 'POST', 
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            'Status': 'Bulan',
-                            'dataTahun': $dataTahun1,
-                            'dataBulan': $dataBulan1
-                        },
-                        url: '/getFilterDataUser',
-                        success: function(response){
+                    // $.ajax({
+                    //     type: 'POST', 
+                    //     headers: {
+                    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    //     },
+                    //     data: {
+                    //         'Status': 'Bulan',
+                    //         'dataTahun': $dataTahun1,
+                    //         'dataBulan': $dataBulan1
+                    //     },
+                    //     url: '/getFilterDataUser',
+                    //     success: function(response){
                             
-                            console.log('Hasil Filter Data Perbulan = ', response.dataPerBulan);
+                    //         console.log('Hasil Filter Data Perbulan = ', response.dataPerBulan);
 
-                            console.log("Jumlah Data Perbulan = ", response.countPerBulan);
+                    //         console.log("Jumlah Data Perbulan = ", response.countPerBulan);
 
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            console.log(xhr.responseText);
-                            console.log(thrownError);
-                        }
-                    })
+                    //     },
+                    //     error: function (xhr, ajaxOptions, thrownError) {
+                    //         console.log(xhr.responseText);
+                    //         console.log(thrownError);
+                    //     }
+                    // })
                 });
 
             }else if (e == 'Tanggal'){
@@ -770,41 +805,41 @@
                 
                 console.log("Periode Table User Tanggal");
 
-                $('#btnCetakTglUser').on('click', function() {
-                    console.log("Cetak Per Tanggal Data User");
+                // $('#btnCetakTglUser').on('click', function() {
+                //     console.log("Cetak Per Tanggal Data User");
 
-                    $dataFromUser = $('#filterDateFromUser').val();
-                    $dataToUser = $('#filterDateToUser').val();
+                //     $dataFromUser = $('#filterDateFromUser').val();
+                //     $dataToUser = $('#filterDateToUser').val();
 
-                    console.log("Date From =", $dataFromUser ,"Date To = ", $dataToUser);
+                //     console.log("Date From =", $dataFromUser ,"Date To = ", $dataToUser);
 
-                    $.ajax({
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            'Status': 'Tanggal',
-                            'DataFrom': $dataFromUser,
-                            'DataTo': $dataToUser
-                        },
-                        url: 'getFilterDataUser',
+                //     $.ajax({
+                //         type: 'POST',
+                //         headers: {
+                //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //         },
+                //         data: {
+                //             'Status': 'Tanggal',
+                //             'DataFrom': $dataFromUser,
+                //             'DataTo': $dataToUser
+                //         },
+                //         url: 'getFilterDataUser',
                         
-                        success: function(response){
+                //         success: function(response){
                             
-                            console.log("Hasil Data Filter PerTanggal = ", response.DataPerTanggal);
+                //             console.log("Hasil Data Filter PerTanggal = ", response.DataPerTanggal);
 
-                            console.log("Jumlah Data Pertanggal = ", response.countPerTanggal);
+                //             console.log("Jumlah Data Pertanggal = ", response.countPerTanggal);
 
-                        },
+                //         },
 
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            console.log(xhr.responseText);
-                            console.log(thrownError);
-                        }
-                    })
+                //         error: function (xhr, ajaxOptions, thrownError) {
+                //             console.log(xhr.responseText);
+                //             console.log(thrownError);
+                //         }
+                //     })
 
-                });
+                // });
 
             }
         }
