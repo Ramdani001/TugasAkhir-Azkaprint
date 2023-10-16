@@ -84,6 +84,22 @@
 
     </style>
 
+        @if ($chData == 'Data Transaksi')
+            <style>
+                        
+                .styled-table thead tr {
+                    color: #000000;
+                    font-size: 12px;
+                    background-color: #6c8bf1e1 !important;
+                }
+                .styled-table tbody tr {
+                    font-size: 12px;
+                    text-align: center !important;
+                    border-bottom: 1px solid #dddddd;
+                }
+            </style>
+        @endif
+
 </head>
 <body>
     <div id="header">
@@ -102,6 +118,8 @@
     <hr>
     <div>
         
+        {{-- User --}}
+
         @if ($chData == 'Data User')
             <table class="styled-table">
                 <thead>
@@ -145,6 +163,105 @@
                 </tbody>
             </table>
         @endif
+
+        {{-- Transaksi --}}
+
+        @if ($chData == 'Data Transaksi')
+      
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th class="py-2">No</th>
+                        <th class="py-2">Id Transaksi</th>
+                        <th class="py-2">Nama Pemesan</th>
+                        <th class="py-2">Jumlah Item</th>
+                        <th class="py-2">Total Bayar</th>
+                        <th class="py-2">Status Transaksi</th>
+                        <th class="py-2">Tanggal Transaksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach ($dataTransaksi as $data)
+                       <tr>
+                        <td class="py-2">
+                            {{ $no }}
+                        </td>
+                        <td class="py-2" id="dataLeft">
+                            {{ $data->idTransaksi }}
+                        </td>
+                        <td class="py-2">
+                            {{ $data->getUser->namaUser }}
+                        </td>
+                        <td class="py-2">
+                            {{ $data->jumlahProduk }}
+                        </td>
+                        <td class="py-2" id="dataLeft">
+                            {{ 'Rp. ' . number_format($data->totalHarga, 0, ',', '.') }}
+                        </td>                    
+                        <td class="py-2">
+                            {{ $data->statusTransaksi }}
+                        </td>
+                        <td class="py-2">
+                            {{ $data->created_at }}
+                        </td>
+                       </tr>
+                        
+                    <?php $no++ ?>
+
+                    @endforeach
+                    <!-- and so on... -->
+                </tbody>
+            </table>
+        @endif
+
+        @if ($chData == 'Data Produk')
+      
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th class="py-2">No</th>
+                        <th class="py-2">Id Produk</th>
+                        <th class="py-2">Nama Pemesan</th>
+                        <th class="py-2">Stok</th>
+                        <th class="py-2">Harga Produk</th>
+                        <th class="py-2">Tanggal Masuk</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach ($dataProduk as $data)
+                       <tr>
+                        <td class="py-2">
+                            {{ $no }}
+                        </td>
+                        <td class="py-2" id="dataLeft">
+                            {{ $data->idProduk }}
+                        </td>
+                        <td class="py-2">
+                            {{ $data->namaProduk }}
+                        </td>
+                        <td class="py-2">
+                            {{ $data->jumlahProduk }}
+                        </td>
+                        <td class="py-2" id="dataLeft">
+                            {{ 'Rp. ' . number_format($data->hargaProduk, 0, ',', '.') }}
+                        </td>                    
+                        <td class="py-2">
+                            {{ $data->created_at }}
+                        </td>
+                       </tr>
+                        
+                    <?php $no++ ?>
+
+                    @endforeach
+                    <!-- and so on... -->
+                </tbody>
+            </table>
+        @endif
+
+
+
     </div>
     
 </body>

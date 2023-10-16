@@ -144,11 +144,11 @@
             @if (Auth::user())
                 <div class="py-1 flex w-[250px] items-center justify-center">
                     <a href="/cartView">
-                        <div class="bg-green-400 text-center rounded-full h-4 w-4 text-sm absolute ml-7 -mt-1">
+                        {{-- <div class="bg-green-400 text-center rounded-full h-5 w-5 text-sm absolute ml-7 -mt-1">
                             <div class="">
                                 {{ $userSama }}
                             </div>
-                        </div>
+                        </div> --}}
                         <button class="text-white ml-9 mr-3">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </button>

@@ -9,7 +9,7 @@
                     <span  class="text-white" >Foto Profile
                         <input type="file" id="profile" name="profile" required>
                     </span>
-                </div>
+                </div> 
 
                     <input type="text" placeholder="Id User" id="idUser" name="idUser" 
                         class=" border border-slate-200 w-full py-2 px-2 text-md rounded-xl my-2 text-slate-600" hidden>

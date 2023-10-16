@@ -92,6 +92,6 @@
     </script> 
 
     <script src="{{ 'style/login/register.js' }}"></script>
-
+    @include('sweetalert::alert')
 </body>
 </html>

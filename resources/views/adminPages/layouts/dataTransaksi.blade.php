@@ -105,7 +105,7 @@
             $.ajax({  
                 type: "GET",
                 url: "/detailTransaksi/"+b,
-                success: function(response){
+                success: function(response){ 
                     console.log(response);
                     console.log(response.detailProduk);
                     console.log(response.jumlahField);

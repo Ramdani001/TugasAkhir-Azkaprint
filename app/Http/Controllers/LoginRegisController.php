@@ -32,9 +32,7 @@ class LoginRegisController extends Controller
 
             }
         
-        
-
-        return back()->with('LoginError', "Username Atau Password Salah !!!");
+        return back()->with('error', "Username Atau Password Salah !!!");
     } 
 
     public function redirectDash(){
@@ -54,32 +52,41 @@ class LoginRegisController extends Controller
 
     public function register(Request $request){
 
-        $this->validate($request, [ 
-            'profile' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
+        $cek = $this->validate($request, [ 
+            'profile' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        $file = $request->file('profile');
+        $cekEmail = User::where('email', $request->email)->first();
+        // dd($cekEmail);
 
-        $nama_file = time()."_".$file->getClientOriginalName();
+        if(!$cekEmail){
+            $file = $request->file('profile');
 
-        // Move File from temp to file address
+            $nama_file = time()."_".$file->getClientOriginalName();
 
-        $tujuan_upload = public_path().'/img/profile'; 
-        $file->move($tujuan_upload, $nama_file); 
-        
-        $password = Hash::make($request->password);
+            // Move File from temp to file address
 
-        $dataRegist = new User();
-        $dataRegist-> idUser = $request->idUser;
-        $dataRegist-> namaUser = $request->namaUser;
-        $dataRegist-> username = $request->username;
-        $dataRegist-> password = $password;
-        $dataRegist-> status = $request->status;
-        $dataRegist-> email = $request->email;
-        $dataRegist-> profile = $nama_file;
-        $dataRegist->save();
+            $tujuan_upload = public_path().'/img/profile'; 
+            $file->move($tujuan_upload, $nama_file);
+            
+            $password = Hash::make($request->password);
 
-        return redirect()->back()->with('success', 'Anda Berhasil Register');
+            $dataRegist = new User();
+            $dataRegist-> idUser = $request->idUser;
+            $dataRegist-> namaUser = $request->namaUser;
+            $dataRegist-> username = $request->username;
+            $dataRegist-> password = $password;
+            $dataRegist-> status = $request->status;
+            $dataRegist-> email = $request->email;
+            $dataRegist-> profile = $nama_file;
+            $dataRegist->save();
+            return redirect()->back()->with('success', 'Anda Berhasil Register!');
+        }else{
+            return redirect()->back()->with('warning', 'Email Sudah Terdaftar!!!');
+        }
+
 
     }
 

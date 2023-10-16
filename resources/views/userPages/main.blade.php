@@ -79,38 +79,79 @@
     .swiper-slide:nth-child(10) {
       background-color: rgb(54, 94, 77);
     }
+
+    #text-loading span {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      text-transform: uppercase;
+      animation: waviy 1s infinite;
+      animation-delay: calc(.1s * var(--i));
+    }
+
+    @keyframes waviy {
+      0%,40%,100% {
+        transform: translateY(0)
+      }
+      20% {
+        transform: translateY(-20px)
+      }
+    }
+
 </style>
 
 </head>
 <body class="bg-slate-200">
-    @include('userPages/partials/navbar')
     
-    {{-- @php
-    dd(Auth::user()->namaUser)
-    @endphp --}}
+    <div id="loading" class="z-[100] hidden fixed w-full h-screen bg-gray-800/80 ease-linear duration-[3500ms]">
+      <div id="text-loading" class="text-center mt-[25%] animate-water text-white  font-bold text-5xl">
+        <span class="border-double border-blue-500" style="--i:1">A</span>
+        <span class="border-double border-blue-500" style="--i:2">Z</span>
+        <span class="border-double border-blue-500" style="--i:3">K</span>
+        <span class="border-double border-blue-500" style="--i:4">A</span>
+        <span class="border-double border-blue-500" style="--i:5">P</span>
+        <span class="border-double border-blue-500" style="--i:6">R</span>
+        <span class="border-double border-blue-500" style="--i:7">I</span>
+        <span class="border-double border-blue-500" style="--i:8">N</span>
+        <span class="border-double border-blue-500" style="--i:9">T</span>
+        <span style="--i:10">&nbsp;</span>
+        <span style="--i:11">.</span>
+        <span style="--i:12">&nbsp;</span>
+        <span style="--i:13">.</span>
+        <span style="--i:14">&nbsp;</span>
+        <span style="--i:15">.</span>
+      </div>
+     
+    </div>
 
-    {{-- Body Content --}}
-    @yield('content')
-    {{-- End Body Content --}}
+      @include('userPages/partials/navbar')
+    
+      {{-- Body Content --}}
+      @yield('content')
+      {{-- End Body Content --}}
 
-    @if ($path = request()->path() !== "cartView")      
-    @else
-      @include('userPages/partials/footerSection')
-    @endif
+          @if ($path = request()->path() !== "cartView")      
+        @else
+          @include('userPages/partials/footerSection')
+        @endif
 
     {{-- Footer --}}
-    
+     
     {{-- Jquery --}}
     <script src="{{ 'style/jquery.js' }}"></script> 
     <script src="{{ 'style/jquery.min.js' }}"></script> 
     {{-- Payment Gateway --}}
 
-    
-
     {{-- Script Change Color Scrolling Navbar --}}
     @if ($path = request()->path() === "/")
       <script>
-        $(document).ready(function(){  
+        $('#loading').removeClass('hidden');
+        $(document).ready(function(){
+          setTimeout(function() {
+              document.getElementById('loading').classList.add('-mt-[2000px]');
+              console.log('Tampilan sudah dimuat sepenuhnya.');
+            }, 3000);
+            
             $(window).scroll(function(){
                 var scroll = $(window).scrollTop();
                 if (scroll > 300) {
@@ -128,14 +169,25 @@
       </script>   
       @elseif($path = request()->path() === "allProduk")
       <script>
+        $('#loading').removeClass('hidden');
         $(document).ready(function(){  
+
+          // Loading State
+          setTimeout(function() {
+              document.getElementById('loading').classList.add('-mt-[2000px]');
+              console.log('Tampilan sudah dimuat sepenuhnya.');
+          }, 3000);
+          // Loading State
+
             $(".navbar").addClass('bg-blue-800 ', 'opacity-50').removeClass('bg-Transparent', 'opacity-10');
             $(".btnLogin").removeClass('bg-blue-800').addClass('bg-yellow-400', 'shadow-md');
         })
       </script>   
       @elseif($path = request()->path() === "cartView")
       <script>
-        $(document).ready(function(){  
+        
+        $(document).ready(function(){ 
+          
             $(".navbar").addClass('bg-blue-800 ', 'opacity-50').removeClass('bg-Transparent', 'opacity-10');
             $(".btnLogin").removeClass('bg-blue-800').addClass('bg-yellow-400', 'shadow-md');
         })

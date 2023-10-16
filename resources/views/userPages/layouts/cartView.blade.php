@@ -98,7 +98,6 @@
     </div>
     {{-- onclick="konfirmasiBayar('Bayar',{{ Auth::user()->id }})" --}}
     
-
     {{-- Modal Dialog Pembayaran --}}
     
     <button class="w-full h-screen top-0 left-0 bg-blue-800/30 absolute z-10 bgModal hidden transition-colors duration-700 ease-linear" id="bgModalBayar">
@@ -169,6 +168,32 @@
         </div>
     </div>
     {{-- End Modal Dialog Pembayaran --}}
+
+
+
+    {{-- Loading  --}}
+    
+    <div id="loading" class="z-[100] hidden fixed w-full h-screen bg-gray-800/80 ease-linear duration-[3500ms]">
+        <div id="text-loading" class="text-center mt-[25%] animate-water text-white  font-bold text-5xl">
+          <span class="border-double border-blue-500" style="--i:1">A</span>
+          <span class="border-double border-blue-500" style="--i:2">Z</span>
+          <span class="border-double border-blue-500" style="--i:3">K</span>
+          <span class="border-double border-blue-500" style="--i:4">A</span>
+          <span class="border-double border-blue-500" style="--i:5">P</span>
+          <span class="border-double border-blue-500" style="--i:6">R</span>
+          <span class="border-double border-blue-500" style="--i:7">I</span>
+          <span class="border-double border-blue-500" style="--i:8">N</span>
+          <span class="border-double border-blue-500" style="--i:9">T</span>
+          <span style="--i:10">&nbsp;</span>
+          <span style="--i:11">.</span>
+          <span style="--i:12">&nbsp;</span>
+          <span style="--i:13">.</span>
+          <span style="--i:14">&nbsp;</span>
+          <span style="--i:15">.</span>
+    </div>
+       
+    {{-- Loading  --}}
+
 
 
     {{-- CartView --}}
@@ -341,6 +366,7 @@
     <script>
         function konfirmasiBayar(cls,idUser){
             if(cls =='Bayar'){
+                $('#loading').removeClass('hidden');
                 console.log("Id User Yang DIkirim : ", idUser);
                 $.ajax({  
                     type: "GET", 
@@ -351,6 +377,8 @@
 
                         console.log(response);
                         console.log(response.dataKeranjang);
+
+                        $('#loading').addClass('-mt-[2000px]');
 
                         $('#bgModalBayar').removeClass('hidden');
                         $('#ModalBayar').removeClass('hidden');

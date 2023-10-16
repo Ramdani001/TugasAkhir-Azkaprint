@@ -151,6 +151,7 @@ Route::controller(TransaksiController::class)->group(function() {
 // Cetak Laporan
 Route::controller(CetakController::class)->group(function() {
     Route::post('/getFilterDataUser', 'getFilterDataUser');
+    Route::post('/TransaksiTahun', 'getFilterDataTransaksi');
     Route::post('/getAllData', 'getAllData');
     Route::get('/cetakPdf/{name}', 'cetakPdf');
 });
