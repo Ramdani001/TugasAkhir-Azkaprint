@@ -17,7 +17,15 @@
                     
                 </div>
 
-                <input type="text" placeholder="Password" class=" border border-slate-200 w-full py-3 px-2 text-md rounded-xl my-2 text-slate-600" id="password" name="password" required>
+                <div class="flex justify-items-center items-center">
+                  <input type="password" placeholder="Password" class=" border border-slate-200 w-full py-3 px-2 text-md rounded-xl my-2 text-slate-600" id="password" name="password" required>
+
+                  <button onclick="showPass()">
+                    <i id="showPass" class="fa-solid fa-eye text-2xl absolute -mt-3 -ml-8"></i>
+                    <i id="hidePass" class="fa-solid fa-eye-slash  text-2xl absolute -mt-3 -ml-9 hidden"></i>
+                  </button>
+
+                </div>
 
                 <div class="flex flex-col-reverse text-sm text-slate-200 gap-10 mt-2">
                      

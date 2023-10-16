@@ -26,7 +26,7 @@
                 {{-- Login --}}
                 @include('validate/login/login')
             </div>
-            <div class="w-full h-[90%]"> 
+            <div class="w-full h-[90%]">  
                 {{-- Register --}}
                 @include('validate/register/register')
             </div>
@@ -62,6 +62,15 @@
     ?> 
 
     <script>
+
+        // Statement Password Show/Hide
+        function showPass(){
+            $('#showPass').toggleClass('hidden');
+            $('#hidePass').toggleClass('hidden');
+            $('#password').attr('type', (_, attr) => attr == "password" ? "text" : "password" );
+        }
+        // Statement Password Show/Hide
+
             function changeButton($value){
 
                 if($value == 'register'){

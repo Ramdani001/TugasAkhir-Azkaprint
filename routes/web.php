@@ -33,12 +33,14 @@ Route::controller(userController::class)->group(function() {
     Route::get('/', 'index');
   
     // Profile Pages
-    Route::get('/profilePages', 'profileIndex');
+    Route::middleware('isLogin')->group(function() {
+        Route::get('/profilePages', 'profileIndex');
 
-    // Spa Profile
-    Route::get('/profileContent', 'profileContent');
-    Route::get('/changePasswordContent', 'changePasswordContent');
-    Route::get('/historyContent', 'historyContent');
+        // Spa Profile
+        Route::get('/profileContent', 'profileContent');
+        Route::get('/changePasswordContent', 'changePasswordContent');
+        Route::get('/historyContent', 'historyContent');
+    });
     // Spa Profile
 
 }); 
@@ -71,38 +73,42 @@ Route::controller(allProduk::class)->group(function() {
 
 // Admin
 Route::controller(viewController::class)->group(function() {
-    Route::get('/admin', 'index');
-    Route::get('/getGrafik', 'getGrafik');
-    Route::post('/getFilter', 'getFilter');
-    Route::post('/bulanTahunFilter', 'bulanTahun');
-    // =====
- 
-    Route::get('/transaksiAdmin', 'transaksiAdmin');
+    
+    Route::middleware('isLogin')->group(function() {
+        Route::get('/admin', 'index');
+        Route::get('/getGrafik', 'getGrafik');
+        Route::post('/getFilter', 'getFilter');
+        Route::post('/bulanTahunFilter', 'bulanTahun');
+        // =====
+    
+        Route::get('/transaksiAdmin', 'transaksiAdmin');
 
-    // User 
-    Route::get('/dataUserSection', 'dataUser');
+        // User 
+        Route::get('/dataUserSection', 'dataUser');
 
-    // Produk
-    Route::get('/produk', 'produk');
+        // Produk
+        Route::get('/produk', 'produk');
 
-    // Barang
-    Route::get('/dataBarang', 'dataBarang');
+        // Barang
+        Route::get('/dataBarang', 'dataBarang');
 
-    // Keuangan
-    Route::get('/dataKeuangan', 'dataKeuangan'); 
+        // Keuangan
+        Route::get('/dataKeuangan', 'dataKeuangan'); 
 
-    // Landing Pages
-    Route::get('/EditHeroSection', 'EditHeroSection');
+        // Landing Pages
+        Route::get('/EditHeroSection', 'EditHeroSection');
 
-    Route::get('/EditTopCategories', 'EditTopCategories');
+        Route::get('/EditTopCategories', 'EditTopCategories');
 
-    Route::get('/EditTentangKami', 'EditTentangKami');
+        Route::get('/EditTentangKami', 'EditTentangKami');
 
-    Route::get('/EditProdukSection', 'EditProdukSection');
+        Route::get('/EditProdukSection', 'EditProdukSection');
 
-    Route::get('/EditFAQSection', 'EditFAQSection');
+        Route::get('/EditFAQSection', 'EditFAQSection');
 
-});
+    });
+
+})->middleware('isLogin');
   
 // CRUD Data User Admin
 Route::controller(userAdmin::class)->group(function() {
@@ -130,17 +136,25 @@ Route::controller(SendEmail::class)->group(function() {
  
 // Login Register
 Route::controller(ValidateController::class)->group(function() {
-    Route::get('/login', 'loginIndex');
+    
+    Route::middleware('alreadyLogin')->group(function() {
+        Route::get('/login', 'loginIndex');
+    });
+  
 });
 
 Route::controller(addToCart::class)->group(function() {
-    Route::post('/addToCart', 'addToCart'); 
-    Route::get('/cartView', 'cartView');
-    Route::get('/cartTmbh/{id}', 'cartTmbh');
-    Route::get('/cartKrng/{id}', 'cartKrng');
+    
+    Route::middleware('isLogin')->group(function() {
+        Route::post('/addToCart', 'addToCart'); 
+        Route::get('/cartView', 'cartView');
+        Route::get('/cartTmbh/{id}', 'cartTmbh');
+        Route::get('/cartKrng/{id}', 'cartKrng');
 
-    Route::get('/cart_pesan/{id}', 'cart_pesan');
-    Route::get('/percobaan', 'percobaan');
+        Route::get('/cart_pesan/{id}', 'cart_pesan');
+        Route::get('/percobaan', 'percobaan');
+    });
+
 });
   
 Route::controller(TransaksiController::class)->group(function() {
