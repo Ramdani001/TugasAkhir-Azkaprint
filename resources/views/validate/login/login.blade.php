@@ -66,7 +66,7 @@
             ?>
           @endif
       </div>
-          
+ 
 
       <form action="/forgot-password" method="post">
         @csrf

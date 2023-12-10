@@ -61,7 +61,7 @@
             background-color: #009879;
             color: #ffffff;
             text-align: left;
-        }
+        } 
 
         .styled-table th,
         .styled-table td {

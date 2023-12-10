@@ -95,7 +95,7 @@ class LoginRegisController extends Controller
         
         $user = User::getEmailSingle($request->email);
         // dd($user);
-        
+         
         if(!empty($user)){ 
             
             $user->remember_token = Str::random(30);

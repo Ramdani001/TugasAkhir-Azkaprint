@@ -187,7 +187,7 @@
             {{-- Form Filter Cetak --}}
             <form action="/cetakPdf/{{ 'User-Tanggal' }}" target="_blank" class="mx-auto w-full grid grid-cols-2 gap-5 px-2 mt-3">
                 <div class="grid grid-cols-2 gap-2">
-                    <div>
+                    <div> 
                         <label> Date From : </label>
                         <input type="date" name="filterDateFromUser" id="filterDateFromUser" class="border shadow-md">
                     </div>
@@ -311,7 +311,7 @@
             </div>
 
             {{-- Form Filter Cetak --}}
-            <form action="/cetakPdf/{{ 'Transaksi-Bulan' }}" target="_blank"  class="mx-auto w-full grid grid-cols-2 gap-5 px-2 mt-3">
+            <form action="/cetakPdf/{{ 'Transaksi-Bulan' }}" target="_blank"  class="mx-auto w-full grid grid-cols-3 gap-5 px-2 mt-3">
                 <select name="dataTahun1" id="dataTahun1" class="border mb-1 shadow-md text-sm h-[100%] px-5 py-1">
                     <option value="">-- Tahun --</option>
                         <?php
@@ -390,8 +390,8 @@
 
 {{-- Produk --}}
 {{-- Modal Table Produk --}}
-<div class="absolute w-full h-screen p-3 bg-blue z-30 bg-blue-400/60 top-0 left-0 hidden" name="bgModalTableProduk" id="bgModalTableProduk">
-    <div class="bg-white w-[80%] h-full mx-auto shadow-md rounded-md">
+<div class="absolute w-full h-full p-3 bg-blue z-30 bg-blue-400/60 top-0 left-0 hidden" name="bgModalTableProduk" id="bgModalTableProduk">
+    <div class="bg-white w-[80%] h-[120%] mx-auto shadow-md rounded-md">
         <div class="flex flex-row w-full border-b-2">
             <div class="w-[95%]">
                 <h3 class="font-semibold w-[180px] p-2">Data Produk</h3>
@@ -409,8 +409,46 @@
                     <i class="fa-solid fa-print"></i>
                 </a>
                 
+                {{-- Form Filter Cetak --}}
+                <button onclick="periodeCetakTransaksi('FilterProduk')" class="bg-blue-400 px-4 py-2 font-semibold rounded-md shadow-md text-white mr-2">
+                    Type Filter
+                    <i class="fa-solid fa-print"></i>
+                </button>
+                
             </div>
-
+            <div class="bg-gray-500/40 absolute top-0 left-0 w-full h-full hidden" name="bgModalFilterType" id="bgModalFilterType">
+                <div class="bg-white absolute left-0 top-0 w-[50%] h-[18%] ml-[25%] mt-[15%] hidden rounded-md shadow-md" name="contentModalFilterType" id="contentModalFilterType">
+                    <div class="flex p-2 border-b-2">
+                        <div class="w-[96%] font-semibold text-xl">
+                            <h2 class="">Filter By Type Produk</h2>
+                        </div>
+                        <div class="font-semibold text-xl cursor-pointer" name="closeModalSecondTransaksiBulan" id="closebgModalTransaksiSecondBulan">
+                            X
+                        </div>
+                    </div>
+        
+                    {{-- Form Filter Cetak --}}
+                    <form action="/cetakPdf/{{ 'Produk-Filter' }}" target="_blank"  class="mx-auto w-full grid grid-cols-2 gap-5 px-2 mt-3">
+                
+                        <select name="dataFilter" id="dataFilter" class="border mb-1 shadow-md text-sm h-[100%] px-5 py-1">
+                            <option value="">-- Filter --</option>
+                            <option value="stempel">Stempel</option>
+                            <option value="undangan">Undangan</option>
+                            <option value="banner">Banner</option>
+                            <option value="xbanner">XBanner</option>
+                            <option value="Lanyard">Lanyard</option>
+                            <option value="IdCard">IdCard</option>
+                             
+                        </select>
+                        <button type="submit" class="bg-blue-400 px-4 py-1 font-semibold rounded-md shadow-md text-white">
+                            CETAK
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+                    </form>
+        
+                </div>
+            </div>
+        
             <table id="tabelDataProduk" class="border w-full h-full mx-auto table">
                 <thead>
                     <tr class="text-center border-b bg-blue-500">
@@ -665,6 +703,10 @@
         $('#closeModalSecondTanggalProduk').on('click', function() {
             $('#bgModalProdukTanggal').addClass('hidden');
         });
+        $('#closeModalFilterType').on('click', function() {
+            $('#bgModalFilterType').addClass('hidden');
+            $('#contentModalFilterType').addClass('hidden');
+        });
         
         // Periode Tahun
         function periodeCetak(e){
@@ -752,6 +794,10 @@
                 $('#bgModalTransaksiTanggal').removeClass('hidden');
                 $('#contentModalTransaksiTanggal').removeClass('hidden');
                 console.log("Periode Tanggal");
+            }else if(e == 'FilterProduk'){
+                $('#bgModalFilterType').removeClass('hidden');
+                $('#contentModalFilterType').removeClass('hidden');
+                console.log("Filter Type Active");
             }
 
         }

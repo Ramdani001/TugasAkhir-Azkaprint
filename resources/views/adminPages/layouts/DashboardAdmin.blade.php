@@ -297,7 +297,7 @@
                             }];
                     
                             chart = new Chart(ctx, {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: labelChart,
                                 datasets: datasets,
@@ -398,7 +398,7 @@
                             }];
                     
                             chart = new Chart(ctx, {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: labelChart,
                                 datasets: datasets,
@@ -503,7 +503,7 @@
                     }];
             
                     chart = new Chart(ctx, {
-                    type: 'line',
+                    type: 'bar',
                     data: {
                         labels: labelChart,
                         datasets: datasets,

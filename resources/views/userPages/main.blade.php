@@ -24,11 +24,6 @@
     }
     /* Medium Screen */
 
-    /* .swiper {
-      width: 340px;
-      height: 420px;
-    } */
-
     .swiper-slide {
       display: flex;
       align-items: center;

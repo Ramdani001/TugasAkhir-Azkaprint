@@ -26,6 +26,7 @@
                         <button class="text-white font-normal mt-2 spa-admin mb-3" value="produk">Data Produk</button>
                             
                         <button value="dataKeuangan" class="mb-4 spa-admin">Cetak Laporan</button>
+                        <button value="EditHeroSection" class="mb-4 spa-admin">EditHeroSection</button>
 
                     @endif
                 </div>
